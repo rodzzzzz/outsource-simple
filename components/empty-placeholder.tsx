@@ -25,9 +25,12 @@ export function EmptyPlaceholder({
   )
 }
 
+//TODO: Fix typing of ref
+
 interface EmptyPlaceholderIconProps
   extends Partial<React.SVGProps<SVGSVGElement>> {
   name: keyof typeof Icons
+  ref: any
 }
 
 EmptyPlaceholder.Icon = function EmptyPlaceHolderIcon({
@@ -42,7 +45,7 @@ EmptyPlaceholder.Icon = function EmptyPlaceHolderIcon({
   }
 
   return (
-    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-muted">
       <Icon className={cn("h-10 w-10", className)} {...props} />
     </div>
   )

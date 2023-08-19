@@ -227,7 +227,9 @@ export function JobDetailsForm({
     data.jobDescription = blocks
 
     const emptyBlocks = blocks?.blocks.every((item) => !item.data.text)
-    const dirtyBlocks = !isEqual(blocks?.blocks, post.jobDescription?.blocks)
+
+    const originalJobDescription = post.jobDescription as Record<string, any>
+    const dirtyBlocks = !isEqual(blocks?.blocks, originalJobDescription?.blocks)
 
     if (emptyBlocks) {
       form.setError(
@@ -313,7 +315,7 @@ export function JobDetailsForm({
                                   (language) => language.id === field.value
                                 )?.name
                               : "Select Company"}
-                            <Icons.caretSort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Icons.caretSort className="w-4 h-4 ml-2 opacity-50 shrink-0" />
                           </Button>
                         </PopoverTrigger>
                       </FormControl>
@@ -482,7 +484,7 @@ export function JobDetailsForm({
                   </FormItem>
                 )}
               />
-              <div className="flex w-full flex-col gap-6 lg:flex-row">
+              <div className="flex flex-col w-full gap-6 lg:flex-row">
                 <FormField
                   control={form.control}
                   name="salaryCurrency"
@@ -621,7 +623,7 @@ export function JobDetailsForm({
                         />
                         <p className="mt-2 text-sm text-gray-500">
                           Use{" "}
-                          <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
+                          <kbd className="px-1 text-xs uppercase border rounded-md bg-muted">
                             Tab
                           </kbd>{" "}
                           to open the command menu.
@@ -640,7 +642,7 @@ export function JobDetailsForm({
               >
                 {isSaving ? (
                   <>
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                     <span>Saving...</span>
                   </>
                 ) : (

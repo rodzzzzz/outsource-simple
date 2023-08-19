@@ -1,4 +1,5 @@
 import * as React from "react"
+import { LucideProps } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
@@ -25,12 +26,8 @@ export function EmptyPlaceholder({
   )
 }
 
-//TODO: Fix typing of ref
-
-interface EmptyPlaceholderIconProps
-  extends Partial<React.SVGProps<SVGSVGElement>> {
+interface EmptyPlaceholderIconProps extends LucideProps {
   name: keyof typeof Icons
-  ref: any
 }
 
 EmptyPlaceholder.Icon = function EmptyPlaceHolderIcon({

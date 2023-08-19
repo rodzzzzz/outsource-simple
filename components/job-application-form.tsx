@@ -239,7 +239,7 @@ export function JobApplicationForm({
                                   (resume) => resume.id === field.value
                                 )?.title
                               : "Select Resume"}
-                            <Icons.caretSort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Icons.caretSort className="w-4 h-4 ml-2 opacity-50 shrink-0" />
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
@@ -308,7 +308,7 @@ export function JobApplicationForm({
                     <FormControl>
                       <Textarea
                         rows={5}
-                        className="h-60 resize-none"
+                        className="resize-none h-60"
                         {...field}
                       />
                     </FormControl>
@@ -444,7 +444,7 @@ export function JobApplicationForm({
                                         >
                                           <FormControl>
                                             <Checkbox
-                                              className="border-border shadow-none"
+                                              className="shadow-none border-border"
                                               checked={field.value?.includes(
                                                 item.id
                                               )}
@@ -455,7 +455,7 @@ export function JobApplicationForm({
                                                       item.id,
                                                     ])
                                                   : field.onChange(
-                                                      field.value?.filter(
+                                                      [...field.value]?.filter(
                                                         (value: string) =>
                                                           value !== item.id
                                                       )
@@ -489,7 +489,7 @@ export function JobApplicationForm({
               >
                 {isSending ? (
                   <>
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                     <span>Sending...</span>
                   </>
                 ) : (

@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "jobs" ALTER COLUMN "job_description" DROP NOT NULL,
+ALTER COLUMN "category" DROP NOT NULL,
+ALTER COLUMN "type" DROP NOT NULL,
+ALTER COLUMN "location_restriction" DROP NOT NULL,
+ALTER COLUMN "status" DROP NOT NULL,
+ALTER COLUMN "published_at" DROP NOT NULL;

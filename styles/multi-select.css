@@ -1,0 +1,67 @@
+.multi-select-container .multi-select__control {
+  @apply flex items-center justify-between w-full px-3 py-2 text-sm bg-transparent border rounded-md border-input ring-offset-background placeholder:text-muted-foreground focus-within:outline-none cursor-pointer;
+}
+
+.multi-select-container .multi-select__input-container {
+  @apply cursor-text;
+}
+
+.multi-select-container .multi-select__value-container {
+  @apply gap-2;
+}
+
+.multi-select-container .multi-select__multi-value {
+  @apply flex justify-between bg-badge text-badge-foreground pl-2 rounded-sm;
+}
+
+.multi-select-container .multi-select__multi-value__label {
+  @apply overflow-visible pr-1 font-medium;
+}
+
+.multi-select-container .multi-select__multi-value__remove {
+  @apply hover:bg-destructive hover:text-destructive-foreground rounded-r-sm px-1;
+}
+
+.multi-select__menu-portal {
+  @apply z-[999];
+}
+
+.multi-select__menu-portal .multi-select__menu {
+  @apply relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover shadow-md animate-in fade-in-80 translate-y-1;
+}
+
+.multi-select__menu-portal .multi-select__menu-list {
+  @apply p-1 space-y-1;
+}
+
+.multi-select__menu-portal .multi-select__option {
+  @apply relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-popover-foreground text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground;
+}
+
+.multi-select__menu-portal .multi-select__option--is-focused {
+  @apply bg-accent;
+}
+
+.multi-select__menu-portal .multi-select__option--is-selected {
+  @apply bg-badge text-badge-foreground;
+}
+
+.multi-select__menu .multi-select__menu {
+  @apply relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover shadow-md animate-in fade-in-80 bg-black translate-y-1;
+}
+
+.multi-select__menu .multi-select__menu-list {
+  @apply p-1 space-y-1;
+}
+
+.multi-select__menu .multi-select__option {
+  @apply relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-popover-foreground text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground;
+}
+
+.multi-select__menu .multi-select__option--is-focused {
+  @apply bg-accent;
+}
+
+.multi-select__menu .multi-select__option--is-selected {
+  @apply bg-badge text-badge-foreground;
+}

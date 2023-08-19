@@ -1,0 +1,428 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Account {
+  id                String   @id @default(cuid())
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.Text
+  session_state     String?
+  createdAt         DateTime @default(now()) @map(name: "created_at")
+  updatedAt         DateTime @default(now()) @map(name: "updated_at")
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map(name: "accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map(name: "sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map(name: "verification_tokens")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  firstName     String    @default("") @map(name: "first_name")
+  lastName      String    @default("") @map(name: "last_name")
+  email         String?   @unique
+  emailVerified DateTime?
+  setup         Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  userType      UserType? @map(name: "user_type")
+
+  accounts       Account[]
+  sessions       Session[]
+  company        Company[]
+  questionForms  QuestionForm[]
+  resume         Resume[]
+  jobs           Job[]
+  applicant      JobApplication[] @relation("applicant")
+  employer       JobApplication[] @relation("employer")
+  jobVisits      JobVisit[]
+  savedJobs      SavedJob[]
+  paymentIntents PaymentIntent[]
+  transactions   Transaction[]
+
+  emialConfig EmailConfig?
+
+  country String?
+  city    String?
+  socials Json[]
+
+  @@map(name: "users")
+}
+
+enum UserType {
+  APPLICANT
+  EMPLOYER
+}
+
+model Resume {
+  id           String  @id @default(cuid())
+  title        String
+  portfolioUrl String? @map(name: "portfolio_url")
+  summary      String? @db.VarChar(1500)
+
+  skillSet      String[]      @map(name: "skill_set")
+  workHistories WorkHistory[]
+  educations    Education[]
+
+  default   Boolean
+  published Boolean
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobApplications JobApplication[]
+
+  @@index([id])
+  @@index([userId])
+  @@map(name: "resumes")
+}
+
+model WorkHistory {
+  id               String         @id @default(cuid())
+  company          String
+  jobTitle         String         @map(name: "job_title")
+  employmentType   EmploymentType @map(name: "employment_type")
+  fromDate         DateTime?      @map(name: "from_date") @db.Date()
+  toDate           DateTime?      @map(name: "to_date") @db.Date()
+  currentlyWorking Boolean        @map(name: "currently_working")
+  skillSet         String[]       @map(name: "skill_set")
+  details          String?        @db.VarChar(1500)
+
+  resumeId String @map(name: "resume_id")
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@index([resumeId])
+  @@map(name: "work_histories")
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  FREELANCE
+  SELF_EMPLOYED
+  INTERNSHIP
+}
+
+model Education {
+  id                String         @id @default(cuid())
+  schoolName        String         @map(name: "school_name")
+  level             EducationLevel
+  fieldOfStudy      String         @map(name: "field_of_study")
+  fromDate          DateTime?      @map(name: "from_date") @db.Date()
+  toDate            DateTime?      @map(name: "to_date") @db.Date()
+  currentlyStudying Boolean        @map(name: "currently_studying")
+  details           String?        @db.VarChar(1500)
+
+  resumeId String @map(name: "resume_id")
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@index([resumeId])
+  @@map(name: "educations")
+}
+
+enum EducationLevel {
+  JUNIOR_HIGHSCHOOL
+  SENIOR_HIGHSCHOOL
+  VOCATIONAL
+  ASSOCIATE_DEGREE
+  BACHELOR_DEGREE
+  MASTERS
+  DOCTORAL
+  PROFESSIONAL_DEGREE
+  JOINT_DEGREE
+}
+
+model Company {
+  id          String       @id @default(cuid())
+  name        String
+  email       String?
+  country     String?
+  city        String?
+  websiteUrl  String?      @map(name: "website_url")
+  description String?      @db.VarChar(1500)
+  companySize CompanySize? @map(name: "company_size")
+  dateFounded DateTime?    @map(name: "date_founded") @db.Date()
+  default     Boolean
+  published   Boolean
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobs Job[]
+
+  @@index([id])
+  @@index([userId])
+  @@map(name: "companies")
+}
+
+enum CompanySize {
+  MICRO
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+model QuestionForm {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  questions   Json[]
+  published   Boolean
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobs Job[]
+
+  @@index([id])
+  @@index([userId])
+  @@map(name: "question_forms")
+}
+
+model EmailConfig {
+  id          String @id @default(cuid())
+  subjectLine String
+  emailBody   Json?
+
+  userId String @unique @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@index([userId])
+  @@map(name: "email_config")
+}
+
+model Job {
+  id                  String                  @id @default(cuid())
+  title               String
+  jobDescription      Json?                   @map(name: "job_description")
+  category            JobCategory?
+  type                JobType?
+  skillSet            String[]                @map(name: "skill_set")
+  salaryCurrency      SalaryCurrency?         @default(USD) @map(name: "salary_currency")
+  startingSalary      Int?
+  maxSalary           Int?
+  locationRestriction JobLocationRestriction? @map(name: "location_restriction")
+  createdAt           DateTime                @default(now()) @map("created_at")
+  updatedAt           DateTime                @default(now()) @map("updated_at")
+  step                Int
+
+  questionnaireId String?       @map(name: "questionnaire_id")
+  questionnaire   QuestionForm? @relation(fields: [questionnaireId], references: [id], onDelete: Cascade)
+
+  companyId String  @map(name: "company_id")
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  postedById String @map(name: "posted_by_id")
+  postedBy   User   @relation(fields: [postedById], references: [id], onDelete: Cascade)
+
+  postedJob     PostedJob?
+  paymentIntent PaymentIntent?
+
+  jobVisits    JobVisit[]
+  applications JobApplication[]
+  savedJobs    SavedJob[]
+  transactions Transaction[]
+
+  @@index([postedById])
+  @@index([companyId])
+  @@index([questionnaireId])
+  @@map(name: "jobs")
+}
+
+model PostedJob {
+  id                     String    @id @default(cuid())
+  publishedAt            DateTime  @default(now()) @map("published_at")
+  expirationDate         DateTime  @default(dbgenerated("NOW() + interval '30 day'")) @map("expiration_date")
+  featured               Boolean   @default(false)
+  featuredExpirationDate DateTime? @map("featured_expiration_date")
+  highlighted            Boolean   @default(false)
+
+  jobId String @unique @map(name: "job_id")
+  job   Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@map(name: "posted_jobs")
+}
+
+model JobVisit {
+  id        String   @id @default(cuid())
+  visitedAt DateTime @default(now()) @map("visited_at") @db.Date
+
+  ownerId String @map(name: "owner_id")
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  jobId String @map(name: "job_id")
+  job   Job    @relation(fields: [jobId], references: [id])
+
+  @@index([jobId])
+  @@index([ownerId])
+  @@map(name: "job_visits")
+}
+
+model JobApplication {
+  id           String               @id @default(cuid())
+  appliedAt    DateTime             @default(now()) @map("applied_at") @db.Date
+  coverLetter  String?              @db.VarChar(1500)
+  formResponse Json[]
+  status       JobApplicationStatus @default(APPLIED)
+
+  applicant   User   @relation("applicant", fields: [applicantId], references: [id], onDelete: Cascade)
+  applicantId String @map(name: "applicant_id")
+
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  resumeId String @map(name: "resume_id")
+
+  employer   User   @relation("employer", fields: [employerId], references: [id], onDelete: Cascade)
+  employerId String @map(name: "employer_id")
+
+  jobId String @map(name: "job_post_id")
+  job   Job    @relation(fields: [jobId], references: [id])
+
+  @@index([jobId])
+  @@index([applicantId])
+  @@index([employerId])
+  @@index([resumeId])
+  @@map(name: "job_applications")
+}
+
+enum JobApplicationStatus {
+  APPLIED
+  ACCEPTED
+  REJECTED
+}
+
+enum JobType {
+  FULL_TIME
+  CONTRACT
+  INTERNSHIP
+}
+
+enum JobCategory {
+  SOFTWARE_DEVELOPMENT
+  DESIGN
+  SUPPORT
+  SALES
+  WRITING
+  PRODUCT
+  LEGAL
+  FINANCE
+  MARKETING
+  DATA_ENTRY
+  HEALTHCARE
+  RECRUITMENT
+  TEACHING
+  VIRTUAL_ASSISTANT
+  OTHERS
+}
+
+enum JobLocationRestriction {
+  WORLDWIDE
+  US
+  EUROPE
+  ASIA
+}
+
+enum SalaryCurrency {
+  USD
+  EUR
+  GBP
+  AUD
+  CAD
+}
+
+model SavedJob {
+  id      String   @id @default(cuid())
+  savedAt DateTime @default(now()) @map("saved_at")
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobId String @map(name: "job_post_id")
+  job   Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@index([jobId])
+  @@index([userId])
+  @@map(name: "saved_jobs")
+}
+
+model PaymentIntent {
+  id           String   @id
+  clientSecret String
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobId String? @unique @map(name: "job_id")
+  job   Job?    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@index([jobId])
+  @@index([userId])
+  @@map(name: "payment_intents")
+}
+
+model Transaction {
+  id        String            @id @default(cuid())
+  createdAt DateTime          @default(now()) @map("created_at")
+  amount    Int
+  items     String[]
+  status    TransactionStatus
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobId String? @map(name: "job_id")
+  job   Job?    @relation(fields: [jobId], references: [id])
+
+  @@index([jobId])
+  @@index([userId])
+  @@map(name: "transactions")
+}
+
+enum TransactionStatus {
+  SUCCESS
+  FAILED
+}

@@ -76,11 +76,15 @@ export function QuestionnaireBuilderForm({
 
   React.useEffect(() => {
     form.reset(questionnaireFormValues)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionnaire])
 
   React.useEffect(() => {
     const disabled = !isDirty || !isValid
     setDisabledButton(disabled)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.formState])
 
   async function onSubmit(data: FormData) {
@@ -122,7 +126,7 @@ export function QuestionnaireBuilderForm({
       >
         <Card>
           <CardHeader>
-            <CardTitle className="inline-flex items-center gap-2 h-[1.375rem]">
+            <CardTitle className="inline-flex h-[1.375rem] items-center gap-2">
               Edit questionnaire form
               {!questionnaire?.published ? (
                 <Badge variant="secondary" className="rounded-sm">
@@ -171,10 +175,10 @@ export function QuestionnaireBuilderForm({
               )
               const Icon = Icons[questionType?.icon!]
               return (
-                <div key={field.id} className="p-4 space-y-4 border rounded-md">
-                  <div className="inline-flex items-center justify-between w-full">
+                <div key={field.id} className="space-y-4 rounded-md border p-4">
+                  <div className="inline-flex w-full items-center justify-between">
                     <span className="inline-flex items-center text-sm font-bold">
-                      <Icon className="w-4 h-4 mr-2" />
+                      <Icon className="mr-2 h-4 w-4" />
                       {questionType?.label}
                     </span>
                     <div className="inline-flex space-x-4">
@@ -183,21 +187,21 @@ export function QuestionnaireBuilderForm({
                           type="button"
                           variant="outline"
                           size="sm"
-                          className="flex items-center justify-center w-8 h-8"
+                          className="flex h-8 w-8 items-center justify-center"
                           disabled={index === 0}
                           onClick={() => move(index, index - 1)}
                         >
-                          <Icons.chevronUp className="w-4 h-4 shrink-0" />
+                          <Icons.chevronUp className="h-4 w-4 shrink-0" />
                         </Button>
                         <Button
                           type="button"
                           variant="outline"
                           size="sm"
-                          className="flex items-center justify-center w-8 h-8"
+                          className="flex h-8 w-8 items-center justify-center"
                           disabled={index === fields.length - 1}
                           onClick={() => move(index, index + 1)}
                         >
-                          <Icons.chevronDown className="w-4 h-4 shrink-0" />
+                          <Icons.chevronDown className="h-4 w-4 shrink-0" />
                         </Button>
                       </div>
 
@@ -255,7 +259,7 @@ export function QuestionnaireBuilderForm({
               )
             })}
             <QuestionAddButton
-              className="w-full mt-3"
+              className="mt-3 w-full"
               disabled={!isValid && fields.length >= 1}
               append={append}
             />
@@ -266,7 +270,7 @@ export function QuestionnaireBuilderForm({
                 disabled={disabledButton || isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 <span>Update form</span>
               </button>

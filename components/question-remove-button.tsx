@@ -32,12 +32,12 @@ export function QuestionRemoveButton({
         onClick={() => setShowDeleteAlert(true)}
         className={cn(
           buttonVariants({ variant: "destructive", size: "sm" }),
-          "flex items-center justify-center w-8 h-8",
+          "flex h-8 w-8 items-center justify-center",
           className
         )}
         disabled={props.disabled}
       >
-        <Icons.trash className="w-4 h-4 shrink-0" />
+        <Icons.trash className="h-4 w-4 shrink-0" />
       </button>
 
       <AlertDialog open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
@@ -56,7 +56,7 @@ export function QuestionRemoveButton({
               onClick={props.onClick}
               className="bg-red-600 focus:ring-red-600"
             >
-              <Icons.trash className="w-4 h-4 mr-2" />
+              <Icons.trash className="mr-2 h-4 w-4" />
               <span>Remove</span>
             </AlertDialogAction>
           </AlertDialogFooter>

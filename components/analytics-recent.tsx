@@ -46,7 +46,7 @@ export function AnalyticsRecent({ applications }: AnalyticsRecentProps) {
                     {application.job?.title}
                   </p>
                 </div>
-                <div className="px-3 py-1 ml-auto text-xs rounded-md bg-accent text-muted-foreground">
+                <div className="ml-auto rounded-md bg-accent px-3 py-1 text-xs text-muted-foreground">
                   {elapsedDuration}
                 </div>
               </div>
@@ -76,10 +76,10 @@ AnalyticsRecent.Skeleton = function AnalyticsRecentSkeleton() {
       <div className="space-y-8">
         {[...Array(5)].map((item, index) => (
           <div className="flex items-center" key={index}>
-            <Skeleton className="flex-shrink-0 rounded-full h-9 w-9" />
-            <div className="w-full ml-4 space-y-1">
-              <Skeleton className="w-2/5 h-5" />
-              <Skeleton className="w-3/5 h-4" />
+            <Skeleton className="h-9 w-9 shrink-0 rounded-full" />
+            <div className="ml-4 w-full space-y-1">
+              <Skeleton className="h-5 w-2/5" />
+              <Skeleton className="h-4 w-3/5" />
             </div>
           </div>
         ))}

@@ -87,6 +87,8 @@ export function JobListToolbar() {
     } else {
       reset(queryParams)
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
 
   async function onSubmit() {
@@ -175,11 +177,11 @@ export function JobListToolbar() {
             />
 
             <Button type="submit">
-              <Icons.search className="w-4 h-4 mr-2" />
+              <Icons.search className="mr-2 h-4 w-4" />
               Search
             </Button>
           </div>
-          <div className="flex flex-wrap items-center flex-1 gap-2">
+          <div className="flex flex-1 flex-wrap items-center gap-2">
             <FormField
               control={form.control}
               name="category"
@@ -205,17 +207,17 @@ export function JobListToolbar() {
                   <Popover open={openSkillset} onOpenChange={setOpenSkillset}>
                     <PopoverTrigger asChild>
                       <Button variant="outline" className="border-dashed">
-                        <PlusCircle className="w-4 h-4 mr-2" />
+                        <PlusCircle className="mr-2 h-4 w-4" />
                         Skillset
                         {value?.length > 0 && (
                           <>
                             <Separator
                               orientation="vertical"
-                              className="h-4 mx-2"
+                              className="mx-2 h-4"
                             />
                             <Badge
                               variant="secondary"
-                              className="px-1 font-normal rounded-sm"
+                              className="rounded-sm px-1 font-normal"
                             >
                               {value.length}
                             </Badge>
@@ -245,7 +247,7 @@ export function JobListToolbar() {
 
                       <div className="mt-[calc(300px-52px)]">
                         <Separator />
-                        <div className="flex justify-end p-2 space-x-1">
+                        <div className="flex justify-end space-x-1 p-2">
                           <Button
                             type="submit"
                             form="filter-form"
@@ -310,12 +312,12 @@ export function JobListToolbar() {
             <Popover open={openSalary} onOpenChange={setOpenSalary}>
               <PopoverTrigger asChild>
                 <Button variant="outline" className="border-dashed">
-                  <PlusCircle className="w-4 h-4 mr-2" />
+                  <PlusCircle className="mr-2 h-4 w-4" />
                   Salary Range
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-[300px] p-0" align="start">
-                <div className="p-2 space-y-2">
+                <div className="space-y-2 p-2">
                   <FormField
                     control={form.control}
                     name="startingSalary"
@@ -355,7 +357,7 @@ export function JobListToolbar() {
                 </div>
                 <div className="mt-1">
                   <Separator />
-                  <div className="flex justify-end p-2 space-x-1">
+                  <div className="flex justify-end space-x-1 p-2">
                     <Button
                       type="submit"
                       form="filter-form"

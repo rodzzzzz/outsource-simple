@@ -12,7 +12,7 @@ import MenuList from "./multi-select-list"
 const DropdownIndicator = (props: any) => {
   return (
     <components.DropdownIndicator {...props}>
-      <ChevronDown className="w-4 h-4 opacity-50" />
+      <ChevronDown className="h-4 w-4 opacity-50" />
     </components.DropdownIndicator>
   )
 }

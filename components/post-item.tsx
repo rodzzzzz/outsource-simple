@@ -29,20 +29,20 @@ export function PostItem({
     : `/editor/${job.id}`
 
   return (
-    <div className="flex flex-col border rounded-md">
+    <div className="flex flex-col rounded-md border">
       <div className="flex items-start justify-between gap-2 px-4 py-3">
         <div className="grid grid-cols-1 gap-1">
-          <Link href={href} className="font-semibold truncate hover:underline">
+          <Link href={href} className="truncate font-semibold hover:underline">
             {job.title}
           </Link>
 
           <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-            <Icons.company className="w-4 h-4" />
+            <Icons.company className="h-4 w-4" />
             <p>{companyName}</p>
           </div>
 
           <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-            <Icons.clock className="w-4 h-4" />
+            <Icons.clock className="h-4 w-4" />
             {posted?.publishedAt ? (
               <p>Published {formatDate(posted.publishedAt?.toDateString())}</p>
             ) : (
@@ -68,13 +68,13 @@ export function PostItem({
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-3 px-4 py-2 text-sm border-t">
+      <div className="flex flex-wrap gap-3 border-t px-4 py-2 text-sm">
         <div className="inline-flex items-center gap-1">
-          <Icons.view className="w-4 h-4" />
+          <Icons.view className="h-4 w-4" />
           <p>{`${visitCount} visited`}</p>
         </div>
         <div className="inline-flex items-center gap-1">
-          <Icons.send className="w-4 h-4" />
+          <Icons.send className="h-4 w-4" />
           <p>{`${applicationCount} applied`}</p>
         </div>
 
@@ -88,19 +88,19 @@ export function PostItem({
 
 PostItem.Skeleton = function PostItemSkeleton() {
   return (
-    <div className="flex flex-col border rounded-md">
+    <div className="flex flex-col rounded-md border">
       <div className="flex items-start justify-between gap-2 px-4 py-3">
-        <div className="flex flex-col w-full gap-1">
-          <Skeleton className="w-2/5 h-6" />
-          <Skeleton className="w-4/5 h-4" />
-          <Skeleton className="w-4/5 h-4" />
+        <div className="flex w-full flex-col gap-1">
+          <Skeleton className="h-6 w-2/5" />
+          <Skeleton className="h-4 w-4/5" />
+          <Skeleton className="h-4 w-4/5" />
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-3 px-4 py-2 border-t">
-        <Skeleton className="w-1/5 h-4" />
-        <Skeleton className="w-1/5 h-4" />
-        <Skeleton className="w-1/5 h-4" />
+      <div className="flex flex-wrap gap-3 border-t px-4 py-2">
+        <Skeleton className="h-4 w-1/5" />
+        <Skeleton className="h-4 w-1/5" />
+        <Skeleton className="h-4 w-1/5" />
       </div>
     </div>
   )

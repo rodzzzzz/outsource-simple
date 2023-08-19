@@ -179,21 +179,21 @@ export function ApplicationDetailsViewer({
             type="button"
             variant="outline"
             size="sm"
-            className="flex items-center justify-center w-10 h-10"
+            className="flex h-10 w-10 items-center justify-center"
             onClick={onMovePrevious}
             disabled={applicationIndex === 0}
           >
-            <Icons.chevronLeft className="w-4 h-4 shrink-0" />
+            <Icons.chevronLeft className="h-4 w-4 shrink-0" />
           </Button>
           <Button
             type="button"
             variant="outline"
             size="sm"
-            className="flex items-center justify-center w-10 h-10"
+            className="flex h-10 w-10 items-center justify-center"
             onClick={onMoveNext}
             disabled={applicationIndex === applicationsLength - 1}
           >
-            <Icons.chevronRight className="w-4 h-4 shrink-0" />
+            <Icons.chevronRight className="h-4 w-4 shrink-0" />
           </Button>
         </div>
       </CardHeader>
@@ -223,9 +223,9 @@ export function ApplicationDetailsViewer({
               className="max-h-[30rem] min-h-[30rem]"
               value="cover-letter"
             >
-              <div className="p-6 border rounded-lg max-h-[30rem] min-h-[30rem] overflow-x-auto">
+              <div className="max-h-[30rem] min-h-[30rem] overflow-x-auto rounded-lg border p-6">
                 {application.coverLetter ? (
-                  <p className="leading-relaxed whitespace-pre-wrap">
+                  <p className="whitespace-pre-wrap leading-relaxed">
                     {application.coverLetter}
                   </p>
                 ) : (
@@ -260,7 +260,7 @@ export function ApplicationDetailsViewer({
               }}
             >
               {isUpdating && (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
               Reject
             </Button>
@@ -271,7 +271,7 @@ export function ApplicationDetailsViewer({
               }}
             >
               {isUpdating && (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
               Accept
             </Button>

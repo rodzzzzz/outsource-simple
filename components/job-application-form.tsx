@@ -239,7 +239,7 @@ export function JobApplicationForm({
                                   (resume) => resume.id === field.value
                                 )?.title
                               : "Select Resume"}
-                            <Icons.caretSort className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+                            <Icons.caretSort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
@@ -308,7 +308,7 @@ export function JobApplicationForm({
                     <FormControl>
                       <Textarea
                         rows={5}
-                        className="resize-none h-60"
+                        className="h-60 resize-none"
                         {...field}
                       />
                     </FormControl>
@@ -444,7 +444,7 @@ export function JobApplicationForm({
                                         >
                                           <FormControl>
                                             <Checkbox
-                                              className="shadow-none border-border"
+                                              className="border-border shadow-none"
                                               checked={field.value?.includes(
                                                 item.id
                                               )}
@@ -489,7 +489,7 @@ export function JobApplicationForm({
               >
                 {isSending ? (
                   <>
-                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                     <span>Sending...</span>
                   </>
                 ) : (

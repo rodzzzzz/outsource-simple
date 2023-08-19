@@ -82,7 +82,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </div>
           <button className={cn(buttonVariants())} disabled={isLoading}>
             {isLoading && (
-              <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             Sign In with Email
           </button>
@@ -93,7 +93,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="px-2 bg-background text-muted-foreground">
+          <span className="bg-background px-2 text-muted-foreground">
             Or continue with
           </span>
         </div>
@@ -108,9 +108,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         disabled={isLoading || isGoogleLoading}
       >
         {isGoogleLoading ? (
-          <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
-          <Icons.google className="w-4 h-4 mr-2" />
+          <Icons.google className="mr-2 h-4 w-4" />
         )}{" "}
         Google
       </button>

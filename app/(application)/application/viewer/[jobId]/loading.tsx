@@ -12,8 +12,8 @@ export default function Loading() {
         <Skeleton className="h-[40px] w-full" />
         <Card>
           <CardHeader className="gap-2">
-            <Skeleton className="w-1/5 h-5" />
-            <Skeleton className="w-4/5 h-4" />
+            <Skeleton className="h-5 w-1/5" />
+            <Skeleton className="h-4 w-4/5" />
           </CardHeader>
           <CardContent>
             <DataTableSkeleton />

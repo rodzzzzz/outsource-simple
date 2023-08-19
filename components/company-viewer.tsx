@@ -35,10 +35,10 @@ interface CompanyViewerProps {
 
 export function CompanyViewer({ company }: CompanyViewerProps) {
   return (
-    <div className="p-6 text-sm border rounded-lg shadow-md md:p-6 min-h-[300px]">
+    <div className="min-h-[300px] rounded-lg border p-6 text-sm shadow-md md:p-6">
       <div className="flex flex-col items-start space-y-4">
-        <div className="flex flex-col items-start flex-1 space-y-2">
-          <h1 className="text-xl font-bold leading-snug text-left md:leading-tight hover:underline">
+        <div className="flex flex-1 flex-col items-start space-y-2">
+          <h1 className="text-left text-xl font-bold leading-snug hover:underline md:leading-tight">
             {company.name}
           </h1>
           <div className="flex flex-col gap-1 text-muted-foreground">
@@ -47,7 +47,7 @@ export function CompanyViewer({ company }: CompanyViewerProps) {
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.email className="w-4 h-4" />
+                      <Icons.email className="h-4 w-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Email</p>
@@ -63,7 +63,7 @@ export function CompanyViewer({ company }: CompanyViewerProps) {
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.website className="w-4 h-4" />
+                      <Icons.website className="h-4 w-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Website</p>
@@ -87,7 +87,7 @@ export function CompanyViewer({ company }: CompanyViewerProps) {
         <div className="flex flex-col items-start space-y-2">
           <span className="text-lg font-bold">About us</span>
 
-          <p className="space-y-1 leading-relaxed whitespace-pre-wrap">
+          <p className="space-y-1 whitespace-pre-wrap leading-relaxed">
             {company.description}
           </p>
         </div>
@@ -98,7 +98,7 @@ export function CompanyViewer({ company }: CompanyViewerProps) {
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.users className="w-4 h-4" />
+                    <Icons.users className="h-4 w-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Company size</p>
@@ -115,7 +115,7 @@ export function CompanyViewer({ company }: CompanyViewerProps) {
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.location className="w-4 h-4" />
+                    <Icons.location className="h-4 w-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Company Location</p>
@@ -131,7 +131,7 @@ export function CompanyViewer({ company }: CompanyViewerProps) {
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.company className="w-4 h-4" />
+                    <Icons.company className="h-4 w-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Year founded</p>

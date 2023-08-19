@@ -33,11 +33,11 @@ export function AccountSetupIntro({
           }}
           initial="hidden"
           animate="show"
-          className="mx-auto max-w-[50rem] text-card-foreground text-center space-y-12"
+          className="mx-auto max-w-[50rem] space-y-12 text-center text-card-foreground"
         >
-          <div className="space-y-1.5 grid place-content-center">
+          <div className="grid place-content-center space-y-1.5">
             <motion.h1
-              className="text-4xl leading-none tracking-tight font-heading md:text-5xl lg:text-6xl"
+              className="font-heading text-4xl leading-none tracking-tight md:text-5xl lg:text-6xl"
               variants={STAGGER_CHILD_VARIANTS}
             >
               Welcome to <br /> Outsource Simple?

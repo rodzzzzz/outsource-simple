@@ -38,10 +38,10 @@ export function ResumeViewer({
   educations,
 }: ResumeViewerProps) {
   return (
-    <div className="p-6 space-y-4 border rounded-lg shadow-md text-sm min-h-[30rem]">
+    <div className="min-h-[30rem] space-y-4 rounded-lg border p-6 text-sm shadow-md">
       <div className="flex justify-between space-x-3">
-        <div className="flex flex-col items-start flex-1 space-y-2">
-          <h1 className="text-xl font-bold leading-snug text-left md:leading-tight hover:underline">
+        <div className="flex flex-1 flex-col items-start space-y-2">
+          <h1 className="text-left text-xl font-bold leading-snug hover:underline md:leading-tight">
             {`${user.firstName} ${user.lastName}`}
           </h1>
           <div className="flex flex-col items-start gap-1 text-muted-foreground">
@@ -50,7 +50,7 @@ export function ResumeViewer({
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.location className="w-4 h-4" />
+                      <Icons.location className="h-4 w-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Location</p>
@@ -65,7 +65,7 @@ export function ResumeViewer({
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.email className="w-4 h-4" />
+                    <Icons.email className="h-4 w-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Email</p>
@@ -80,7 +80,7 @@ export function ResumeViewer({
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.website className="w-4 h-4" />
+                      <Icons.website className="h-4 w-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Portfolio</p>
@@ -98,11 +98,11 @@ export function ResumeViewer({
             ) : null}
 
             {!isEmptyArray(resume.skillSet) ? (
-              <div className="inline-flex items-center gap-3 mt-1">
+              <div className="mt-1 inline-flex items-center gap-3">
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.skillset className="w-4 h-4" />
+                      <Icons.skillset className="h-4 w-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Skillset</p>
@@ -132,7 +132,7 @@ export function ResumeViewer({
           <Badge className="h-6">{resume.title}</Badge>
         </div>
 
-        <p className="space-y-1 leading-relaxed whitespace-pre-wrap">
+        <p className="space-y-1 whitespace-pre-wrap leading-relaxed">
           {resume.summary}
         </p>
       </div>
@@ -157,12 +157,12 @@ export function ResumeViewer({
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.company className="w-4 h-4" />
+                      <Icons.company className="h-4 w-4" />
                       <p>{work.company}</p>
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.calendar className="w-4 h-4" />
+                      <Icons.calendar className="h-4 w-4" />
                       <p>{`${format(
                         work.fromDate!,
                         "MMMM yyy"
@@ -170,12 +170,12 @@ export function ResumeViewer({
                     </div>
 
                     {!!work.details ? (
-                      <p className="mt-1 space-y-1 leading-relaxed whitespace-pre-wrap">
+                      <p className="mt-1 space-y-1 whitespace-pre-wrap leading-relaxed">
                         {work.details}
                       </p>
                     ) : null}
 
-                    <div className="flex flex-wrap gap-1 mt-1">
+                    <div className="mt-1 flex flex-wrap gap-1">
                       {work.skillSet.map((skill, index) => {
                         return (
                           <Badge variant="outline" key={index}>
@@ -214,12 +214,12 @@ export function ResumeViewer({
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.school className="w-4 h-4" />
+                      <Icons.school className="h-4 w-4" />
                       <p>{edu.schoolName}</p>
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.calendar className="w-4 h-4" />
+                      <Icons.calendar className="h-4 w-4" />
                       <p>{`${format(
                         edu.fromDate!,
                         "MMMM yyy"
@@ -227,7 +227,7 @@ export function ResumeViewer({
                     </div>
 
                     {!!edu.details ? (
-                      <p className="mt-1 space-y-1 leading-relaxed whitespace-pre-wrap">
+                      <p className="mt-1 space-y-1 whitespace-pre-wrap leading-relaxed">
                         {edu.details}
                       </p>
                     ) : null}
@@ -254,7 +254,7 @@ export function ResumeViewer({
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Link href={social.url!} target="_blank">
-                          <Icon className="w-6 h-6" />
+                          <Icon className="h-6 w-6" />
                         </Link>
                       </TooltipTrigger>
                       <TooltipContent>

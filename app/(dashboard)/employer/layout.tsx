@@ -20,9 +20,9 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex flex-col min-h-screen space-y-6">
-      <header className="sticky top-0 z-40 px-6 pt-6 bg-background">
-        <div className="container flex items-center justify-between h-20 py-4 border rounded-full shadow-md">
+    <div className="flex min-h-screen flex-col space-y-6">
+      <header className="sticky top-0 z-40 bg-background px-6 pt-6">
+        <div className="container flex h-20 items-center justify-between rounded-full border py-4 shadow-md">
           <MainNav items={dashboardConfig.employerNav} />
           <div className="flex items-center gap-6">
             <ModeToggle />
@@ -38,7 +38,7 @@ export default async function DashboardLayout({
         </div>
       </header>
       <div className="container relative grid flex-1 gap-12 pb-12">
-        <main className="flex flex-col flex-1 overflow-hidden">{children}</main>
+        <main className="flex flex-1 flex-col overflow-hidden">{children}</main>
       </div>
     </div>
   )

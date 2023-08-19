@@ -92,6 +92,8 @@ export function ResumeDetails({ resumes }: ResumeDetailsProps) {
           "Please create your resume first before sending job applications.",
       })
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   React.useEffect(() => {

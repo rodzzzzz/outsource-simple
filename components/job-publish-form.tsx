@@ -104,6 +104,8 @@ export function JobPublishForm({
     const fd = featured ? ` | ${featuredPrice.name}` : ""
     const hd = highlighted ? ` | ${highlightedPrice.name}` : ""
     setDescription(posting.name + fd + hd)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [featured, highlighted])
 
   async function onPublish() {
@@ -140,7 +142,7 @@ export function JobPublishForm({
             <CardContent>
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <FormItem className="p-4 border-2 rounded-lg border-primary">
+                  <FormItem className="rounded-lg border-2 border-primary p-4">
                     <div>
                       <h1>{`$${posting.price}`}</h1>
                       <div className="space-y-0.5">
@@ -156,7 +158,7 @@ export function JobPublishForm({
                     name="featured"
                     defaultValue={config.featured}
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-center justify-between p-4 border-2 rounded-lg  [&:has([data-state=checked])]:border-primary">
+                      <FormItem className="flex flex-row items-center justify-between rounded-lg border-2 p-4  [&:has([data-state=checked])]:border-primary">
                         <div>
                           <h1>{`$${featuredPrice.price}`}</h1>
                           <div className="space-y-0.5">
@@ -183,7 +185,7 @@ export function JobPublishForm({
                     name="highlighted"
                     defaultValue={config.highlighted}
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-center justify-between p-4 border-2 rounded-lg [&:has([data-state=checked])]:border-primary">
+                      <FormItem className="flex flex-row items-center justify-between rounded-lg border-2 p-4 [&:has([data-state=checked])]:border-primary">
                         <div>
                           <h1>{`$${highlightedPrice.price}`}</h1>
                           <div className="space-y-0.5">
@@ -211,7 +213,7 @@ export function JobPublishForm({
                 <div className="space-y-4">
                   <Separator />
 
-                  <Card className="border-none shadow-none w-[400px]">
+                  <Card className="w-[400px] border-none shadow-none">
                     <CardHeader className="p-0 pb-1">
                       <CardTitle className="text-sm font-medium">
                         Total price
@@ -268,8 +270,8 @@ export function JobPublishForm({
               <ul className="space-y-2 text-sm">
                 <li>
                   1. Posted job will be visible on our our website for 30 days,
-                  once the payment goes through. You'll receive a confirmation
-                  email together with the copy of Invoice.
+                  once the payment goes through. You&apos;ll receive a
+                  confirmation email together with the copy of Invoice.
                 </li>
                 <li>
                   2. Please make sure that all the details of your job is

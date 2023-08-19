@@ -10,20 +10,20 @@ import {
 
 export function DataTableSkeleton() {
   return (
-    <div className="p-1 space-y-4">
+    <div className="space-y-4 p-1">
       <div className="flex gap-2">
         <Skeleton className="h-8 w-[200px]" />
         <Skeleton className="h-8 w-[100px]" />
         <Skeleton className="h-8 w-[100px]" />
       </div>
 
-      <div className="border rounded-md">
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>
               {[...Array(3)].map((_, index) => (
                 <TableHead key={index}>
-                  <Skeleton className="w-3/5 h-5" />
+                  <Skeleton className="h-5 w-3/5" />
                 </TableHead>
               ))}
             </TableRow>
@@ -33,7 +33,7 @@ export function DataTableSkeleton() {
               <TableRow key={index}>
                 {[...Array(3)].map((_, cellIndex) => (
                   <TableCell key={cellIndex}>
-                    <Skeleton className="w-2/5 h-4" />
+                    <Skeleton className="h-4 w-2/5" />
                   </TableCell>
                 ))}
               </TableRow>

@@ -107,11 +107,11 @@ export function AccountTypeForm({
         }}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-[50rem] text-card-foreground text-center flex flex-col gap-12"
+        className="mx-auto flex max-w-[50rem] flex-col gap-12 text-center text-card-foreground"
       >
         <div className="space-y-1.5">
           <motion.h1
-            className="text-4xl leading-none tracking-tight font-heading md:text-5xl lg:text-6xl"
+            className="font-heading text-4xl leading-none tracking-tight md:text-5xl lg:text-6xl"
             variants={STAGGER_CHILD_VARIANTS}
           >
             How do you want to use <br /> Outsource Simple?
@@ -148,14 +148,14 @@ export function AccountTypeForm({
                             <Label
                               key={type.value}
                               htmlFor={type.value}
-                              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover px-4 py-8 md:py-12 lg:py-16 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary cursor-pointer"
+                              className="flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-muted bg-popover px-4 py-8 hover:bg-accent hover:text-accent-foreground md:py-12 lg:py-16 [&:has([data-state=checked])]:border-primary"
                             >
                               <RadioGroupItem
                                 value={type.value}
                                 id={type.value}
                                 className="sr-only"
                               />
-                              <Icon className="w-6 h-6 mb-3" />
+                              <Icon className="mb-3 h-6 w-6" />
                               {type.label}
                             </Label>
                           )
@@ -172,7 +172,7 @@ export function AccountTypeForm({
                 disabled={isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 <span>Finish setup</span>
               </button>

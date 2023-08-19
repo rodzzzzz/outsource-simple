@@ -82,6 +82,8 @@ export function ApplicationViewer({
         setSelected("viewer")
       }
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [applicantId])
 
   React.useEffect(() => {

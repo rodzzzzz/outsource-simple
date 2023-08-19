@@ -23,9 +23,9 @@ export default async function MarketingLayout({
       : null
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-40 px-6 pt-6 bg-background">
-        <div className="container flex items-center justify-between h-20 py-4 border rounded-full shadow-md">
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-40 bg-background px-6 pt-6">
+        <div className="container flex h-20 items-center justify-between rounded-full border py-4 shadow-md">
           <MainNav items={marketingConfig.mainNav} />
           <nav className="flex items-center gap-6">
             <ModeToggle />
@@ -34,7 +34,7 @@ export default async function MarketingLayout({
                 <UserAvatar
                   user={{ image: user.image || null }}
                   name={name || null}
-                  className="w-8 h-8"
+                  className="h-8 w-8"
                 />
               ) : (
                 <span

@@ -119,11 +119,15 @@ export function ResumeEducationForm({
 
   React.useEffect(() => {
     form.reset(educationFormValues)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [education])
 
   React.useEffect(() => {
     const disabled = !isDirty
     setDisabledButton(disabled)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.formState])
 
   async function onSubmit(data: FormData) {
@@ -165,7 +169,7 @@ export function ResumeEducationForm({
       >
         <Card>
           <CardHeader>
-            <CardTitle className="inline-flex items-center gap-2 h-[1.375rem]">
+            <CardTitle className="inline-flex h-[1.375rem] items-center gap-2">
               Educational Background
             </CardTitle>
             <CardDescription>
@@ -281,7 +285,7 @@ export function ResumeEducationForm({
                                       ) : (
                                         <span>Pick a date</span>
                                       )}
-                                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
+                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                     </Button>
                                   </PopoverTrigger>
                                 </FormControl>
@@ -329,7 +333,7 @@ export function ResumeEducationForm({
                                       ) : (
                                         <span>Pick a date</span>
                                       )}
-                                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
+                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                     </Button>
                                   </PopoverTrigger>
                                 </FormControl>
@@ -385,7 +389,7 @@ export function ResumeEducationForm({
                         <FormControl>
                           <Textarea
                             rows={5}
-                            className="resize-none h-30"
+                            className="h-30 resize-none"
                             {...field}
                           />
                         </FormControl>
@@ -436,7 +440,7 @@ export function ResumeEducationForm({
                   disabled={disabledButton || isSaving}
                 >
                   {isSaving && (
-                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                   )}
                   <span>Update details</span>
                 </button>

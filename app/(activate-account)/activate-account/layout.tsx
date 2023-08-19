@@ -16,8 +16,8 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex flex-col min-h-screen space-y-6">
-      <main className="container flex flex-col justify-center flex-1 overflow-hidden">
+    <div className="flex min-h-screen flex-col space-y-6">
+      <main className="container flex flex-1 flex-col justify-center overflow-hidden">
         {children}
       </main>
     </div>

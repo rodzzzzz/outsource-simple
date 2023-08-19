@@ -57,8 +57,8 @@ export function SavedOperations({ saved, job }: SavedOperationsProps) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center justify-center w-8 h-8 transition-colors border rounded-md hover:bg-muted">
-          <Icons.ellipsis className="w-4 h-4" />
+        <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
+          <Icons.ellipsis className="h-4 w-4" />
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -69,7 +69,7 @@ export function SavedOperations({ saved, job }: SavedOperationsProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            className="flex items-center cursor-pointer text-destructive focus:text-destructive"
+            className="flex cursor-pointer items-center text-destructive focus:text-destructive"
             onSelect={() => setShowDeleteAlert(true)}
           >
             Unsave
@@ -104,9 +104,9 @@ export function SavedOperations({ saved, job }: SavedOperationsProps) {
               className="bg-red-600 focus:ring-red-600"
             >
               {isDeleteLoading ? (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <Icons.unsave className="w-4 h-4 mr-2" />
+                <Icons.unsave className="mr-2 h-4 w-4" />
               )}
               <span>Unsave</span>
             </AlertDialogAction>

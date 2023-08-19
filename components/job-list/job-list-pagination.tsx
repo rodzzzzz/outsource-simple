@@ -110,7 +110,7 @@ export function JobListPagination({ jobsLength }: JobListPaginationProps) {
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            className="hidden w-8 h-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
               if (currentPage > 1) {
                 onChange(1)
@@ -119,11 +119,11 @@ export function JobListPagination({ jobsLength }: JobListPaginationProps) {
             disabled={currentPage === 1}
           >
             <span className="sr-only">Go to first page</span>
-            <ChevronsLeft className="w-4 h-4" />
+            <ChevronsLeft className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
-            className="w-8 h-8 p-0"
+            className="h-8 w-8 p-0"
             onClick={() => {
               if (currentPage > 1) {
                 onChange(currentPage - 1)
@@ -132,11 +132,11 @@ export function JobListPagination({ jobsLength }: JobListPaginationProps) {
             disabled={currentPage === 1}
           >
             <span className="sr-only">Go to previous page</span>
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
-            className="w-8 h-8 p-0"
+            className="h-8 w-8 p-0"
             onClick={() => {
               if (currentPage < lastPage) {
                 onChange(currentPage + 1)
@@ -145,11 +145,11 @@ export function JobListPagination({ jobsLength }: JobListPaginationProps) {
             disabled={currentPage === lastPage}
           >
             <span className="sr-only">Go to next page</span>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
-            className="hidden w-8 h-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
               if (currentPage < lastPage) {
                 onChange(lastPage)
@@ -158,7 +158,7 @@ export function JobListPagination({ jobsLength }: JobListPaginationProps) {
             disabled={currentPage === lastPage}
           >
             <span className="sr-only">Go to last page</span>
-            <ChevronsRight className="w-4 h-4" />
+            <ChevronsRight className="h-4 w-4" />
           </Button>
         </div>
       </div>

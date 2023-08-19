@@ -46,15 +46,15 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
     <Link
       href={absoluteUrl(`/job/${postedJob.jobId}`)}
       className={cn(
-        "flex flex-col w-full text-sm transition-transform border rounded-lg shadow-md bg-card text-card-foreground",
+        "flex w-full flex-col rounded-lg border bg-card text-sm text-card-foreground shadow-md transition-transform",
         postedJob.highlighted && "bg-highlight"
       )}
       {...props}
     >
-      <div className="px-6 py-6 space-y-4">
+      <div className="space-y-4 p-6">
         <div className="flex justify-between space-x-3">
           <div className="flex flex-col items-start space-y-1">
-            <h1 className="text-base font-bold leading-snug text-left md:leading-tight hover:underline">
+            <h1 className="text-left text-base font-bold leading-snug hover:underline md:leading-tight">
               {job.title}
             </h1>
 
@@ -85,7 +85,7 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
             <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Icons.location className="w-4 h-4" />
+                  <Icons.location className="h-4 w-4" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Location restriction</p>
@@ -100,7 +100,7 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
             <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Icons.employmentType className="w-4 h-4" />
+                  <Icons.employmentType className="h-4 w-4" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Employment type</p>
@@ -115,7 +115,7 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.salary className="w-4 h-4" />
+                    <Icons.salary className="h-4 w-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Salary range</p>
@@ -134,7 +134,7 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
             <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Icons.skillset className="w-4 h-4" />
+                  <Icons.skillset className="h-4 w-4" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Skillset</p>
@@ -180,12 +180,12 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
 
       <div
         className={cn(
-          "flex flex-col items-start px-6 py-3 border-t rounded-b-lg bg-secondary text-muted-foreground",
-          postedJob.highlighted && "bg-highlight-foreground border-none"
+          "flex flex-col items-start rounded-b-lg border-t bg-secondary px-6 py-3 text-muted-foreground",
+          postedJob.highlighted && "border-none bg-highlight-foreground"
         )}
       >
         <div className="inline-flex items-center gap-3" title="Last posted">
-          <Icons.clock className="w-4 h-4" />
+          <Icons.clock className="h-4 w-4" />
           <p>{elapsedDuration}</p>
         </div>
       </div>

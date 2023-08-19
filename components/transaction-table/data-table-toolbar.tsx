@@ -23,7 +23,7 @@ export function DataTableToolbar<TData>({
 
   return (
     <div className="flex items-center justify-between gap-2">
-      <div className="flex flex-col flex-1 gap-2 lg:flex-row">
+      <div className="flex flex-1 flex-col gap-2 lg:flex-row">
         <Input
           placeholder="Filter transactions..."
           value={
@@ -56,7 +56,7 @@ export function DataTableToolbar<TData>({
               className="h-8 px-2 lg:px-3"
             >
               Reset
-              <X className="w-4 h-4 ml-2" />
+              <X className="ml-2 h-4 w-4" />
             </Button>
           )}
         </div>

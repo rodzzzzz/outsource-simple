@@ -70,7 +70,7 @@ const CustomTooltip = (
   const { active, payload, label } = props
   if (active && payload && payload.length) {
     return (
-      <div className="px-6 py-4 border rounded shadow-lg bg-popover">
+      <div className="rounded border bg-popover px-6 py-4 shadow-lg">
         <h1 className="mb-3 text-lg font-bold text-primary">{label}</h1>
         <table>
           <tbody className="text-sm">
@@ -98,7 +98,7 @@ const CustomLegend = (props: LegendProps) => {
   const { payload } = props
 
   return (
-    <ul className="flex justify-center w-full gap-6">
+    <ul className="flex w-full justify-center gap-6">
       {payload?.map((entry: LegendPayload, index: number) => {
         const item = displayItems[entry.value] as DisplayConfig
 
@@ -108,7 +108,7 @@ const CustomLegend = (props: LegendProps) => {
             className="flex items-center gap-1 text-sm text-gray-600"
           >
             <span
-              className="w-4 h-4 rounded-sm"
+              className="h-4 w-4 rounded-sm"
               style={{ backgroundColor: item.color }}
             />
 

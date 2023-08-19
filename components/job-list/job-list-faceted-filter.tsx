@@ -51,14 +51,14 @@ const JobListFacetedFilter = ({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className="border-dashed">
-          <PlusCircle className="w-4 h-4 mr-2" />
+          <PlusCircle className="mr-2 h-4 w-4" />
           {title}
           {selectedValues?.size > 0 && (
             <>
-              <Separator orientation="vertical" className="h-4 mx-2" />
+              <Separator orientation="vertical" className="mx-2 h-4" />
               <Badge
                 variant="secondary"
-                className="px-1 font-normal rounded-sm"
+                className="rounded-sm px-1 font-normal"
               >
                 {selectedValues.size}
               </Badge>
@@ -73,7 +73,7 @@ const JobListFacetedFilter = ({
               <CommandInput placeholder={title} />
             ) : (
               <>
-                <div className="flex w-full py-3 pl-4 text-sm bg-transparent rounded-md outline-none text-foreground-muted h-11">
+                <div className="text-foreground-muted flex h-11 w-full rounded-md bg-transparent py-3 pl-4 text-sm outline-none">
                   {title}
                 </div>
                 <CommandSeparator />
@@ -116,7 +116,7 @@ const JobListFacetedFilter = ({
 
               <div className="sticky bottom-0 bg-popover">
                 <CommandSeparator />
-                <div className="flex justify-end p-2 space-x-1">
+                <div className="flex justify-end space-x-1 p-2">
                   <Button
                     form="filter-form"
                     variant="link"

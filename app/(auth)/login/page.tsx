@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="container flex flex-col items-center justify-center w-screen h-screen">
+    <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
         href="/"
         className={cn(
@@ -22,7 +22,7 @@ export default function LoginPage() {
         )}
       >
         <>
-          <Icons.chevronLeft className="w-4 h-4 mr-2" />
+          <Icons.chevronLeft className="mr-2 h-4 w-4" />
           Back
         </>
       </Link>

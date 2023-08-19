@@ -26,30 +26,30 @@ export default function PricingPage() {
           </h3>
           <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
             <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Job Posting for 30 days
+              <Icons.check className="mr-2 h-4 w-4" /> Job Posting for 30 days
             </li>
             <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Get posted on Google Jobs
+              <Icons.check className="mr-2 h-4 w-4" /> Get posted on Google Jobs
             </li>
 
             <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Applicant Management Tool
+              <Icons.check className="mr-2 h-4 w-4" /> Applicant Management Tool
             </li>
             <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Dashboard Analytics
+              <Icons.check className="mr-2 h-4 w-4" /> Dashboard Analytics
             </li>
             <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Customizable Question
+              <Icons.check className="mr-2 h-4 w-4" /> Customizable Question
               Forms
             </li>
             <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Premium Support
+              <Icons.check className="mr-2 h-4 w-4" /> Premium Support
             </li>
           </ul>
         </div>
         <div className="flex flex-col gap-4 text-center">
           <div>
-            <h4 className="font-bold text-7xl">$299</h4>
+            <h4 className="text-7xl font-bold">$299</h4>
             <p className="text-sm font-medium text-muted-foreground">
               per job posting
             </p>

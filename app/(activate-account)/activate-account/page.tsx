@@ -23,10 +23,10 @@ export default async function AcitvateAccountPage() {
   }
 
   return (
-    <section className="px-6 pt-6 pb-8 space-y-6 md:pb-12 md:pt-10 lg:py-32">
-      <Card className="mx-auto max-w-[50rem] border-none shadow-none text-center">
+    <section className="space-y-6 px-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+      <Card className="mx-auto max-w-[50rem] border-none text-center shadow-none">
         <CardHeader>
-          <CardTitle className="text-4xl font-heading md:text-5xl lg:text-6xl">
+          <CardTitle className="font-heading text-4xl md:text-5xl lg:text-6xl">
             Before we get started, <br />
             please activate your account.
           </CardTitle>

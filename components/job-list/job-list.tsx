@@ -29,7 +29,7 @@ interface JobListProps {
 
 export default function JobList({ jobs }: JobListProps) {
   return (
-    <div className="flex flex-col w-full pt-6 space-y-6">
+    <div className="flex w-full flex-col space-y-6 pt-6">
       {jobs.map((job) => {
         return (
           <React.Fragment key={job.jobId}>

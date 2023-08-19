@@ -170,7 +170,7 @@ export function ApplicantAccountSocialsForm({
                                           key={social.value}
                                         >
                                           <div className="flex items-center">
-                                            <Icon className="w-4 h-4 mr-2" />
+                                            <Icon className="mr-2 h-4 w-4" />
                                             <span>{social.label}</span>
                                           </div>
                                         </SelectItem>
@@ -236,7 +236,7 @@ export function ApplicantAccountSocialsForm({
                 disabled={disabledSocialButton || isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 <span>Update socials</span>
               </button>

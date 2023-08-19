@@ -81,9 +81,9 @@ export function PostCreateButton({
       {...props}
     >
       {isLoading ? (
-        <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
       ) : (
-        <Icons.add className="w-4 h-4 mr-2" />
+        <Icons.add className="mr-2 h-4 w-4" />
       )}
       New job post
     </button>

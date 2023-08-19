@@ -30,7 +30,7 @@ export function ApplicantAccountNav({ user }: ApplicantAccountNavProps) {
         <UserAvatar
           user={{ image: user.image || null }}
           name={name || null}
-          className="w-8 h-8"
+          className="h-8 w-8"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

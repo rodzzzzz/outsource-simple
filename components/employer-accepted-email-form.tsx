@@ -277,13 +277,13 @@ export function EmployerAcceptedEmailForm({
                           <div
                             id="editor"
                             className={cn(
-                              "min-h-[250px] pt-8 text-sm bg-transparent border rounded-md border-input ring-offset-background placeholder:text-muted-foreground focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 transition"
+                              "min-h-[250px] rounded-md border border-input bg-transparent pt-8 text-sm ring-offset-background transition placeholder:text-muted-foreground focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
                             )}
                             {...field}
                           />
                           <p className="mt-2 text-sm text-gray-500">
                             Use{" "}
-                            <kbd className="px-1 text-xs uppercase border rounded-md bg-muted">
+                            <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
                               Tab
                             </kbd>{" "}
                             to open the command menu.
@@ -306,7 +306,7 @@ export function EmployerAcceptedEmailForm({
                     disabled={isSaving || isSending}
                   >
                     {isSending && (
-                      <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                     )}
                     <span>Test email</span>
                   </button>
@@ -316,20 +316,20 @@ export function EmployerAcceptedEmailForm({
                     disabled={isSaving || isSending || !isMounted}
                   >
                     {isSaving && (
-                      <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                     )}
                     <span>Update email</span>
                   </button>
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="pt-6 border-t">
+            <CardFooter className="border-t pt-6">
               <button
                 type="button"
                 onClick={() => setShowVariablesDialog(true)}
                 className={cn(
                   buttonVariants({ variant: "link" }),
-                  "text-xs text-muted-foreground underline p-0 h-fit"
+                  "h-fit p-0 text-xs text-muted-foreground underline"
                 )}
               >
                 View all dynamic variables.

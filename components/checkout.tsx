@@ -31,6 +31,8 @@ export default function Checkout({
       .then((data) => {
         setPaymentIntent(data)
       })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const appearance: Appearance = {
@@ -52,12 +54,12 @@ export default function Checkout({
           <CheckoutForm paymentIntent={paymentIntent} />
         </Elements>
       ) : (
-        <div className="flex flex-col items-center w-full">
+        <div className="flex w-full flex-col items-center">
           <Icons.spinner
             strokeWidth={1.5}
-            className="w-32 h-32 text-muted animate-spin"
+            className="h-32 w-32 animate-spin text-muted"
           />
-          <Skeleton className="w-full mt-8 h-11" />
+          <Skeleton className="mt-8 h-11 w-full" />
         </div>
       )}
     </div>

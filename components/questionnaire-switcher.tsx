@@ -94,6 +94,8 @@ export default function QuestionnaireSwitcher({
     } else {
       setSelectedQuestionnaire(defaultQuestionnaire)
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.questionnaireId, questionnaireGroups])
 
   async function onSubmit(data: FormData) {
@@ -150,7 +152,7 @@ export default function QuestionnaireSwitcher({
                 ? selectedQuestionnaire?.label
                 : "New questionnaire"}
             </span>
-            <Icons.caretSort className="w-4 h-4 ml-auto opacity-50 shrink-0" />
+            <Icons.caretSort className="ml-auto h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className={cn("w-[250px] p-0", className)}>
@@ -207,7 +209,7 @@ export default function QuestionnaireSwitcher({
                           setShowNewQuestionnaireDialog(true)
                         }}
                       >
-                        <Icons.plusCircle className="w-5 h-5 mr-2" />
+                        <Icons.plusCircle className="mr-2 h-5 w-5" />
                         Add Questionnaire
                       </CommandItem>
                     </DialogTrigger>
@@ -232,7 +234,7 @@ export default function QuestionnaireSwitcher({
               </DialogDescription>
             </DialogHeader>
             <div>
-              <div className="py-2 pb-4 space-y-4">
+              <div className="space-y-4 py-2 pb-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Form title</Label>
                   <Input id="name" {...register("name")} />

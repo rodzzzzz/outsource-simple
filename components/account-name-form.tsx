@@ -95,11 +95,11 @@ export function AccountNameForm({
         }}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-[50rem] text-card-foreground text-center flex flex-col gap-12"
+        className="mx-auto flex max-w-[50rem] flex-col gap-12 text-center text-card-foreground"
       >
         <div className="space-y-1.5">
           <motion.h1
-            className="text-4xl leading-none tracking-tight font-heading md:text-5xl lg:text-6xl"
+            className="font-heading text-4xl leading-none tracking-tight md:text-5xl lg:text-6xl"
             variants={STAGGER_CHILD_VARIANTS}
           >
             Let&apos;s get you started.
@@ -155,7 +155,7 @@ export function AccountNameForm({
                 disabled={isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 <span>Next</span>
               </button>

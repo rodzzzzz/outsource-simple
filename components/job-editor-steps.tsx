@@ -19,14 +19,14 @@ export function JobEditorSteps({
   setActive,
 }: JobEditorStepsProps) {
   return (
-    <ol className="flex items-center w-full px-6 text-sm font-medium text-center text-muted-foreground sm:text-base">
+    <ol className="flex w-full items-center px-6 text-center text-sm font-medium text-muted-foreground sm:text-base">
       {steps.map((step, index) => {
         return (
           <React.Fragment key={index}>
             {index < steps.length - 1 && (
               <li
                 className={cn(
-                  "flex md:w-full items-center after:content-[''] after:w-full after:h-[1px] after:bg-muted after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10",
+                  "flex items-center after:mx-6 after:hidden after:h-[1px] after:w-full after:bg-muted after:content-[''] sm:after:inline-block md:w-full xl:after:mx-10",
                   index < active && "after:bg-primary"
                 )}
               >
@@ -34,14 +34,14 @@ export function JobEditorSteps({
                   onClick={() => setActive(index)}
                   disabled={!(done > index - 1) && index !== 0}
                   className={cn(
-                    "flex items-center after:content-['/'] sm:after:hidden after:mx-2 text-muted-foreground",
+                    "flex items-center text-muted-foreground after:mx-2 after:content-['/'] sm:after:hidden",
                     index <= active && "text-primary"
                   )}
                 >
                   {done > index ? (
                     <Icons.checkCircle
                       fill="currentColor"
-                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5 stroke-primary-foreground"
+                      className="mr-2.5 h-3.5 w-3.5 stroke-primary-foreground sm:h-4 sm:w-4"
                     />
                   ) : (
                     <span className="mr-2">{index + 1}</span>
@@ -65,7 +65,7 @@ export function JobEditorSteps({
                   {done > index ? (
                     <Icons.checkCircle
                       fill="currentColor"
-                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5 stroke-primary-foreground"
+                      className="mr-2.5 h-3.5 w-3.5 stroke-primary-foreground sm:h-4 sm:w-4"
                     />
                   ) : (
                     <span className="mr-2">{index + 1}</span>

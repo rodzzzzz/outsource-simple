@@ -117,9 +117,9 @@ export function JobSaveButton({
           {...props}
         >
           {isLoading ? (
-            <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            <Icons.unsave className="w-4 h-4 mr-2" />
+            <Icons.unsave className="mr-2 h-4 w-4" />
           )}
           Unsave job
         </button>
@@ -137,9 +137,9 @@ export function JobSaveButton({
           {...props}
         >
           {isLoading ? (
-            <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            <Icons.save className="w-4 h-4 mr-2" />
+            <Icons.save className="mr-2 h-4 w-4" />
           )}
           Save job
         </button>

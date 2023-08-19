@@ -87,7 +87,7 @@ export default async function ApplicationPage({ params }: JobPageProps) {
           href={`/job/${params.jobId}`}
           className={cn(buttonVariants({ variant: "ghost" }))}
         >
-          <Icons.chevronLeft className="w-4 h-4 mr-2" />
+          <Icons.chevronLeft className="mr-2 h-4 w-4" />
           Back
         </Link>
       </div>

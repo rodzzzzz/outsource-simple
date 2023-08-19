@@ -48,7 +48,7 @@ export function QuestionAddButton({
         className={cn(buttonVariants({ variant }), className)}
         disabled={props.disabled}
       >
-        <Icons.add className="w-4 h-4 mr-2" />
+        <Icons.add className="mr-2 h-4 w-4" />
         Add question
       </button>
       <DialogContent>
@@ -88,7 +88,7 @@ export function QuestionAddButton({
                   id={type.value}
                   className="sr-only"
                 />
-                <Icon className="w-4 h-4 mr-2" />
+                <Icon className="mr-2 h-4 w-4" />
                 {type.label}
               </Label>
             )

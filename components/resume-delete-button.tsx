@@ -111,9 +111,9 @@ export function ResumeDeleteButton({
               className="bg-red-600 focus:ring-red-600"
             >
               {isDeleteLoading ? (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <Icons.trash className="w-4 h-4 mr-2" />
+                <Icons.trash className="mr-2 h-4 w-4" />
               )}
               <span>Delete</span>
             </AlertDialogAction>

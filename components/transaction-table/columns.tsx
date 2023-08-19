@@ -37,7 +37,7 @@ export const columns: ColumnDef<Transaction>[] = [
               {jobTitle}
             </span>
           ) : (
-            <span className="max-w-[300px] text-muted-foreground italic">
+            <span className="max-w-[300px] italic text-muted-foreground">
               deleted job
             </span>
           )}
@@ -57,7 +57,7 @@ export const columns: ColumnDef<Transaction>[] = [
           {items.map((item, index) => (
             <Badge
               variant={"secondary"}
-              className="capitalize rounded-sm"
+              className="rounded-sm capitalize"
               key={index}
             >
               {item}

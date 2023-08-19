@@ -64,7 +64,7 @@ export function AccountActivationButton({
       onClick={onSubmit}
       {...props}
     >
-      {isLoading && <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />}
+      {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
       Send account activation email
     </button>
   )

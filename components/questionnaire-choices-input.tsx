@@ -57,10 +57,10 @@ export function QuestionnaireChoicesInput({
                 type="button"
                 variant="outline"
                 size="sm"
-                className="flex items-center justify-center w-8 h-8 border-destructive text-destructive hover:text-destructive"
+                className="flex h-8 w-8 items-center justify-center border-destructive text-destructive hover:text-destructive"
                 onClick={() => remove(k)}
               >
-                <Icons.close className="w-4 h-4 shrink-0" />
+                <Icons.close className="h-4 w-4 shrink-0" />
               </Button>
             )}
             {k === fields.length - 1 && (
@@ -68,10 +68,10 @@ export function QuestionnaireChoicesInput({
                 type="button"
                 variant="outline"
                 size="sm"
-                className="flex items-center justify-center w-8 h-8"
+                className="flex h-8 w-8 items-center justify-center"
                 onClick={() => append({ id: uuidv4(), value: "" })}
               >
-                <Icons.add className="w-4 h-4 shrink-0" />
+                <Icons.add className="h-4 w-4 shrink-0" />
               </Button>
             )}
           </div>

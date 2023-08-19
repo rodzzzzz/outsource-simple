@@ -73,11 +73,11 @@ export default async function JobPage({ params }: JobPageProps) {
 
   return (
     <div className="grid w-full gap-10">
-      <div className="sticky flex items-center justify-between w-full">
+      <div className="sticky flex w-full items-center justify-between">
         <div className="flex items-center sm:space-x-3">
           <Link href="/" className={cn(buttonVariants({ variant: "ghost" }))}>
             <>
-              <Icons.chevronLeft className="w-4 h-4 mr-2" />
+              <Icons.chevronLeft className="mr-2 h-4 w-4" />
               Find remote jobs
             </>
           </Link>

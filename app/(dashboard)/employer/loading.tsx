@@ -19,20 +19,20 @@ export default function DashboardLoading() {
           <Card className="lg:col-span-2">
             <CardHeader>
               <CardTitle>
-                <Skeleton className="w-1/5 h-5" />
+                <Skeleton className="h-5 w-1/5" />
               </CardTitle>
             </CardHeader>
-            <CardContent className="pl-2 min-h-[350px] grid place-items-center">
+            <CardContent className="grid min-h-[350px] place-items-center pl-2">
               <Icons.spinner
                 strokeWidth={1.5}
-                className="w-32 h-32 text-muted animate-spin"
+                className="h-32 w-32 animate-spin text-muted"
               />
             </CardContent>
           </Card>
           <Card className="lg:col-span-1">
             <CardHeader>
               <CardTitle>
-                <Skeleton className="w-1/5 h-5" />
+                <Skeleton className="h-5 w-1/5" />
               </CardTitle>
             </CardHeader>
             <CardContent>

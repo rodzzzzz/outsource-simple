@@ -133,7 +133,7 @@ export function AccountDeleteForm({
             <div className="space-y-1">
               <span className="text-sm text-muted-foreground">
                 To confirm account deletion, type{" "}
-                <span className="font-bold">"DELETE"</span> below:
+                <span className="font-bold">&quot;DELETE&quot;</span> below:
               </span>
               <Input id="name" className="" />
             </div>
@@ -156,9 +156,9 @@ export function AccountDeleteForm({
               className="bg-red-600 focus:ring-red-600"
             >
               {isDeleteLoading ? (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <Icons.trash className="w-4 h-4 mr-2" />
+                <Icons.trash className="mr-2 h-4 w-4" />
               )}
               <span>Delete account</span>
             </AlertDialogAction>

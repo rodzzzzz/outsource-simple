@@ -26,16 +26,16 @@ export function AccountSetup({ user, className, ...props }: AccountSetupProps) {
     <AnimatePresence mode="wait">
       <div
         className={cn(
-          "flex flex-col justify-center min-h-screen w-full py-10",
+          "flex min-h-screen w-full flex-col justify-center py-10",
           className
         )}
         {...props}
       >
         {!!step ? (
-          <div className="sticky flex items-center justify-between w-full mx-auto max-w-[50rem]">
+          <div className="sticky mx-auto flex w-full max-w-[50rem] items-center justify-between">
             <Button variant="ghost" onClick={() => router.back()}>
               <>
-                <Icons.chevronLeft className="w-4 h-4 mr-2" />
+                <Icons.chevronLeft className="mr-2 h-4 w-4" />
                 Back
               </>
             </Button>

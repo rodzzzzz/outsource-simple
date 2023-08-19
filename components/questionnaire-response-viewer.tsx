@@ -53,7 +53,7 @@ export function QuestionnaireResponseViewer({
   formResponse,
 }: QuestionnaireResponseViewerProps) {
   return (
-    <Card className="text-sm min-h-[30rem]">
+    <Card className="min-h-[30rem] text-sm">
       <CardHeader>
         <CardTitle>{questionnaireForm.name}</CardTitle>
         <CardDescription>{questionnaireForm.description}</CardDescription>

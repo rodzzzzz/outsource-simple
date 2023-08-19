@@ -313,7 +313,7 @@ export function JobDetailsForm({
                                   (language) => language.id === field.value
                                 )?.name
                               : "Select Company"}
-                            <Icons.caretSort className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+                            <Icons.caretSort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                           </Button>
                         </PopoverTrigger>
                       </FormControl>
@@ -482,7 +482,7 @@ export function JobDetailsForm({
                   </FormItem>
                 )}
               />
-              <div className="flex flex-col w-full gap-6 lg:flex-row">
+              <div className="flex w-full flex-col gap-6 lg:flex-row">
                 <FormField
                   control={form.control}
                   name="salaryCurrency"
@@ -614,14 +614,14 @@ export function JobDetailsForm({
                         <div
                           id="editor"
                           className={cn(
-                            "min-h-[400px] pt-8 text-sm bg-transparent border rounded-md border-input ring-offset-background placeholder:text-muted-foreground focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 transition",
+                            "min-h-[400px] rounded-md border border-input bg-transparent pt-8 text-sm ring-offset-background transition placeholder:text-muted-foreground focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
                             published && "pointer-events-none opacity-50"
                           )}
                           {...field}
                         />
                         <p className="mt-2 text-sm text-gray-500">
                           Use{" "}
-                          <kbd className="px-1 text-xs uppercase border rounded-md bg-muted">
+                          <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
                             Tab
                           </kbd>{" "}
                           to open the command menu.
@@ -640,7 +640,7 @@ export function JobDetailsForm({
               >
                 {isSaving ? (
                   <>
-                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                     <span>Saving...</span>
                   </>
                 ) : (

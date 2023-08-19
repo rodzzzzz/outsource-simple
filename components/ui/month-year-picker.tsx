@@ -63,7 +63,7 @@ function MonthYearPicker({
   }
 
   return (
-    <div className={cn("p-3 space-y-3 text-sm", className)}>
+    <div className={cn("space-y-3 p-3 text-sm", className)}>
       <div className="flex items-center justify-between">
         <button
           className={cn(
@@ -73,7 +73,7 @@ function MonthYearPicker({
           onClick={onDecrementYear}
           disabled={year <= minYear}
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft className="h-4 w-4" />
         </button>
         <label className="text-sm font-medium">{year}</label>
         <button
@@ -84,7 +84,7 @@ function MonthYearPicker({
           onClick={onIncrementYear}
           disabled={maxYear ? year >= maxYear : false}
         >
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="h-4 w-4" />
         </button>
       </div>
 
@@ -97,7 +97,7 @@ function MonthYearPicker({
                 name="month"
                 id={`month-${item.toLowerCase()}`}
                 value={index}
-                className="hidden peer"
+                className="peer hidden"
                 checked={month === index}
                 onChange={onChangeMonth}
               />
@@ -105,7 +105,7 @@ function MonthYearPicker({
                 htmlFor={`month-${item.toLowerCase()}`}
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "font-normal cursor-pointer px-6 text-center peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:hover:bg-primary peer-checked:hover:text-primary-foreground peer-checked:focus:bg-primary peer-checked:focus:text-primary-foreground"
+                  "cursor-pointer px-6 text-center font-normal peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:hover:bg-primary peer-checked:hover:text-primary-foreground peer-checked:focus:bg-primary peer-checked:focus:text-primary-foreground"
                 )}
               >
                 {item}

@@ -65,7 +65,7 @@ export function EmployerAccountDetailsForm({
           </div>
         </div>
       </CardContent>
-      <CardFooter className="pt-6 border-t">
+      <CardFooter className="border-t pt-6">
         <p className="text-xs text-muted-foreground">
           Account details cannot be changed.
         </p>

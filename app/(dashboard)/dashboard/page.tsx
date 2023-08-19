@@ -55,7 +55,7 @@ export default async function DashboardPage() {
         text="View your job applications."
       >
         <Link href="/" className={cn(buttonVariants())}>
-          <Icons.send className="w-4 h-4 mr-2" />
+          <Icons.send className="mr-2 h-4 w-4" />
           Apply for jobs
         </Link>
       </DashboardHeader>
@@ -84,7 +84,7 @@ export default async function DashboardPage() {
               href="/"
               className={cn(buttonVariants({ variant: "outline" }))}
             >
-              <Icons.send className="w-4 h-4 mr-2" />
+              <Icons.send className="mr-2 h-4 w-4" />
               Apply for jobs
             </Link>
           </EmptyPlaceholder>

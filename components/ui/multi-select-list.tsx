@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+
 import * as React from "react"
 import { GroupBase, OptionProps } from "react-select"
 import { VariableSizeList as List, ListChildComponentProps } from "react-window"
@@ -87,7 +89,12 @@ function MenuList(props: any) {
     loadingMsgStyles,
   })
 
-  const heights = React.useMemo(() => children.map(getHeight), [children])
+  const heights = React.useMemo(
+    () => children.map(getHeight),
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [children]
+  )
   const currentIndex = React.useMemo(
     () => getCurrentIndex(children),
     [children]
@@ -216,6 +223,8 @@ function MenuItem({ data, index, setMeasuredHeight }) {
 
       setMeasuredHeight({ index, measuredHeight })
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref.current])
 
   return (

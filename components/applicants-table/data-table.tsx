@@ -70,10 +70,10 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="p-1 overflow-x-auto">
+    <div className="overflow-x-auto p-1">
       <div className="space-y-4">
         <DataTableToolbar table={table} />
-        <div className="border rounded-md">
+        <div className="rounded-md border">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

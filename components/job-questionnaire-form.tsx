@@ -159,7 +159,7 @@ export function JobQuestionnaireForm({
                                     questionnaire.id === field.value
                                 )?.name
                               : "Select Form"}
-                            <Icons.caretSort className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+                            <Icons.caretSort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                           </Button>
                         </PopoverTrigger>
                       </FormControl>
@@ -235,7 +235,7 @@ export function JobQuestionnaireForm({
                 >
                   {isSaving ? (
                     <>
-                      <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                       <span>Saving...</span>
                     </>
                   ) : (

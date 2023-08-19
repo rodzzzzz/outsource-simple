@@ -72,13 +72,13 @@ export const metadata = {
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
-    creator: "@rodny",
-  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: siteConfig.name,
+  //   description: siteConfig.description,
+  //   images: [`${siteConfig.url}/og.jpg`],
+  //   creator: "@rodny",
+  // },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",

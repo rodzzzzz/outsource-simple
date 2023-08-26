@@ -63,18 +63,35 @@ export async function PATCH(
     const sanitized = body.jobDescription.blocks.map(
       (item: OutputBlockData) => ({
         ...item,
-        data: {
-          text: sanitizeBlocks(item.data.text, {
-            a: {
-              href: true,
-            },
-            b: true,
-            i: true,
-            u: true,
-          }),
-        },
+        data:
+          item.type === "list"
+            ? {
+                ...item.data,
+                items: item.data.items.map((text: string) =>
+                  sanitizeBlocks(text, {
+                    a: {
+                      href: true,
+                    },
+                    b: true,
+                    i: true,
+                    u: true,
+                  })
+                ),
+              }
+            : {
+                ...item.data,
+                text: sanitizeBlocks(item.data.text, {
+                  a: {
+                    href: true,
+                  },
+                  b: true,
+                  i: true,
+                  u: true,
+                }),
+              },
       })
     )
+
     const blocks = Object.assign(body.jobDescription, { blocks: sanitized })
 
     // Update the post.

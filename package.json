@@ -73,6 +73,7 @@
     "date-fns": "^2.30.0",
     "framer-motion": "^10.15.1",
     "isomorphic-dompurify": "^1.8.0",
+    "jsdom": "^22.1.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.263.1",
     "mustache": "^4.2.0",

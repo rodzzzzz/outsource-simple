@@ -23,6 +23,8 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/employer") ||
       req.nextUrl.pathname.startsWith("/editor")
 
+    console.log(token)
+
     if (isAuthPage) {
       if (isAuth) {
         if (!token.emailVerified) {

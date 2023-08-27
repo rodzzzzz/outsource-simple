@@ -127,20 +127,20 @@ export function JobQuestionnaireForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSave)}>
-        <Card>
-          <CardHeader>
+        <Card className="border-0 shadow-none sm:border sm:shadow-sm">
+          <CardHeader className="px-0 sm:px-6">
             <CardTitle>Job Questionnaire</CardTitle>
             <CardDescription>
               Select a questionnaire form for your job.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-0 sm:px-6">
             <div className="space-y-8">
               <FormField
                 control={form.control}
                 name="questionnaireId"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col w-full max-w-[400px]">
                     <FormLabel className="w-fit">Questionnaire Form</FormLabel>
                     <Popover>
                       <FormControl>
@@ -149,7 +149,7 @@ export function JobQuestionnaireForm({
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "w-[400px] justify-between",
+                              "justify-between",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -159,11 +159,11 @@ export function JobQuestionnaireForm({
                                     questionnaire.id === field.value
                                 )?.name
                               : "Select Form"}
-                            <Icons.caretSort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Icons.caretSort className="w-4 h-4 ml-2 opacity-50 shrink-0" />
                           </Button>
                         </PopoverTrigger>
                       </FormControl>
-                      <PopoverContent className="w-[400px] p-0">
+                      <PopoverContent className="p-0" align="start">
                         <Command>
                           <CommandList>
                             <CommandInput placeholder="Search form..." />
@@ -235,7 +235,7 @@ export function JobQuestionnaireForm({
                 >
                   {isSaving ? (
                     <>
-                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                      <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                       <span>Saving...</span>
                     </>
                   ) : (

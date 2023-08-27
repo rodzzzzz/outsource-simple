@@ -6,8 +6,8 @@ export default function DashboardLoading() {
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Job Applications"
-        text="View your job applications status."
+        heading="Job Posts"
+        text="Create and manage your job posts."
       />
       <div className="space-y-6">
         <PostItem.Skeleton />

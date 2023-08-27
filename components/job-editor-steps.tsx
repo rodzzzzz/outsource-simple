@@ -19,7 +19,7 @@ export function JobEditorSteps({
   setActive,
 }: JobEditorStepsProps) {
   return (
-    <ol className="flex w-full items-center px-6 text-center text-sm font-medium text-muted-foreground sm:text-base">
+    <ol className="flex items-center w-full px-0 text-sm font-medium text-center sm:px-6 text-muted-foreground sm:text-base">
       {steps.map((step, index) => {
         return (
           <React.Fragment key={index}>

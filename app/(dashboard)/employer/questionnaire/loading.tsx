@@ -7,8 +7,8 @@ export default function DashboardLoading() {
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Company Details"
-        text="Make your company more pleasing to job applicants."
+        heading="Questionnaire Forms"
+        text="Build questionnaire forms for your job posting."
       ></DashboardHeader>
       <div className="space-y-2">
         <Skeleton className="h-[40px] w-[250px]" />

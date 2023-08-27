@@ -65,32 +65,32 @@ export function JobEditor({
 
   return (
     <div className="grid w-full gap-10">
-      <div className="sticky flex w-full items-center justify-between">
-        <div className="flex items-center sm:space-x-3">
+      <div className="sticky flex items-center justify-between w-full">
+        <div className="flex items-center space-x-3">
           <Link
             href="/employer/posts"
-            className={cn(buttonVariants({ variant: "ghost" }))}
+            className="inline-flex items-center pl-0 text-sm sm:pl-4"
           >
             <>
-              <Icons.chevronLeft className="mr-2 h-4 w-4" />
+              <Icons.chevronLeft className="w-4 h-4 mr-2" />
               Back
             </>
           </Link>
-          <p className="rounded-md bg-accent px-3 py-1 text-sm text-muted-foreground">
+          <p className="px-3 py-1 text-sm rounded-md bg-accent text-muted-foreground">
             {published ? "Published" : "Draft"}
           </p>
         </div>
         {published ? (
           <Link
             href={absoluteUrl(`/job/${post.id}`)}
-            className={cn(buttonVariants())}
+            className={cn(buttonVariants({ size: "sm" }))}
           >
-            <Icons.externalLink className="mr-2 h-4 w-4" />
+            <Icons.externalLink className="w-4 h-4 mr-2" />
             <span>View posting</span>
           </Link>
         ) : null}
       </div>
-      <div className="space-y-6">
+      <div className="space-y-3 sm:space-y-6">
         <JobEditorSteps
           steps={jobEditorSteps}
           active={active}

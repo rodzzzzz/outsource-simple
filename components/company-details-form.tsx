@@ -171,13 +171,13 @@ export function CompanyDetailsForm({
                 control={form.control}
                 name="name"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Company Name
                       <span className="ml-1 text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input className="w-[400px]" size={32} {...field} />
+                      <Input className="w-full" size={32} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -188,7 +188,7 @@ export function CompanyDetailsForm({
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Company Email
                       <span className="ml-1 text-destructive">*</span>
@@ -196,7 +196,7 @@ export function CompanyDetailsForm({
                     <FormControl>
                       <Input
                         placeholder="awesomecompany@email.com"
-                        className="w-[400px]"
+                        className="w-full"
                         size={32}
                         {...field}
                       />
@@ -211,10 +211,10 @@ export function CompanyDetailsForm({
                   control={form.control}
                   name="country"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px]">
                       <FormLabel>Country</FormLabel>
                       <FormControl>
-                        <Input className="w-[400px]" size={32} {...field} />
+                        <Input className="w-full" size={32} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -225,10 +225,10 @@ export function CompanyDetailsForm({
                   control={form.control}
                   name="city"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px]">
                       <FormLabel>City</FormLabel>
                       <FormControl>
-                        <Input className="w-[400px]" size={32} {...field} />
+                        <Input className="w-full" size={32} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -240,12 +240,12 @@ export function CompanyDetailsForm({
                 control={form.control}
                 name="websiteUrl"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>Website URL</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="https://www.awesomecompany.com"
-                        className="w-[400px]"
+                        className="w-full"
                         {...field}
                       />
                     </FormControl>
@@ -276,7 +276,7 @@ export function CompanyDetailsForm({
                     <FormControl>
                       <Textarea
                         rows={5}
-                        className="h-60 resize-none"
+                        className="resize-none h-60"
                         {...field}
                       />
                     </FormControl>
@@ -289,11 +289,11 @@ export function CompanyDetailsForm({
                 control={form.control}
                 name="companySize"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>Company Size</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
-                        <SelectTrigger className="w-[400px]">
+                        <SelectTrigger className="w-full">
                           <SelectValue placeholder="Select company size" />
                         </SelectTrigger>
                       </FormControl>
@@ -314,7 +314,7 @@ export function CompanyDetailsForm({
                 control={form.control}
                 name="dateFounded"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>Date Founded</FormLabel>
                     <div className="flex flex-col">
                       <Popover>
@@ -323,7 +323,7 @@ export function CompanyDetailsForm({
                             <Button
                               variant={"outline"}
                               className={cn(
-                                "w-[400px] pl-3 text-left font-normal",
+                                "w-full pl-3 text-left font-normal",
                                 !field.value && "text-muted-foreground"
                               )}
                             >
@@ -332,7 +332,7 @@ export function CompanyDetailsForm({
                               ) : (
                                 <span>Pick a date</span>
                               )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
@@ -357,7 +357,7 @@ export function CompanyDetailsForm({
                   disabled={disabledButton || isSaving}
                 >
                   {isSaving && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                   )}
                   <span>Update details</span>
                 </button>

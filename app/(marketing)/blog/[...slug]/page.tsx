@@ -7,9 +7,10 @@ import "@/styles/mdx.css"
 import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { format } from "date-fns"
 
 import { env } from "@/env.mjs"
-import { absoluteUrl, cn, formatDate } from "@/lib/utils"
+import { absoluteUrl, cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
@@ -103,7 +104,7 @@ export default async function PostPage({ params }: PostPageProps) {
           "absolute left-[-200px] top-14 hidden xl:inline-flex"
         )}
       >
-        <Icons.chevronLeft className="mr-2 h-4 w-4" />
+        <Icons.chevronLeft className="w-4 h-4 mr-2" />
         See all posts
       </Link>
       <div>
@@ -112,14 +113,14 @@ export default async function PostPage({ params }: PostPageProps) {
             dateTime={post.date}
             className="block text-sm text-muted-foreground"
           >
-            Published on {formatDate(post.date)}
+            Published on {format(Date.parse(post.date), "PP")}
           </time>
         )}
-        <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">
+        <h1 className="inline-block mt-2 text-4xl leading-tight font-heading lg:text-5xl">
           {post.title}
         </h1>
         {authors?.length ? (
-          <div className="mt-4 flex space-x-4">
+          <div className="flex mt-4 space-x-4">
             {authors.map((author) =>
               author ? (
                 <Link
@@ -132,9 +133,9 @@ export default async function PostPage({ params }: PostPageProps) {
                     alt={author.title}
                     width={42}
                     height={42}
-                    className="rounded-full bg-white"
+                    className="bg-white rounded-full"
                   />
-                  <div className="flex-1 text-left leading-tight">
+                  <div className="flex-1 leading-tight text-left">
                     <p className="font-medium">{author.title}</p>
                     <p className="text-[12px] text-muted-foreground">
                       @{author.twitter}
@@ -152,7 +153,7 @@ export default async function PostPage({ params }: PostPageProps) {
           alt={post.title}
           width={720}
           height={405}
-          className="my-8 rounded-md border bg-muted transition-colors"
+          className="my-8 transition-colors border rounded-md bg-muted"
           priority
         />
       )}
@@ -160,7 +161,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">
         <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
-          <Icons.chevronLeft className="mr-2 h-4 w-4" />
+          <Icons.chevronLeft className="w-4 h-4 mr-2" />
           See all posts
         </Link>
       </div>

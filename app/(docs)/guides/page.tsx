@@ -1,8 +1,7 @@
 import Link from "next/link"
 import { allGuides } from "contentlayer/generated"
-import { compareDesc } from "date-fns"
+import { compareDesc, format } from "date-fns"
 
-import { formatDate } from "@/lib/utils"
 import { DocsPageHeader } from "@/components/page-header"
 
 export const metadata = {
@@ -29,10 +28,10 @@ export default function GuidesPage() {
           {guides.map((guide) => (
             <article
               key={guide._id}
-              className="group relative rounded-lg border p-6 shadow-md transition-shadow hover:shadow-lg"
+              className="relative p-6 transition-shadow border rounded-lg shadow-md group hover:shadow-lg"
             >
               {guide.featured && (
-                <span className="absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-medium">
+                <span className="absolute px-3 py-1 text-xs font-medium rounded-full right-4 top-4">
                   Featured
                 </span>
               )}
@@ -47,7 +46,7 @@ export default function GuidesPage() {
                 </div>
                 {guide.date && (
                   <p className="text-sm text-muted-foreground">
-                    {formatDate(guide.date)}
+                    {format(Date.parse(guide.date), "PP")}
                   </p>
                 )}
               </div>

@@ -250,13 +250,13 @@ export function EmployerAcceptedEmailForm({
                   control={form.control}
                   name="subjectLine"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px]">
                       <FormLabel>
                         Subject Line
                         <span className="ml-1 text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input className="w-[400px]" size={32} {...field} />
+                        <Input className="w-full" size={32} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -283,7 +283,7 @@ export function EmployerAcceptedEmailForm({
                           />
                           <p className="mt-2 text-sm text-gray-500">
                             Use{" "}
-                            <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
+                            <kbd className="px-1 text-xs uppercase border rounded-md bg-muted">
                               Tab
                             </kbd>{" "}
                             to open the command menu.
@@ -306,7 +306,7 @@ export function EmployerAcceptedEmailForm({
                     disabled={isSaving || isSending}
                   >
                     {isSending && (
-                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                      <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                     )}
                     <span>Test email</span>
                   </button>
@@ -316,14 +316,14 @@ export function EmployerAcceptedEmailForm({
                     disabled={isSaving || isSending || !isMounted}
                   >
                     {isSaving && (
-                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                      <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                     )}
                     <span>Update email</span>
                   </button>
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="border-t pt-6">
+            <CardFooter className="pt-6 border-t">
               <button
                 type="button"
                 onClick={() => setShowVariablesDialog(true)}

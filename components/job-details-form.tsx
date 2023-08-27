@@ -282,20 +282,20 @@ export function JobDetailsForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSave)}>
-        <Card>
-          <CardHeader>
+        <Card className="border-0 shadow-none sm:border sm:shadow-sm">
+          <CardHeader className="px-0 sm:px-6">
             <CardTitle>Job Details</CardTitle>
             <CardDescription>
               This is how job seekers will see your job posting.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-0 sm:px-6">
             <div className="space-y-8">
               <FormField
                 control={form.control}
                 name="companyId"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col w-full max-w-[400px]">
                     <FormLabel className="w-fit">
                       Company<span className="ml-1 text-destructive">*</span>
                     </FormLabel>
@@ -306,7 +306,7 @@ export function JobDetailsForm({
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "w-[400px] justify-between",
+                              "justify-between",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -319,7 +319,7 @@ export function JobDetailsForm({
                           </Button>
                         </PopoverTrigger>
                       </FormControl>
-                      <PopoverContent className="w-[400px] p-0">
+                      <PopoverContent className="p-0" align="start">
                         <Command>
                           <CommandList>
                             <CommandInput placeholder="Search company..." />
@@ -368,19 +368,20 @@ export function JobDetailsForm({
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="title"
                 defaultValue={post.title}
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Position/Title
                       <span className="ml-1 text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className=""
+                        className="w-full"
                         size={32}
                         {...field}
                         autoFocus
@@ -391,21 +392,21 @@ export function JobDetailsForm({
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="category"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col w-full max-w-[400px]">
                     <FormLabel>
                       Category<span className="ml-1 text-destructive">*</span>
                     </FormLabel>
-
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                       disabled={published}
                     >
-                      <SelectTrigger className="w-[400px]">
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select job category" />
                       </SelectTrigger>
                       <FormControl>
@@ -426,11 +427,12 @@ export function JobDetailsForm({
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="type"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Type<span className="ml-1 text-destructive">*</span>
                     </FormLabel>
@@ -439,10 +441,9 @@ export function JobDetailsForm({
                       defaultValue={field.value}
                       disabled={published}
                     >
-                      <SelectTrigger className="w-[400px]">
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select job type" />
                       </SelectTrigger>
-
                       <FormControl>
                         <SelectContent>
                           {types.map((type) => (
@@ -457,18 +458,19 @@ export function JobDetailsForm({
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="skillSet"
                 defaultValue={post.skillSet}
                 render={({ field: { onChange, value, ref } }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Skillset<span className="ml-1 text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
                       <MultiSelect
-                        className="w-[400px] [&_.multi-select\_\_control]:focus-within:ring-2 [&_.multi-select\_\_control]:focus-within:ring-ring [&_.multi-select\_\_control]:focus-within:ring-offset-2"
+                        className="w-full [&_.multi-select\_\_control]:focus-within:ring-2 [&_.multi-select\_\_control]:focus-within:ring-ring [&_.multi-select\_\_control]:focus-within:ring-offset-2"
                         options={skillsOptions}
                         placeholder="Select skillsets"
                         value={arrayToObject(value)}
@@ -484,12 +486,13 @@ export function JobDetailsForm({
                   </FormItem>
                 )}
               />
+
               <div className="flex flex-col w-full gap-6 lg:flex-row">
                 <FormField
                   control={form.control}
                   name="salaryCurrency"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px]">
                       <FormLabel>Salary Currency</FormLabel>
 
                       <Select
@@ -497,7 +500,7 @@ export function JobDetailsForm({
                         defaultValue={field.value}
                         disabled={published}
                       >
-                        <SelectTrigger className="w-[400px]">
+                        <SelectTrigger className="w-full">
                           <SelectValue placeholder="Select salary currency" />
                         </SelectTrigger>
 
@@ -521,11 +524,12 @@ export function JobDetailsForm({
                     </FormItem>
                   )}
                 />
+
                 <FormField
                   control={form.control}
                   name="startingSalary"
                   render={({ field: { onChange, value, ref } }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px]">
                       <FormLabel>Starting Salary</FormLabel>
                       <FormControl>
                         <MonetaryInput
@@ -542,11 +546,12 @@ export function JobDetailsForm({
                     </FormItem>
                   )}
                 />
+
                 <FormField
                   control={form.control}
                   name="maxSalary"
                   render={({ field: { onChange, value, ref } }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px]">
                       <FormLabel>Max Salary</FormLabel>
                       <FormControl>
                         <MonetaryInput
@@ -569,7 +574,7 @@ export function JobDetailsForm({
                 control={form.control}
                 name="locationRestriction"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Location Restriction
                       <span className="ml-1 text-destructive">*</span>
@@ -580,7 +585,7 @@ export function JobDetailsForm({
                       defaultValue={field.value}
                       disabled={published}
                     >
-                      <SelectTrigger className="w-[400px]">
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select location restriction" />
                       </SelectTrigger>
                       <FormControl>

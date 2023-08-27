@@ -1,9 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { allPosts } from "contentlayer/generated"
-import { compareDesc } from "date-fns"
-
-import { formatDate } from "@/lib/utils"
+import { compareDesc, format } from "date-fns"
 
 export const metadata = {
   title: "Blog",
@@ -20,7 +18,7 @@ export default async function BlogPage() {
     <div className="container max-w-4xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="inline-block font-heading text-4xl tracking-tight lg:text-5xl">
+          <h1 className="inline-block text-4xl tracking-tight font-heading lg:text-5xl">
             Blog
           </h1>
           <p className="text-xl text-muted-foreground">
@@ -34,7 +32,7 @@ export default async function BlogPage() {
           {posts.map((post, index) => (
             <article
               key={post._id}
-              className="group relative flex flex-col space-y-2"
+              className="relative flex flex-col space-y-2 group"
             >
               {post.image && (
                 <Image
@@ -42,7 +40,7 @@ export default async function BlogPage() {
                   alt={post.title}
                   width={804}
                   height={452}
-                  className="rounded-md border bg-muted transition-colors"
+                  className="transition-colors border rounded-md bg-muted"
                   priority={index <= 1}
                 />
               )}
@@ -52,7 +50,7 @@ export default async function BlogPage() {
               )}
               {post.date && (
                 <p className="text-sm text-muted-foreground">
-                  {formatDate(post.date)}
+                  {format(Date.parse(post.date), "PP")}
                 </p>
               )}
               <Link href={post.slug} className="absolute inset-0">

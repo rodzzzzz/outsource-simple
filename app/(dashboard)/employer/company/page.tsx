@@ -5,7 +5,6 @@ import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { CompanyDetails } from "@/components/company-details"
 import { DashboardHeader } from "@/components/header"
-import { PostCreateButton } from "@/components/post-create-button"
 import { DashboardShell } from "@/components/shell"
 
 export const metadata = {
@@ -51,9 +50,7 @@ export default async function DashboardPage() {
       <DashboardHeader
         heading="Company Details"
         text="Make your company more pleasing to job applicants."
-      >
-        <PostCreateButton />
-      </DashboardHeader>
+      ></DashboardHeader>
       <CompanyDetails companies={companies} />
     </DashboardShell>
   )

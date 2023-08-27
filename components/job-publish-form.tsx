@@ -132,18 +132,18 @@ export function JobPublishForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onPublish)}>
         <div className="space-y-8">
-          <Card>
-            <CardHeader>
+          <Card className="border-0 shadow-none sm:border sm:shadow-sm">
+            <CardHeader className="px-0 sm:px-6">
               <CardTitle>Publish Configuration</CardTitle>
               <CardDescription>
                 Customize how your job will be posted.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-0 sm:px-6">
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <FormItem className="rounded-lg border-2 border-primary p-4">
-                    <div>
+                  <FormItem className="p-4 border-2 rounded-lg border-primary">
+                    <div className="w-full">
                       <h1>{`$${posting.price}`}</h1>
                       <div className="space-y-0.5">
                         <FormLabel className="text-base">
@@ -213,7 +213,7 @@ export function JobPublishForm({
                 <div className="space-y-4">
                   <Separator />
 
-                  <Card className="w-[400px] border-none shadow-none">
+                  <Card className="border-none shadow-none">
                     <CardHeader className="p-0 pb-1">
                       <CardTitle className="text-sm font-medium">
                         Total price

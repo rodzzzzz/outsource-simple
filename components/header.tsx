@@ -10,9 +10,9 @@ export function DashboardHeader({
   children,
 }: DashboardHeaderProps) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-start justify-between gap-3 sm:items-center">
       <div>
-        <h1 className="font-heading text-2xl md:text-3xl">{heading}</h1>
+        <h1 className="text-2xl font-heading md:text-3xl">{heading}</h1>
         {text && <p className="text-muted-foreground">{text}</p>}
       </div>
       {children}

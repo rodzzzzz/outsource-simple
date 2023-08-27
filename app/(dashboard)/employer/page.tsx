@@ -10,7 +10,6 @@ import { AnalyticsOverview, DailyObject } from "@/components/analytics-overview"
 import { AnalyticsRecent } from "@/components/analytics-recent"
 import { AnalyticsTotal } from "@/components/analytics-total"
 import { DashboardHeader } from "@/components/header"
-import { PostCreateButton } from "@/components/post-create-button"
 import { DashboardShell } from "@/components/shell"
 
 export const metadata = {
@@ -152,9 +151,7 @@ export default async function DashboardPage() {
       <DashboardHeader
         heading="Dashboard"
         text="View your job posting analytics."
-      >
-        <PostCreateButton />
-      </DashboardHeader>
+      ></DashboardHeader>
       <div className="space-y-4">
         <AnalyticsTotal
           applications={total[0]._count.employer}

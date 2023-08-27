@@ -4,7 +4,6 @@ import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { DashboardHeader } from "@/components/header"
-import { PostCreateButton } from "@/components/post-create-button"
 import { QuestionnaireBuilder } from "@/components/questionnaire-builder"
 import { DashboardShell } from "@/components/shell"
 
@@ -45,9 +44,7 @@ export default async function DashboardPage() {
       <DashboardHeader
         heading="Questionnaire Forms"
         text="Build questionnaire forms for your job posting."
-      >
-        <PostCreateButton />
-      </DashboardHeader>
+      ></DashboardHeader>
       <QuestionnaireBuilder questionnaires={questionnaires} />
     </DashboardShell>
   )

@@ -143,10 +143,10 @@ export default function CompanySwitcher({
             <span className="truncate">
               {selectedCompany ? selectedCompany?.label : "Default company"}
             </span>
-            <Icons.caretSort className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+            <Icons.caretSort className="w-4 h-4 ml-auto opacity-50 shrink-0" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[250px] p-0">
+        <PopoverContent className="p-0" align="start">
           <Command>
             <CommandList>
               <CommandInput placeholder="Search company..." />
@@ -197,7 +197,7 @@ export default function CompanySwitcher({
                           setShowNewCompanyDialog(true)
                         }}
                       >
-                        <Icons.plusCircle className="mr-2 h-5 w-5" />
+                        <Icons.plusCircle className="w-5 h-5 mr-2" />
                         Add Company
                       </CommandItem>
                     </DialogTrigger>
@@ -222,7 +222,7 @@ export default function CompanySwitcher({
               </DialogDescription>
             </DialogHeader>
             <div>
-              <div className="space-y-4 py-2 pb-4">
+              <div className="py-2 pb-4 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Company name</Label>
                   <Input id="name" {...register("name")} />

@@ -295,8 +295,8 @@ model JobVisit {
   ownerId String @map(name: "owner_id")
   owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
-  jobId String @map(name: "job_id")
-  job   Job    @relation(fields: [jobId], references: [id])
+  jobId String? @map(name: "job_id")
+  job   Job?    @relation(fields: [jobId], references: [id])
 
   @@index([jobId])
   @@index([ownerId])
@@ -320,7 +320,7 @@ model JobApplication {
   employerId String @map(name: "employer_id")
 
   jobId String @map(name: "job_post_id")
-  job   Job    @relation(fields: [jobId], references: [id])
+  job   Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
 
   @@index([jobId])
   @@index([applicantId])

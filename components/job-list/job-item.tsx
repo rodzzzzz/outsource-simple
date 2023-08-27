@@ -51,27 +51,16 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
       )}
       {...props}
     >
-      <div className="space-y-4 p-6">
+      <div className="p-6 space-y-4">
         <div className="flex justify-between space-x-3">
           <div className="flex flex-col items-start space-y-1">
-            <h1 className="text-left text-base font-bold leading-snug hover:underline md:leading-tight">
+            <h1 className="text-base font-bold leading-snug text-left hover:underline md:leading-tight">
               {job.title}
             </h1>
 
-            <div className="inline-flex gap-2">
-              <p className="text-muted-foreground">{company.name}</p>
-              <Badge
-                variant="secondary"
-                className={cn(
-                  postedJob.highlighted &&
-                    "bg-highlight-foreground hover:bg-highlight-foreground"
-                )}
-              >
-                {snakeToLabel(job.category!)}
-              </Badge>
-            </div>
+            <p className="text-muted-foreground">{company.name}</p>
           </div>
-          <Button className={cn(buttonVariants())}>
+          <Button className={cn(buttonVariants(), "hidden sm:block")}>
             <span>View</span>
           </Button>
         </div>
@@ -81,11 +70,36 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
         />
 
         <div className="flex flex-col items-start space-y-2">
+          <div className="flex flex-wrap gap-x-2 gap-y-1">
+            <div className="inline-flex items-center gap-3">
+              <TooltipProvider delayDuration={0}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Icons.employmentType className="w-4 h-4" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Employment type</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              <p>{snakeToLabel(job.type!)}</p>
+            </div>
+            <Badge
+              variant="secondary"
+              className={cn(
+                postedJob.highlighted &&
+                  "bg-highlight-foreground hover:bg-highlight-foreground"
+              )}
+            >
+              {snakeToLabel(job.category!)}
+            </Badge>
+          </div>
+
           <div className="inline-flex items-center gap-3">
             <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Icons.location className="h-4 w-4" />
+                  <Icons.location className="w-4 h-4" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Location restriction</p>
@@ -96,26 +110,12 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
             <p>{snakeToLabel(job.locationRestriction!)}</p>
           </div>
 
-          <div className="inline-flex items-center gap-3">
-            <TooltipProvider delayDuration={0}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Icons.employmentType className="h-4 w-4" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Employment type</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <p>{snakeToLabel(job.type!)}</p>
-          </div>
-
           {job.startingSalary && job.maxSalary ? (
             <div className="inline-flex items-center gap-3">
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.salary className="h-4 w-4" />
+                    <Icons.salary className="w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Salary range</p>
@@ -130,11 +130,11 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
             </div>
           ) : null}
 
-          <div className="inline-flex items-center gap-3">
+          <div className="items-center hidden gap-3 sm:inline-flex">
             <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Icons.skillset className="h-4 w-4" />
+                  <Icons.skillset className="flex-shrink-0 w-4 h-4" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Skillset</p>
@@ -146,7 +146,9 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
                 return (
                   <Badge
                     variant="outline"
-                    className={cn(postedJob.highlighted && "border-primary")}
+                    className={cn(
+                      postedJob.highlighted && "rounded-sm border-primary"
+                    )}
                     key={skill}
                   >
                     {skill}
@@ -156,7 +158,7 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
               {job.skillSet.length > 4 ? (
                 <Badge
                   className={cn(
-                    "bg-muted text-muted-foreground",
+                    "rounded-sm bg-muted text-muted-foreground",
                     postedJob.highlighted && "bg-highlight-foreground"
                   )}
                 >
@@ -166,7 +168,9 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
                 job.skillSet.slice(3).map((skill) => (
                   <Badge
                     variant="outline"
-                    className={cn(postedJob.highlighted && "border-primary")}
+                    className={cn(
+                      postedJob.highlighted && "rounded-sm border-primary"
+                    )}
                     key={skill}
                   >
                     {skill}
@@ -185,7 +189,7 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
         )}
       >
         <div className="inline-flex items-center gap-3" title="Last posted">
-          <Icons.clock className="h-4 w-4" />
+          <Icons.clock className="w-4 h-4" />
           <p>{elapsedDuration}</p>
         </div>
       </div>

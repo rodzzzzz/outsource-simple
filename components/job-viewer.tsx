@@ -84,11 +84,11 @@ export function JobViewer({
   const elapsedDuration = getElapsedDuration(publishedAt)
 
   return (
-    <div className="my-6 flex w-full flex-col text-sm">
-      <div className="space-y-4 rounded-lg border p-4 shadow-md md:p-6">
-        <div className="md: flex justify-between space-x-3 rounded-t-lg border-b bg-background pb-4">
-          <div className="flex flex-1 flex-col items-start space-y-1">
-            <h1 className="text-left text-lg font-bold leading-snug hover:underline md:text-2xl md:leading-tight">
+    <div className="w-full my-6 text-sm">
+      <div className="p-0 space-y-4 rounded-lg sm:p-4 sm:border sm:shadow-md md:p-6">
+        <div className="flex justify-between pb-4 space-x-3 border-b rounded-t-lg md: bg-background">
+          <div className="flex flex-col items-start flex-1 space-y-1">
+            <h1 className="text-lg font-bold leading-snug text-left hover:underline md:text-2xl md:leading-tight">
               {job.title}
             </h1>
             <p className="text-muted-foreground">{company.name}</p>
@@ -99,7 +99,7 @@ export function JobViewer({
             {!!application ? (
               <Badge
                 variant={"secondary"}
-                className="h-10 rounded-md px-4 py-2"
+                className="h-10 px-4 py-2 rounded-md"
               >
                 Application sent
               </Badge>
@@ -110,20 +110,20 @@ export function JobViewer({
                 // onClick={onApply}
                 className={cn(buttonVariants())}
               >
-                <Icons.send className="mr-2 h-4 w-4" />
+                <Icons.send className="w-4 h-4 mr-2" />
                 Apply now
               </Link>
             )}
           </div>
         </div>
 
-        <div className="flex flex-col items-start space-y-2 border-b pb-4">
+        <div className="flex flex-col items-start pb-4 space-y-2 border-b">
           {!!job.locationRestriction ? (
             <div className="inline-flex items-center gap-3">
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.location className="h-4 w-4" />
+                    <Icons.location className="w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Location restriction</p>
@@ -139,7 +139,7 @@ export function JobViewer({
             <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Icons.employmentType className="h-4 w-4" />
+                  <Icons.employmentType className="w-4 h-4" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Employment type</p>
@@ -154,7 +154,7 @@ export function JobViewer({
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.salary className="h-4 w-4" />
+                    <Icons.salary className="w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Salary range</p>
@@ -174,7 +174,7 @@ export function JobViewer({
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.skillset className="h-4 w-4" />
+                    <Icons.skillset className="flex-shrink-0 w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Skillset</p>
@@ -189,32 +189,32 @@ export function JobViewer({
             </div>
           ) : null}
 
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-4 sm:gap-6">
             <div
               className="inline-flex items-center gap-3 text-muted-foreground"
               title="Last posted"
             >
-              <Icons.clock className="h-4 w-4" />
+              <Icons.clock className="w-4 h-4" />
               <p>{elapsedDuration}</p>
             </div>
             <div
               className="inline-flex items-center gap-3 text-muted-foreground"
               title="Last posted"
             >
-              <Icons.view className="h-4 w-4" />
+              <Icons.view className="w-4 h-4" />
               <p>{`${visitCount} visited`}</p>
             </div>
             <div
               className="inline-flex items-center gap-3 text-muted-foreground"
               title="Last posted"
             >
-              <Icons.send className="h-4 w-4" />
+              <Icons.send className="w-4 h-4" />
               <p>{`${applicationCount} applied`}</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-start space-y-2 border-b pb-4">
+        <div className="flex flex-col items-start pb-4 space-y-2 border-b">
           <div className="inline-flex flex-wrap gap-2">
             <span className="text-base font-bold md:text-xl">
               Job Description
@@ -223,7 +223,7 @@ export function JobViewer({
           </div>
 
           <div
-            className="space-y-4 whitespace-pre-wrap leading-loose"
+            className="space-y-4 leading-loose whitespace-pre-wrap"
             dangerouslySetInnerHTML={{ __html: sanitized }}
           />
         </div>
@@ -232,16 +232,16 @@ export function JobViewer({
           <span className="text-base font-bold md:text-xl">
             {`About ${company.name}`}
           </span>
-          <p className="space-y-3 whitespace-pre-wrap leading-loose">
+          <p className="space-y-3 leading-loose whitespace-pre-wrap">
             {company.description}
           </p>
-          <div className="flex flex-col items-start space-y-2 py-4">
+          <div className="flex flex-col items-start py-4 space-y-2">
             {!!company.companySize ? (
               <div className="inline-flex items-center gap-3">
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.users className="h-4 w-4" />
+                      <Icons.users className="w-4 h-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Company size</p>
@@ -258,7 +258,7 @@ export function JobViewer({
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.location className="h-4 w-4" />
+                      <Icons.location className="w-4 h-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Company Location</p>
@@ -274,7 +274,7 @@ export function JobViewer({
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.company className="h-4 w-4" />
+                      <Icons.company className="w-4 h-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Year founded</p>
@@ -289,21 +289,21 @@ export function JobViewer({
             ) : null}
           </div>
 
-          <div className="ml-auto space-x-3">
+          {/* <div className="ml-auto space-x-3">
             <Button
               className={cn(
                 buttonVariants({ variant: "secondary" }),
                 "border-destructive bg-primary-foreground text-destructive"
               )}
             >
-              <Icons.report className="mr-2 h-4 w-4" />
+              <Icons.report className="w-4 h-4 mr-2" />
               <span>Report</span>
             </Button>
             <Button className={cn(buttonVariants({ variant: "outline" }))}>
-              <Icons.share className="mr-2 h-4 w-4" />
+              <Icons.share className="w-4 h-4 mr-2" />
               <span>Share</span>
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

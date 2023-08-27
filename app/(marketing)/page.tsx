@@ -171,15 +171,15 @@ export default async function IndexPage(props: Props) {
   const jobs = await getAllJobs(parsed as SearchParams)
 
   return (
-    <section className="space-y-6 px-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-      <div className="mx-auto flex max-w-[60rem] flex-col items-center space-y-10 text-center">
+    <section className="px-6 pt-12 pb-8 space-y-6 md:pb-12 md:pt-32 lg:py-32">
+      <div className="mx-auto flex max-w-[60rem] flex-col items-center space-y-6 sm:space-y-10 text-center">
         <div className="flex flex-col space-y-6">
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="text-4xl font-heading sm:text-5xl md:text-6xl lg:text-7xl">
             Find the perfect remote job for you.
           </h1>
           <JobListToolbar />
         </div>
-        <div className="flex w-full flex-col gap-6" id="main">
+        <div className="flex flex-col w-full gap-6" id="main">
           {!isEmptyArray(jobs.jobs) ? (
             <>
               <JobList jobs={jobs.jobs} />
@@ -192,7 +192,7 @@ export default async function IndexPage(props: Props) {
                 Uh oh! No jobs found
               </EmptyPlaceholder.Title>
               <Link href="/" className={cn(buttonVariants(), "mt-3")}>
-                <Icons.search className="mr-2 h-4 w-4" />
+                <Icons.search className="w-4 h-4 mr-2" />
                 See all jobs
               </Link>
             </EmptyPlaceholder>

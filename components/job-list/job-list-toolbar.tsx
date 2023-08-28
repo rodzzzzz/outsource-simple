@@ -10,7 +10,7 @@ import { skills } from "@/constant/skills"
 import { JobCategory, JobLocationRestriction, JobType } from "@prisma/client"
 import isEmpty from "lodash/isEmpty"
 import isEqual from "lodash/isEqual"
-import { Filter, PlusCircle } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import qs from "qs"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -28,6 +28,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { Icons } from "@/components/icons"
 import {
   Form,
@@ -37,15 +46,6 @@ import {
   FormLabel,
 } from "@/components/react-hook-form/form"
 
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet"
 import { JobListFacetedFilter } from "./job-list-faceted-filter"
 
 function arrayToObject(arr: Array<string>): Array<MultiSelectOptions> {
@@ -68,6 +68,7 @@ export function JobListToolbar() {
   const emptyValues = {
     searchQuery: "",
     category: [],
+    skillSet: [],
     employmentType: [],
     locationRestriction: [],
     maxSalary: null,
@@ -83,21 +84,23 @@ export function JobListToolbar() {
   const values = watch()
 
   const [openFilter, setOpenFilter] = React.useState(false)
+  const [isSaving, setIsSaving] = React.useState(false)
+  const [isResetting, setIsResetting] = React.useState(false)
 
   const [openCategory, setOpenCategory] = React.useState(false)
   const [openSkillset, setOpenSkillset] = React.useState(false)
   const [openType, setOpenType] = React.useState(false)
   const [openLocation, setOpenLocation] = React.useState(false)
-  const [openSalary, setOpenSalary] = React.useState(false)
 
   React.useEffect(() => {
-    const queryParams = searchParamsToObject(searchParams)
+    setOpenFilter(false)
+    setIsSaving(false)
+    setIsResetting(false)
 
-    if (isEmpty(queryParams)) {
-      reset(emptyValues)
-    } else {
-      reset(queryParams)
-    }
+    const queryParams = searchParamsToObject(searchParams)
+    const merged = Object.assign({}, emptyValues, queryParams)
+
+    reset(merged)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
@@ -148,25 +151,30 @@ export function JobListToolbar() {
     )
 
     if (!isEqual(queryWithoutIgnoredParams, newQuery)) {
+      if (isEmpty(newQuery)) {
+        setIsResetting(true)
+      } else {
+        setIsSaving(true)
+      }
+
       const queryParams = new URLSearchParams(newQuery as Record<string, any>)
       const query = !!queryParams.toString()
         ? `/?${queryParams.toString()}#main`
         : "/"
 
+      router.refresh()
       router.replace(query)
     }
 
-    // closePopover()
-    setOpenFilter(false)
+    closePopover()
   }
 
-  // function closePopover() {
-  //   setOpenCategory(false)
-  //   setOpenSkillset(false)
-  //   setOpenType(false)
-  //   setOpenLocation(false)
-  //   setOpenSalary(false)
-  // }
+  function closePopover() {
+    setOpenCategory(false)
+    setOpenSkillset(false)
+    setOpenType(false)
+    setOpenLocation(false)
+  }
 
   return (
     <Form {...form}>
@@ -210,19 +218,19 @@ export function JobListToolbar() {
                     )}
                   </Button>
                 </SheetTrigger>
-                <SheetContent position="bottom" className="h-full space-y-6">
+                <SheetContent position="bottom" size="content">
                   <SheetHeader>
                     <SheetTitle>Search filters</SheetTitle>
                     <SheetDescription>
                       Search more specific jobs using the filters below.
                     </SheetDescription>
                   </SheetHeader>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-4">
                     <FormField
                       control={form.control}
                       name="category"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full max-w-[400px]">
                           <JobListFacetedFilter
                             title="Category"
                             options={categories}
@@ -239,23 +247,75 @@ export function JobListToolbar() {
                       control={form.control}
                       name="skillSet"
                       render={({ field: { onChange, value, ref } }) => (
-                        <FormItem>
-                          <FormLabel>Skillset</FormLabel>
-                          <FormControl>
-                            <MultiSelect
-                              className="w-full [&_.multi-select\_\_control_.multi-select\_\_indicators]:hidden"
-                              options={skillsOptions}
-                              placeholder="Select skillsets"
-                              menuShouldBlockScroll={false}
-                              maxMenuHeight={300 - 45}
-                              menuPortalTarget={null}
-                              value={arrayToObject(value)}
-                              onChange={(val: Array<MultiSelectOptions>) =>
-                                onChange(val.map((c) => c.value))
-                              }
-                              ref={ref}
-                            />
-                          </FormControl>
+                        <FormItem className="w-full max-w-[400px]">
+                          <Popover
+                            open={openSkillset}
+                            onOpenChange={setOpenSkillset}
+                          >
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                className="flex justify-between w-full border-dashed"
+                              >
+                                <span className="inline-flex items-center">
+                                  <PlusCircle className="w-4 h-4 mr-2" />
+                                  Skillset
+                                </span>
+
+                                {value?.length > 0 && (
+                                  <span className="inline-flex items-center">
+                                    <Separator
+                                      orientation="vertical"
+                                      className="h-4 mx-2"
+                                    />
+                                    <Badge
+                                      variant="secondary"
+                                      className="px-1 font-normal rounded-sm"
+                                    >
+                                      {value.length}
+                                    </Badge>
+                                  </span>
+                                )}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              className="w-[300px] p-0"
+                              align="start"
+                            >
+                              <div className="p-2">
+                                <FormControl>
+                                  <MultiSelect
+                                    className="w-full [&_.multi-select\_\_control_.multi-select\_\_indicators]:hidden"
+                                    options={skillsOptions}
+                                    placeholder="Select skillsets"
+                                    menuIsOpen
+                                    menuShouldBlockScroll={false}
+                                    maxMenuHeight={300 - 45}
+                                    menuPortalTarget={null}
+                                    value={arrayToObject(value)}
+                                    onChange={(
+                                      val: Array<MultiSelectOptions>
+                                    ) => onChange(val.map((c) => c.value))}
+                                    ref={ref}
+                                  />
+                                </FormControl>
+                              </div>
+
+                              <div className="mt-[calc(300px-52px)]">
+                                <Separator />
+                                <div className="flex justify-end p-2">
+                                  <Button
+                                    variant="link"
+                                    size="sm"
+                                    onClick={() => onChange([])}
+                                    className="text-destructive"
+                                  >
+                                    Clear
+                                  </Button>
+                                </div>
+                              </div>
+                            </PopoverContent>
+                          </Popover>
                         </FormItem>
                       )}
                     />
@@ -264,7 +324,7 @@ export function JobListToolbar() {
                       control={form.control}
                       name="employmentType"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full max-w-[400px]">
                           <JobListFacetedFilter
                             title="Employment type"
                             options={types}
@@ -282,7 +342,7 @@ export function JobListToolbar() {
                       control={form.control}
                       name="locationRestriction"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full max-w-[400px]">
                           <JobListFacetedFilter
                             title="Location restriction"
                             options={locationRestrictions}
@@ -296,12 +356,12 @@ export function JobListToolbar() {
                       )}
                     />
 
-                    <div className="space-y-2">
+                    <div className="flex flex-wrap gap-2">
                       <FormField
                         control={form.control}
                         name="startingSalary"
                         render={({ field: { onChange, value, ref } }) => (
-                          <FormItem className="space-y-0">
+                          <FormItem className="space-y-0 w-full max-w-[400px]">
                             <FormLabel>Starting Salary</FormLabel>
                             <FormControl>
                               <MonetaryInput
@@ -319,7 +379,7 @@ export function JobListToolbar() {
                         control={form.control}
                         name="maxSalary"
                         render={({ field: { onChange, value, ref } }) => (
-                          <FormItem className="space-y-0">
+                          <FormItem className="space-y-0 w-full max-w-[400px]">
                             <FormLabel>Max Salary</FormLabel>
                             <FormControl>
                               <MonetaryInput
@@ -338,13 +398,29 @@ export function JobListToolbar() {
                   <SheetFooter>
                     <div className="flex flex-col gap-2 sm:flex-row">
                       <Button
+                        type="submit"
+                        form="filter-form"
                         variant="outline"
                         className="text-destructive border-destructive"
                         onClick={() => reset(emptyValues)}
+                        disabled={isSaving || isResetting}
                       >
-                        Reset all
+                        {isResetting && (
+                          <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                        )}
+                        Clear all
                       </Button>
-                      <Button onClick={() => reset(emptyValues)}>Save</Button>
+                      <Button
+                        type="submit"
+                        form="filter-form"
+                        size="sm"
+                        disabled={isSaving || isResetting}
+                      >
+                        {isSaving && (
+                          <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                        )}
+                        Save filter
+                      </Button>
                     </div>
                   </SheetFooter>
                 </SheetContent>
@@ -356,215 +432,6 @@ export function JobListToolbar() {
               Search
             </Button>
           </div>
-          {/* <div className="flex flex-wrap items-center gap-2">
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <JobListFacetedFilter
-                    title="Category"
-                    options={categories}
-                    value={field.value}
-                    onChange={field.onChange}
-                    open={openCategory}
-                    setOpen={setOpenCategory}
-                  />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="skillSet"
-              render={({ field: { onChange, value, ref } }) => (
-                <FormItem>
-                  <Popover open={openSkillset} onOpenChange={setOpenSkillset}>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline" className="border-dashed">
-                        <PlusCircle className="w-4 h-4 mr-2" />
-                        Skillset
-                        {value?.length > 0 && (
-                          <>
-                            <Separator
-                              orientation="vertical"
-                              className="h-4 mx-2"
-                            />
-                            <Badge
-                              variant="secondary"
-                              className="px-1 font-normal rounded-sm"
-                            >
-                              {value.length}
-                            </Badge>
-                          </>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[300px] p-0" align="start">
-                      <div className="p-2">
-                        <FormControl>
-                          <MultiSelect
-                            className="w-full [&_.multi-select\_\_control_.multi-select\_\_indicators]:hidden"
-                            options={skillsOptions}
-                            placeholder="Select skillsets"
-                            menuIsOpen
-                            menuShouldBlockScroll={false}
-                            maxMenuHeight={300 - 45}
-                            menuPortalTarget={null}
-                            value={arrayToObject(value)}
-                            onChange={(val: Array<MultiSelectOptions>) =>
-                              onChange(val.map((c) => c.value))
-                            }
-                            ref={ref}
-                          />
-                        </FormControl>
-                      </div>
-
-                      <div className="mt-[calc(300px-52px)]">
-                        <Separator />
-                        <div className="flex justify-end p-2 space-x-1">
-                          <Button
-                            type="submit"
-                            form="filter-form"
-                            variant="link"
-                            size="sm"
-                            onClick={() =>
-                              reset((formValues) => ({
-                                ...formValues,
-                                skillSet: [],
-                              }))
-                            }
-                          >
-                            Clear
-                          </Button>
-                          <Button type="submit" form="filter-form" size="sm">
-                            Save
-                          </Button>
-                        </div>
-                      </div>
-                    </PopoverContent>
-                  </Popover>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="employmentType"
-              render={({ field }) => (
-                <FormItem>
-                  <JobListFacetedFilter
-                    title="Employment type"
-                    options={types}
-                    isSearchable={false}
-                    value={field.value}
-                    onChange={field.onChange}
-                    open={openType}
-                    setOpen={setOpenType}
-                  />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="locationRestriction"
-              render={({ field }) => (
-                <FormItem>
-                  <JobListFacetedFilter
-                    title="Location restriction"
-                    options={locationRestrictions}
-                    isSearchable={false}
-                    value={field.value}
-                    onChange={field.onChange}
-                    open={openLocation}
-                    setOpen={setOpenLocation}
-                  />
-                </FormItem>
-              )}
-            />
-
-            <Popover open={openSalary} onOpenChange={setOpenSalary}>
-              <PopoverTrigger asChild>
-                <Button variant="outline" className="border-dashed">
-                  <PlusCircle className="w-4 h-4 mr-2" />
-                  Salary Range
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[300px] p-0" align="start">
-                <div className="p-2 space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="startingSalary"
-                    render={({ field: { onChange, value, ref } }) => (
-                      <FormItem className="space-y-0">
-                        <FormLabel>Starting Salary</FormLabel>
-                        <FormControl>
-                          <MonetaryInput
-                            onValueChange={(value: string) =>
-                              onChange(parseInt(value))
-                            }
-                            defaultValue={value}
-                            ref={ref}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="maxSalary"
-                    render={({ field: { onChange, value, ref } }) => (
-                      <FormItem className="space-y-0">
-                        <FormLabel>Max Salary</FormLabel>
-                        <FormControl>
-                          <MonetaryInput
-                            onValueChange={(value: string) =>
-                              onChange(parseInt(value))
-                            }
-                            defaultValue={value}
-                            ref={ref}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="mt-1">
-                  <Separator />
-                  <div className="flex justify-end p-2 space-x-1">
-                    <Button
-                      type="submit"
-                      form="filter-form"
-                      variant="link"
-                      size="sm"
-                      onClick={() =>
-                        reset((formValues) => ({
-                          ...formValues,
-                          startingSalary: null,
-                          maxSalary: null,
-                        }))
-                      }
-                    >
-                      Clear
-                    </Button>
-                    <Button type="submit" form="filter-form" size="sm">
-                      Save
-                    </Button>
-                  </div>
-                </div>
-              </PopoverContent>
-            </Popover>
-
-            <Button
-              variant="link"
-              size="sm"
-              className="text-destructive"
-              onClick={() => reset(emptyValues)}
-            >
-              Reset all
-            </Button>
-          </div> */}
         </div>
       </form>
     </Form>

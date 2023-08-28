@@ -50,11 +50,17 @@ const JobListFacetedFilter = ({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="border-dashed">
-          <PlusCircle className="w-4 h-4 mr-2" />
-          {title}
+        <Button
+          variant="outline"
+          className="flex justify-between w-full border-dashed"
+        >
+          <span className="inline-flex items-center">
+            <PlusCircle className="w-4 h-4 mr-2" />
+            {title}
+          </span>
+
           {selectedValues?.size > 0 && (
-            <>
+            <span className="inline-flex items-center">
               <Separator orientation="vertical" className="h-4 mx-2" />
               <Badge
                 variant="secondary"
@@ -62,7 +68,7 @@ const JobListFacetedFilter = ({
               >
                 {selectedValues.size}
               </Badge>
-            </>
+            </span>
           )}
         </Button>
       </PopoverTrigger>
@@ -116,17 +122,19 @@ const JobListFacetedFilter = ({
 
               <div className="sticky bottom-0 bg-popover">
                 <CommandSeparator />
-                <div className="flex justify-end p-2 space-x-1">
+                <div className="flex justify-end p-2">
                   <Button
-                    form="filter-form"
+                    type="button"
                     variant="link"
                     size="sm"
-                    onClick={() => onChange([])}
+                    className="text-destructive"
+                    onClick={() => {
+                      selectedValues.clear()
+                      const filterValues = Array.from(selectedValues)
+                      onChange(filterValues)
+                    }}
                   >
                     Clear
-                  </Button>
-                  <Button type="submit" form="filter-form" size="sm">
-                    Save
                   </Button>
                 </div>
               </div>

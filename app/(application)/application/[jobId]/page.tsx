@@ -81,13 +81,13 @@ export default async function ApplicationPage({ params }: JobPageProps) {
   }
 
   return (
-    <div className="grid w-full gap-10">
+    <div className="grid w-full gap-4 sm:gap-10">
       <div className="sticky w-full">
         <Link
           href={`/job/${params.jobId}`}
-          className={cn(buttonVariants({ variant: "ghost" }))}
+          className="inline-flex items-center pl-0 text-sm sm:pl-4"
         >
-          <Icons.chevronLeft className="mr-2 h-4 w-4" />
+          <Icons.chevronLeft className="w-4 h-4 mr-2" />
           Back
         </Link>
       </div>

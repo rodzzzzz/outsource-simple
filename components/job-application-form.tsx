@@ -203,14 +203,14 @@ export function JobApplicationForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onApply)}>
-        <Card>
-          <CardHeader>
+        <Card className="border-0 shadow-none sm:border sm:shadow-sm">
+          <CardHeader className="px-0 sm:px-6">
             <CardTitle>Send Job Application</CardTitle>
             <CardDescription>
               This is how job seekers will see your job posting.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-0 sm:px-6">
             <div className="flex flex-col gap-8">
               <FormField
                 control={form.control}
@@ -219,7 +219,7 @@ export function JobApplicationForm({
                   required: { value: true, message: "Required" },
                 }}
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col w-full max-w-[400px]">
                     <FormLabel className="w-fit">
                       Resume<span className="ml-1 text-destructive">*</span>
                     </FormLabel>
@@ -230,7 +230,7 @@ export function JobApplicationForm({
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "w-[400px] justify-between",
+                              "justify-between",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -243,7 +243,7 @@ export function JobApplicationForm({
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-[400px] p-0">
+                      <PopoverContent className="p-0" align="start">
                         <Command>
                           <CommandList>
                             <CommandInput placeholder="Search resume..." />
@@ -343,7 +343,7 @@ export function JobApplicationForm({
                               },
                             }}
                             render={({ field }) => (
-                              <FormItem>
+                              <FormItem className="w-full max-w-[400px]">
                                 <FormLabel>
                                   {question.title}
                                   {question.required && (
@@ -353,11 +353,7 @@ export function JobApplicationForm({
                                   )}
                                 </FormLabel>
                                 <FormControl>
-                                  <Input
-                                    className="w-[400px]"
-                                    size={32}
-                                    {...field}
-                                  />
+                                  <Input size={32} {...field} />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -376,7 +372,7 @@ export function JobApplicationForm({
                               },
                             }}
                             render={({ field }) => (
-                              <FormItem>
+                              <FormItem className="w-full max-w-[400px]">
                                 <FormLabel>
                                   {question.title}
                                   {question.required && (
@@ -422,7 +418,7 @@ export function JobApplicationForm({
                               },
                             }}
                             render={() => (
-                              <FormItem>
+                              <FormItem className="w-full max-w-[400px]">
                                 <FormLabel>
                                   {question.title}
                                   {question.required && (

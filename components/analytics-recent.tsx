@@ -40,13 +40,13 @@ export function AnalyticsRecent({ applications }: AnalyticsRecentProps) {
                   <AvatarImage src={applicant.image!} alt="Avatar" />
                   <AvatarFallback>{initial}</AvatarFallback>
                 </Avatar>
-                <div className="ml-4 space-y-1">
+                <div className="flex-1 min-w-0 ml-4 mr-2 space-y-1">
                   <p className="text-sm font-medium leading-none">{name}</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm truncate text-muted-foreground">
                     {application.job?.title}
                   </p>
                 </div>
-                <div className="ml-auto rounded-md bg-accent px-3 py-1 text-xs text-muted-foreground">
+                <div className="px-3 py-1 ml-auto text-xs rounded-md bg-accent text-muted-foreground whitespace-nowrap">
                   {elapsedDuration}
                 </div>
               </div>
@@ -76,10 +76,10 @@ AnalyticsRecent.Skeleton = function AnalyticsRecentSkeleton() {
       <div className="space-y-8">
         {[...Array(5)].map((item, index) => (
           <div className="flex items-center" key={index}>
-            <Skeleton className="h-9 w-9 shrink-0 rounded-full" />
-            <div className="ml-4 w-full space-y-1">
-              <Skeleton className="h-5 w-2/5" />
-              <Skeleton className="h-4 w-3/5" />
+            <Skeleton className="rounded-full h-9 w-9 shrink-0" />
+            <div className="w-full ml-4 space-y-1">
+              <Skeleton className="w-2/5 h-5" />
+              <Skeleton className="w-3/5 h-4" />
             </div>
           </div>
         ))}

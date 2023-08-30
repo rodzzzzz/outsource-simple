@@ -8,17 +8,19 @@ export default function Loading() {
       <div className="flex items-center">
         <Skeleton className="h-[38px] w-[90px]" />
       </div>
-      <div className="space-y-2">
+      <div className="overflow-x-hidden">
         <Skeleton className="h-[40px] w-full" />
-        <Card>
-          <CardHeader className="gap-2">
-            <Skeleton className="h-5 w-1/5" />
-            <Skeleton className="h-4 w-4/5" />
-          </CardHeader>
-          <CardContent>
-            <DataTableSkeleton />
-          </CardContent>
-        </Card>
+        <div className="mt-2">
+          <Card>
+            <CardHeader>
+              <Skeleton className="w-1/5 min-w-[150px] h-5" />
+              <Skeleton className="w-4/5 max-w-[300px] h-4" />
+            </CardHeader>
+            <CardContent>
+              <DataTableSkeleton />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )

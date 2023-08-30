@@ -82,7 +82,9 @@ export function ApplicationDetailsViewer({
   applicationsLength,
 }: ApplicationDetailsViewerProps) {
   const router = useRouter()
-  const [isUpdating, setIsUpdating] = React.useState(false)
+  const [isAccepting, setIsAccepting] = React.useState(false)
+  const [isRejecting, setIsRejecting] = React.useState(false)
+
   function onMovePrevious() {
     if (applicationIndex > 0) {
       setApplicationIndex((prev) => prev - 1)
@@ -96,9 +98,9 @@ export function ApplicationDetailsViewer({
   }
 
   async function onUpdate(status: z.infer<typeof statusType>) {
-    setIsUpdating(true)
-
     if (status === "ACCEPTED") {
+      setIsAccepting(true)
+
       const emailResponse: Response = await fetchPlus(
         "/api/email/notification/accepted",
         {
@@ -112,7 +114,7 @@ export function ApplicationDetailsViewer({
       )
 
       if (!emailResponse?.ok) {
-        setIsUpdating(false)
+        setIsAccepting(false)
 
         return toast({
           title: "Something went wrong.",
@@ -120,6 +122,10 @@ export function ApplicationDetailsViewer({
           variant: "destructive",
         })
       }
+    }
+
+    if (status === "REJECTED") {
+      setIsRejecting(true)
     }
 
     const response = await fetchPlus(
@@ -136,7 +142,8 @@ export function ApplicationDetailsViewer({
       3
     )
 
-    setIsUpdating(false)
+    setIsAccepting(false)
+    setIsRejecting(false)
 
     if (!response?.ok) {
       return toast({
@@ -179,21 +186,21 @@ export function ApplicationDetailsViewer({
             type="button"
             variant="outline"
             size="sm"
-            className="flex h-10 w-10 items-center justify-center"
+            className="flex items-center justify-center w-10 h-10"
             onClick={onMovePrevious}
             disabled={applicationIndex === 0}
           >
-            <Icons.chevronLeft className="h-4 w-4 shrink-0" />
+            <Icons.chevronLeft className="w-4 h-4 shrink-0" />
           </Button>
           <Button
             type="button"
             variant="outline"
             size="sm"
-            className="flex h-10 w-10 items-center justify-center"
+            className="flex items-center justify-center w-10 h-10"
             onClick={onMoveNext}
             disabled={applicationIndex === applicationsLength - 1}
           >
-            <Icons.chevronRight className="h-4 w-4 shrink-0" />
+            <Icons.chevronRight className="w-4 h-4 shrink-0" />
           </Button>
         </div>
       </CardHeader>
@@ -204,7 +211,7 @@ export function ApplicationDetailsViewer({
               <TabsTrigger value="resume">Resume</TabsTrigger>
               <TabsTrigger value="cover-letter">Cover Letter</TabsTrigger>
               <TabsTrigger value="form-response" disabled={!questionnaireForm}>
-                Form Response
+                Response
               </TabsTrigger>
             </TabsList>
 
@@ -223,9 +230,9 @@ export function ApplicationDetailsViewer({
               className="max-h-[30rem] min-h-[30rem]"
               value="cover-letter"
             >
-              <div className="max-h-[30rem] min-h-[30rem] overflow-x-auto rounded-lg border p-6">
+              <div className="max-h-[30rem] min-h-[30rem]  w-full overflow-x-auto rounded-lg border p-6">
                 {application.coverLetter ? (
-                  <p className="whitespace-pre-wrap leading-relaxed">
+                  <p className="w-full leading-relaxed break-words whitespace-pre-wrap">
                     {application.coverLetter}
                   </p>
                 ) : (
@@ -254,24 +261,28 @@ export function ApplicationDetailsViewer({
           <div className="flex flex-col justify-end gap-3 md:flex-row">
             <Button
               variant="destructive"
-              disabled={isUpdating || application.status !== "APPLIED"}
+              disabled={
+                isAccepting || isRejecting || application.status !== "APPLIED"
+              }
               onClick={() => {
                 onUpdate("REJECTED")
               }}
             >
-              {isUpdating && (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              {isRejecting && (
+                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
               )}
               Reject
             </Button>
             <Button
-              disabled={isUpdating || application.status !== "APPLIED"}
+              disabled={
+                isAccepting || isRejecting || application.status !== "APPLIED"
+              }
               onClick={() => {
                 onUpdate("ACCEPTED")
               }}
             >
-              {isUpdating && (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              {isAccepting && (
+                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
               )}
               Accept
             </Button>

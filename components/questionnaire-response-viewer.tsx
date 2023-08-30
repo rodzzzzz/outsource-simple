@@ -42,7 +42,7 @@ function MultipleAnswers({ answers }: { answers: string[] }) {
 
 function SingleAnswer({ answer }: { answer: string }) {
   return !!answer ? (
-    <span>{answer}</span>
+    <span className="w-full break-words">{answer}</span>
   ) : (
     <span className="italic text-muted-foreground">[No answer]</span>
   )

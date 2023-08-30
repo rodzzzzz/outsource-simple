@@ -126,7 +126,7 @@ export default async function ApplicationViewerPage({ params }: JobPageProps) {
           href="/employer/posts"
           className={cn(buttonVariants({ variant: "ghost" }))}
         >
-          <Icons.chevronLeft className="mr-2 h-4 w-4" />
+          <Icons.chevronLeft className="w-4 h-4 mr-2" />
           Back
         </Link>
       </div>

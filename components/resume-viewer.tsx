@@ -40,8 +40,8 @@ export function ResumeViewer({
   return (
     <div className="min-h-[30rem] space-y-4 rounded-lg border p-6 text-sm shadow-md">
       <div className="flex justify-between space-x-3">
-        <div className="flex flex-1 flex-col items-start space-y-2">
-          <h1 className="text-left text-xl font-bold leading-snug hover:underline md:leading-tight">
+        <div className="flex flex-col items-start flex-1 space-y-2">
+          <h1 className="text-xl font-bold leading-snug text-left hover:underline md:leading-tight">
             {`${user.firstName} ${user.lastName}`}
           </h1>
           <div className="flex flex-col items-start gap-1 text-muted-foreground">
@@ -50,7 +50,7 @@ export function ResumeViewer({
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.location className="h-4 w-4" />
+                      <Icons.location className="w-4 h-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Location</p>
@@ -65,7 +65,7 @@ export function ResumeViewer({
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.email className="h-4 w-4" />
+                    <Icons.email className="w-4 h-4" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Email</p>
@@ -80,7 +80,7 @@ export function ResumeViewer({
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.website className="h-4 w-4" />
+                      <Icons.website className="w-4 h-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Portfolio</p>
@@ -98,11 +98,11 @@ export function ResumeViewer({
             ) : null}
 
             {!isEmptyArray(resume.skillSet) ? (
-              <div className="mt-1 inline-flex items-center gap-3">
+              <div className="inline-flex items-center gap-3 mt-1">
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Icons.skillset className="h-4 w-4" />
+                      <Icons.skillset className="w-4 h-4" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Skillset</p>
@@ -126,13 +126,13 @@ export function ResumeViewer({
 
       <Separator />
 
-      <div className="flex flex-col items-start space-y-2">
+      <div className="flex flex-col items-start w-full space-y-2">
         <div className="inline-flex flex-wrap gap-2">
           <span className="text-lg font-bold">Profile</span>
           <Badge className="h-6">{resume.title}</Badge>
         </div>
 
-        <p className="space-y-1 whitespace-pre-wrap leading-relaxed">
+        <p className="w-full space-y-1 leading-relaxed break-words whitespace-pre-wrap">
           {resume.summary}
         </p>
       </div>
@@ -140,15 +140,15 @@ export function ResumeViewer({
       {!isEmptyArray(workHistories) ? (
         <>
           <Separator />
-          <div className="flex flex-col items-start space-y-2">
+          <div className="flex flex-col items-start w-full space-y-2">
             <span className="text-lg font-bold">Work history</span>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col w-full gap-6">
               {workHistories?.map((work, index) => {
                 const toDate = work.currentlyWorking
                   ? "Present"
                   : format(work.toDate!, "MMMM yyy")
                 return (
-                  <div className="flex flex-col gap-1" key={index}>
+                  <div className="flex flex-col w-full gap-1" key={index}>
                     <div className="inline-flex flex-wrap gap-2">
                       <p className="font-semibold">{work.jobTitle}</p>
                       <Badge variant="secondary">
@@ -157,12 +157,12 @@ export function ResumeViewer({
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.company className="h-4 w-4" />
+                      <Icons.company className="w-4 h-4" />
                       <p>{work.company}</p>
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.calendar className="h-4 w-4" />
+                      <Icons.calendar className="w-4 h-4" />
                       <p>{`${format(
                         work.fromDate!,
                         "MMMM yyy"
@@ -170,12 +170,12 @@ export function ResumeViewer({
                     </div>
 
                     {!!work.details ? (
-                      <p className="mt-1 space-y-1 whitespace-pre-wrap leading-relaxed">
+                      <p className="w-full mt-1 space-y-1 leading-relaxed break-words whitespace-pre-wrap">
                         {work.details}
                       </p>
                     ) : null}
 
-                    <div className="mt-1 flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1 mt-1">
                       {work.skillSet.map((skill, index) => {
                         return (
                           <Badge variant="outline" key={index}>
@@ -196,16 +196,16 @@ export function ResumeViewer({
         <>
           <Separator />
 
-          <div className="flex flex-col items-start space-y-2">
+          <div className="flex flex-col items-start w-full space-y-2">
             <span className="text-lg font-bold">Education</span>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col w-full gap-6">
               {educations?.map((edu, index) => {
                 const toDate = edu.currentlyStudying
                   ? "Present"
                   : format(edu.toDate!, "MMMM yyy")
 
                 return (
-                  <div className="flex flex-col gap-1" key={index}>
+                  <div className="flex flex-col w-full gap-1" key={index}>
                     <div className="inline-flex flex-wrap gap-2">
                       <p className="font-semibold">{edu.fieldOfStudy}</p>
                       <Badge variant="secondary">
@@ -214,12 +214,12 @@ export function ResumeViewer({
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.school className="h-4 w-4" />
+                      <Icons.school className="w-4 h-4" />
                       <p>{edu.schoolName}</p>
                     </div>
 
                     <div className="inline-flex items-center gap-3 text-muted-foreground">
-                      <Icons.calendar className="h-4 w-4" />
+                      <Icons.calendar className="w-4 h-4" />
                       <p>{`${format(
                         edu.fromDate!,
                         "MMMM yyy"
@@ -227,7 +227,7 @@ export function ResumeViewer({
                     </div>
 
                     {!!edu.details ? (
-                      <p className="mt-1 space-y-1 whitespace-pre-wrap leading-relaxed">
+                      <p className="w-full mt-1 space-y-1 leading-relaxed break-words whitespace-pre-wrap">
                         {edu.details}
                       </p>
                     ) : null}
@@ -254,7 +254,7 @@ export function ResumeViewer({
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Link href={social.url!} target="_blank">
-                          <Icon className="h-6 w-6" />
+                          <Icon className="w-6 h-6" />
                         </Link>
                       </TooltipTrigger>
                       <TooltipContent>

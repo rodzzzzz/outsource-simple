@@ -3,7 +3,7 @@ import localFont from "next/font/local"
 
 import "@/styles/globals.css"
 import { siteConfig } from "@/config/site"
-import { absoluteUrl, cn } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import SessionProvider from "@/components/auth-session-provider"
@@ -28,6 +28,7 @@ interface RootLayoutProps {
 }
 
 export const metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -55,11 +56,11 @@ export const metadata = {
   ],
   authors: [
     {
-      name: "rodny",
-      url: "https://rodny.com",
+      name: "Rodny",
+      url: "https://rodnycablilan.netlify.app/",
     },
   ],
-  creator: "rodny",
+  creator: "Rodny Cablilan",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -71,6 +72,7 @@ export const metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [{ url: "/og.jpg" }],
   },
   twitter: {
     card: "summary_large_image",

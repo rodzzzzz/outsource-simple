@@ -65,7 +65,7 @@ export default async function DashboardPage() {
         text="View and manage your saved job."
       >
         <Link href="/" className={cn(buttonVariants())}>
-          <Icons.search className="mr-2 h-4 w-4" />
+          <Icons.search className="w-4 h-4 mr-2" />
           Look for jobs
         </Link>
       </DashboardHeader>
@@ -92,7 +92,7 @@ export default async function DashboardPage() {
               href="/"
               className={cn(buttonVariants({ variant: "outline" }))}
             >
-              <Icons.search className="mr-2 h-4 w-4" />
+              <Icons.search className="w-4 h-4 mr-2" />
               Look for jobs
             </Link>
           </EmptyPlaceholder>

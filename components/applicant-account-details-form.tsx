@@ -36,39 +36,24 @@ export function ApplicantAccountDetailsForm({
       <CardContent>
         <div className="space-y-8">
           <div className="flex flex-wrap gap-8">
-            <div className="space-y-2">
+            <div className="w-full max-w-[400px] space-y-2">
               <Label>First Name</Label>
-              <Input
-                disabled
-                defaultValue={user.firstName}
-                className="w-[400px]"
-                size={32}
-              />
+              <Input disabled defaultValue={user.firstName} size={32} />
             </div>
 
-            <div className="space-y-2">
+            <div className="w-full max-w-[400px] space-y-2">
               <Label>Last Name</Label>
-              <Input
-                disabled
-                defaultValue={user.lastName}
-                className="w-[400px]"
-                size={32}
-              />
+              <Input disabled defaultValue={user.lastName} size={32} />
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="w-full max-w-[400px] space-y-2">
             <Label>Email Address</Label>
-            <Input
-              disabled
-              defaultValue={user.email!}
-              className="w-[400px]"
-              size={32}
-            />
+            <Input disabled defaultValue={user.email!} size={32} />
           </div>
         </div>
       </CardContent>
-      <CardFooter className="border-t pt-6">
+      <CardFooter className="pt-6 border-t">
         <p className="text-xs text-muted-foreground">
           Account details cannot be changed.
         </p>

@@ -186,14 +186,13 @@ export function ResumeEducationForm({
                       control={form.control}
                       name={`educations.${index}.schoolName`}
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full max-w-[400px]">
                           <FormLabel>
                             School
                             <span className="ml-1 text-destructive">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
-                              className="w-[400px]"
                               size={32}
                               {...field}
                               placeholder="School name"
@@ -208,7 +207,7 @@ export function ResumeEducationForm({
                       control={form.control}
                       name={`educations.${index}.level`}
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full max-w-[400px]">
                           <FormLabel>
                             Education Level
                             <span className="ml-1 text-destructive">*</span>
@@ -217,7 +216,7 @@ export function ResumeEducationForm({
                             onValueChange={field.onChange}
                             defaultValue={field.value}
                           >
-                            <SelectTrigger className="w-[400px]">
+                            <SelectTrigger>
                               <SelectValue placeholder="Select education level" />
                             </SelectTrigger>
                             <FormControl>
@@ -243,14 +242,13 @@ export function ResumeEducationForm({
                     control={form.control}
                     name={`educations.${index}.fieldOfStudy`}
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="w-full max-w-[400px]">
                         <FormLabel>
                           Field of Study
                           <span className="ml-1 text-destructive">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            className="w-[400px]"
                             size={32}
                             {...field}
                             placeholder="ex. Bachelor of Science in Computer Science"
@@ -267,7 +265,7 @@ export function ResumeEducationForm({
                         control={form.control}
                         name={`educations.${index}.fromDate`}
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="w-full max-w-[400px]">
                             <FormLabel>From</FormLabel>
                             <div className="flex flex-col">
                               <Popover>
@@ -276,7 +274,7 @@ export function ResumeEducationForm({
                                     <Button
                                       variant={"outline"}
                                       className={cn(
-                                        "w-[400px] pl-3 text-left font-normal",
+                                        "pl-3 text-left font-normal",
                                         !field.value && "text-muted-foreground"
                                       )}
                                     >
@@ -285,7 +283,7 @@ export function ResumeEducationForm({
                                       ) : (
                                         <span>Pick a date</span>
                                       )}
-                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                                     </Button>
                                   </PopoverTrigger>
                                 </FormControl>
@@ -309,7 +307,7 @@ export function ResumeEducationForm({
                         control={form.control}
                         name={`educations.${index}.toDate`}
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="w-full max-w-[400px]">
                             <FormLabel>To</FormLabel>
                             <div className="flex flex-col">
                               <Popover>
@@ -324,7 +322,7 @@ export function ResumeEducationForm({
                                     <Button
                                       variant={"outline"}
                                       className={cn(
-                                        "w-[400px] pl-3 text-left font-normal",
+                                        "pl-3 text-left font-normal",
                                         !field.value && "text-muted-foreground"
                                       )}
                                     >
@@ -333,7 +331,7 @@ export function ResumeEducationForm({
                                       ) : (
                                         <span>Pick a date</span>
                                       )}
-                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                                     </Button>
                                   </PopoverTrigger>
                                 </FormControl>
@@ -389,7 +387,7 @@ export function ResumeEducationForm({
                         <FormControl>
                           <Textarea
                             rows={5}
-                            className="h-30 resize-none"
+                            className="resize-none h-30"
                             {...field}
                           />
                         </FormControl>
@@ -440,7 +438,7 @@ export function ResumeEducationForm({
                   disabled={disabledButton || isSaving}
                 >
                   {isSaving && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                   )}
                   <span>Update details</span>
                 </button>

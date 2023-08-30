@@ -170,7 +170,7 @@ export function ApplicantAccountSocialsForm({
                                           key={social.value}
                                         >
                                           <div className="flex items-center">
-                                            <Icon className="mr-2 h-4 w-4" />
+                                            <Icon className="w-4 h-4 mr-2" />
                                             <span>{social.label}</span>
                                           </div>
                                         </SelectItem>
@@ -188,14 +188,9 @@ export function ApplicantAccountSocialsForm({
                           control={form.control}
                           name={`socials.${index}.url`}
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="max-w-[400px] ">
                               <FormControl>
-                                <Input
-                                  className="w-[400px]"
-                                  size={32}
-                                  {...field}
-                                  placeholder="URL"
-                                />
+                                <Input size={32} {...field} placeholder="URL" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -236,7 +231,7 @@ export function ApplicantAccountSocialsForm({
                 disabled={disabledSocialButton || isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                 )}
                 <span>Update socials</span>
               </button>

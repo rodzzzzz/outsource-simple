@@ -151,12 +151,12 @@ export function ResumeDetailsForm({
                 control={form.control}
                 name="title"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Job Title<span className="ml-1 text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input className="w-[400px]" {...field} />
+                      <Input className="" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -167,13 +167,13 @@ export function ResumeDetailsForm({
                 control={form.control}
                 name="skillSet"
                 render={({ field: { onChange, value, ref } }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>
                       Skillset<span className="ml-1 text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
                       <MultiSelect
-                        className="w-[400px] [&_.multi-select\_\_control]:focus-within:ring-2 [&_.multi-select\_\_control]:focus-within:ring-ring [&_.multi-select\_\_control]:focus-within:ring-offset-2"
+                        className="[&_.multi-select\_\_control]:focus-within:ring-2 [&_.multi-select\_\_control]:focus-within:ring-ring [&_.multi-select\_\_control]:focus-within:ring-offset-2"
                         options={skillsOptions}
                         placeholder="Select skillsets"
                         value={arrayToObject(value)}
@@ -192,12 +192,12 @@ export function ResumeDetailsForm({
                 control={form.control}
                 name="portfolioUrl"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full max-w-[400px]">
                     <FormLabel>Portfolio URL</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="https://www.yourawesomeportfolio.com"
-                        className="w-[400px]"
+                        className=""
                         {...field}
                       />
                     </FormControl>
@@ -227,7 +227,7 @@ export function ResumeDetailsForm({
                     <FormControl>
                       <Textarea
                         rows={5}
-                        className="h-60 resize-none"
+                        className="resize-none h-60"
                         {...field}
                       />
                     </FormControl>
@@ -242,7 +242,7 @@ export function ResumeDetailsForm({
                   disabled={disabledButton || isSaving}
                 >
                   {isSaving && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                   )}
                   <span>Update details</span>
                 </button>

@@ -114,10 +114,10 @@ export function ApplicantAccountLocationForm({
                   control={form.control}
                   name="country"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px] ">
                       <FormLabel>Country</FormLabel>
                       <FormControl>
-                        <Input className="w-[400px]" size={32} {...field} />
+                        <Input size={32} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -128,10 +128,10 @@ export function ApplicantAccountLocationForm({
                   control={form.control}
                   name="city"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full max-w-[400px] ">
                       <FormLabel>City</FormLabel>
                       <FormControl>
-                        <Input className="w-[400px]" size={32} {...field} />
+                        <Input size={32} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -145,7 +145,7 @@ export function ApplicantAccountLocationForm({
                 disabled={disabledButton || isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                 )}
                 <span>Update location</span>
               </button>

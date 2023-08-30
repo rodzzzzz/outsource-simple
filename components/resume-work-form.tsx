@@ -193,14 +193,13 @@ export function ResumeWorkForm({
                       control={form.control}
                       name={`workHistories.${index}.company`}
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full max-w-[400px]">
                           <FormLabel>
                             Company
                             <span className="ml-1 text-destructive">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
-                              className="w-[400px]"
                               size={32}
                               {...field}
                               placeholder="Company name"
@@ -215,13 +214,13 @@ export function ResumeWorkForm({
                       control={form.control}
                       name={`workHistories.${index}.jobTitle`}
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full max-w-[400px]">
                           <FormLabel>
                             Job Title
                             <span className="ml-1 text-destructive">*</span>
                           </FormLabel>
                           <FormControl>
-                            <Input className="w-[400px]" size={32} {...field} />
+                            <Input size={32} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -233,7 +232,7 @@ export function ResumeWorkForm({
                     control={form.control}
                     name={`workHistories.${index}.employmentType`}
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="w-full max-w-[400px]">
                         <FormLabel>
                           Employment Type
                           <span className="ml-1 text-destructive">*</span>
@@ -243,7 +242,7 @@ export function ResumeWorkForm({
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                         >
-                          <SelectTrigger className="w-[400px]">
+                          <SelectTrigger>
                             <SelectValue placeholder="Select employment type" />
                           </SelectTrigger>
                           <FormControl>
@@ -267,7 +266,7 @@ export function ResumeWorkForm({
                         control={form.control}
                         name={`workHistories.${index}.fromDate`}
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="w-full max-w-[400px]">
                             <FormLabel>From</FormLabel>
                             <div className="flex flex-col">
                               <Popover>
@@ -276,7 +275,7 @@ export function ResumeWorkForm({
                                     <Button
                                       variant={"outline"}
                                       className={cn(
-                                        "w-[400px] pl-3 text-left font-normal",
+                                        "pl-3 text-left font-normal",
                                         !field.value && "text-muted-foreground"
                                       )}
                                     >
@@ -285,7 +284,7 @@ export function ResumeWorkForm({
                                       ) : (
                                         <span>Pick a date</span>
                                       )}
-                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                                     </Button>
                                   </PopoverTrigger>
                                 </FormControl>
@@ -310,7 +309,7 @@ export function ResumeWorkForm({
                         control={form.control}
                         name={`workHistories.${index}.toDate`}
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="w-full max-w-[400px]">
                             <FormLabel>To</FormLabel>
                             <div className="flex flex-col">
                               <Popover>
@@ -325,7 +324,7 @@ export function ResumeWorkForm({
                                     <Button
                                       variant={"outline"}
                                       className={cn(
-                                        "w-[400px] pl-3 text-left font-normal",
+                                        "pl-3 text-left font-normal",
                                         !field.value && "text-muted-foreground"
                                       )}
                                     >
@@ -334,7 +333,7 @@ export function ResumeWorkForm({
                                       ) : (
                                         <span>Pick a date</span>
                                       )}
-                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                      <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                                     </Button>
                                   </PopoverTrigger>
                                 </FormControl>
@@ -387,11 +386,11 @@ export function ResumeWorkForm({
                     control={form.control}
                     name={`workHistories.${index}.skillSet`}
                     render={({ field: { onChange, value, ref } }) => (
-                      <FormItem>
+                      <FormItem className="w-full max-w-[400px]">
                         <FormLabel>Skillset</FormLabel>
                         <FormControl>
                           <MultiSelect
-                            className="w-[400px] [&_.multi-select\_\_control]:focus-within:ring-2 [&_.multi-select\_\_control]:focus-within:ring-ring [&_.multi-select\_\_control]:focus-within:ring-offset-2"
+                            className="[&_.multi-select\_\_control]:focus-within:ring-2 [&_.multi-select\_\_control]:focus-within:ring-ring [&_.multi-select\_\_control]:focus-within:ring-offset-2"
                             options={skillsOptions}
                             placeholder="Select skillsets"
                             value={arrayToObject(value)}
@@ -416,7 +415,7 @@ export function ResumeWorkForm({
                         <FormControl>
                           <Textarea
                             rows={5}
-                            className="h-30 resize-none"
+                            className="resize-none h-30"
                             {...field}
                           />
                         </FormControl>
@@ -467,7 +466,7 @@ export function ResumeWorkForm({
                   disabled={disabledButton || isSaving}
                 >
                   {isSaving && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                   )}
                   <span>Update details</span>
                 </button>

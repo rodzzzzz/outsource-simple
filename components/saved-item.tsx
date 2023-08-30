@@ -50,14 +50,14 @@ SavedItem.Skeleton = function SavedItemSkeleton() {
   return (
     <div className="flex flex-col border rounded-md">
       <div className="flex items-start justify-between gap-2 px-4 py-3">
-        <div className="grid grid-cols-1 grid-rows-2 gap-1">
-          <Skeleton className="w-2/5 h-5" />
-          <Skeleton className="w-4/5 h-4" />
+        <div className="grid w-full grid-cols-1 grid-rows-2 gap-1">
+          <Skeleton className="w-3/5 max-w-[350px] min-w-[200px] h-6" />
+          <Skeleton className="w-2/5 max-w-[250px] min-w-[100px] h-5" />
         </div>
       </div>
 
       <div className="px-4 py-2 text-sm border-t">
-        <Skeleton className="w-4/5 h-4" />
+        <Skeleton className="w-1/5 max-w-[200px] min-w-[80px] h-5" />
       </div>
     </div>
   )

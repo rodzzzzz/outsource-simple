@@ -75,7 +75,7 @@ export function PostCreateButton({
         {
           "cursor-not-allowed opacity-60": isLoading,
         },
-        "flex flex-shrink-0",
+        "flex shrink-0",
         className
       )}
       disabled={isLoading}

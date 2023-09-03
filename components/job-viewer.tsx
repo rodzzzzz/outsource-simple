@@ -174,7 +174,7 @@ export function JobViewer({
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icons.skillset className="flex-shrink-0 w-4 h-4" />
+                    <Icons.skillset className="w-4 h-4 shrink-0" />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Skillset</p>

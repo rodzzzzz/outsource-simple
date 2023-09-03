@@ -199,7 +199,7 @@ export function JobListToolbar() {
 
               <Sheet open={openFilter} onOpenChange={setOpenFilter}>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className="flex-shrink-0">
+                  <Button variant="outline" className="shrink-0">
                     <Icons.filter className="w-4 h-4 sm:mr-2" />
                     <span className="hidden sm:block">Filter</span>
                     {[...new Set(searchParams?.keys())].length > 0 && (

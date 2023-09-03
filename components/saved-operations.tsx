@@ -57,7 +57,7 @@ export function SavedOperations({ saved, job }: SavedOperationsProps) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center justify-center flex-shrink-0 w-8 h-8 transition-colors border rounded-md hover:bg-muted">
+        <DropdownMenuTrigger className="flex items-center justify-center w-8 h-8 transition-colors border rounded-md shrink-0 hover:bg-muted">
           <Icons.ellipsis className="w-4 h-4" />
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>

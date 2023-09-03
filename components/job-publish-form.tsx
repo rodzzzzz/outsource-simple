@@ -8,6 +8,7 @@ import * as React from "react"
 import * as z from "zod"
 
 import "@/styles/editor.css"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Job, PostedJob, User } from "@prisma/client"
 
@@ -252,7 +253,7 @@ export function JobPublishForm({
 
             <div className="border rounded-md border-border">
               <div className="relative flex justify-center object-contain w-full h-80">
-                <img
+                <Image
                   className="h-full"
                   // className="object-contain"
                   src="/images/promo/shaking-hands.svg"
@@ -271,8 +272,8 @@ export function JobPublishForm({
                 <p className="text-muted-foreground">
                   Early adopters can post their jobs on our platform and use all
                   other features for <strong>FREE</strong>. This promo is
-                  available for a limited time only. Don't miss your chance and
-                  start posting now!
+                  available for a limited time only. Don&apos;t miss your chance
+                  and start posting now!
                 </p>
               </div>
             </div>

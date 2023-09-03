@@ -1,21 +1,21 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import EditorJS from "@editorjs/editorjs"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+// import Link from "next/link"
+// import { useRouter } from "next/navigation"
+// import { zodResolver } from "@hookform/resolvers/zod"
+// import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import "@/styles/editor.css"
+import { useRouter } from "next/navigation"
 import { Job, PostedJob, User } from "@prisma/client"
 
-import {
-  featured as featuredPrice,
-  highlighted as highlightedPrice,
-  posting,
-} from "@/config/price"
+// import {
+//   featured as featuredPrice,
+//   highlighted as highlightedPrice,
+//   posting,
+// } from "@/config/price"
 import { cn } from "@/lib/utils"
 import { postConfigPatchSchema, postPatchSchema } from "@/lib/validations/post"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -26,26 +26,30 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Separator } from "@/components/ui/separator"
-import { Switch } from "@/components/ui/switch"
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogDescription,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogTrigger,
+// } from "@/components/ui/dialog"
+// import { Separator } from "@/components/ui/separator"
+// import { Switch } from "@/components/ui/switch"
 import { toast } from "@/components/ui/use-toast"
-import Checkout from "@/components/checkout"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/react-hook-form/form"
+
+import { Icons } from "./icons"
+import { Separator } from "./ui/separator"
+
+// import Checkout from "@/components/checkout"
+// import {
+//   Form,
+//   FormControl,
+//   FormDescription,
+//   FormField,
+//   FormItem,
+//   FormLabel,
+// } from "@/components/react-hook-form/form"
 
 interface JobPublishFormProps {
   postId: Job["id"]
@@ -63,61 +67,72 @@ type FormData = z.infer<typeof postPatchSchema & typeof postConfigPatchSchema>
 
 export function JobPublishForm({
   postId,
-  config,
-  paymentIntentId,
-  userId,
+  // config,
+  // paymentIntentId,
+  // userId,
   setActive,
   published,
 }: JobPublishFormProps) {
-  const form = useForm<FormData>({
-    resolver: zodResolver(postPatchSchema),
-    defaultValues: {
-      featured: config.featured || false,
-      highlighted: config.highlighted || false,
-    },
-    mode: "onChange",
-  })
-  const [price, setPrice] = React.useState(0)
-  const [metadata, setMetadata] = React.useState({})
-  const [description, setDescription] = React.useState("")
+  const router = useRouter()
+  const [isPublishing, setIsPublishing] = React.useState(false)
+  // const form = useForm<FormData>({
+  //   resolver: zodResolver(postPatchSchema),
+  //   defaultValues: {
+  //     featured: config.featured || false,
+  //     highlighted: config.highlighted || false,
+  //   },
+  //   mode: "onChange",
+  // })
+  // const [price, setPrice] = React.useState(0)
+  // const [metadata, setMetadata] = React.useState({})
+  // const [description, setDescription] = React.useState("")
 
-  const featured = form.getValues("featured")
-  const highlighted = form.getValues("highlighted")
+  // const featured = form.getValues("featured")
+  // const highlighted = form.getValues("highlighted")
 
-  // Setting up the paymentintent update body
-  React.useEffect(() => {
-    const p = posting.price
-    const f = featured ? featuredPrice.price : 0
-    const h = highlighted ? highlightedPrice.price : 0
-    setPrice(p + f + h)
+  // // Setting up the paymentintent update body
+  // React.useEffect(() => {
+  //   const p = posting.price
+  //   const f = featured ? featuredPrice.price : 0
+  //   const h = highlighted ? highlightedPrice.price : 0
+  //   setPrice(p + f + h)
 
-    setMetadata({
-      jobId: postId,
-      userId,
-      [posting.label]: posting.price * 100,
-      ...(featured && { [featuredPrice.label]: featuredPrice.price * 100 }),
-      ...(highlighted && {
-        [highlightedPrice.label]: highlightedPrice.price * 100,
-      }),
-    })
+  //   setMetadata({
+  //     jobId: postId,
+  //     userId,
+  //     [posting.label]: posting.price * 100,
+  //     ...(featured && { [featuredPrice.label]: featuredPrice.price * 100 }),
+  //     ...(highlighted && {
+  //       [highlightedPrice.label]: highlightedPrice.price * 100,
+  //     }),
+  //   })
 
-    const fd = featured ? ` | ${featuredPrice.name}` : ""
-    const hd = highlighted ? ` | ${highlightedPrice.name}` : ""
-    setDescription(posting.name + fd + hd)
+  //   const fd = featured ? ` | ${featuredPrice.name}` : ""
+  //   const hd = highlighted ? ` | ${highlightedPrice.name}` : ""
+  //   setDescription(posting.name + fd + hd)
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [featured, highlighted])
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [featured, highlighted])
 
   async function onPublish() {
-    const response = await fetch(`/api/stripe/${paymentIntentId}`, {
-      method: "PATCH",
+    // const response = await fetch(`/api/stripe/${paymentIntentId}`, {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     amount: price * 100,
+    //     metadata,
+    //     description,
+    //   }),
+    // })
+
+    setIsPublishing(true)
+
+    const response = await fetch(`/api/posts/publish/${postId}`, {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: price * 100,
-        metadata,
-        description,
-      }),
     })
+
+    setIsPublishing(false)
 
     if (!response?.ok) {
       return toast({
@@ -126,22 +141,32 @@ export function JobPublishForm({
         variant: "destructive",
       })
     }
+
+    toast({
+      description: "Your job has been posted successfully.",
+    })
+
+    router.push("/checkout/success?redirect_status=success")
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onPublish)}>
-        <div className="space-y-8">
-          <Card className="border-0 shadow-none sm:border sm:shadow-sm">
-            <CardHeader className="px-0 sm:px-6">
-              <CardTitle>Publish Configuration</CardTitle>
-              <CardDescription>
-                Customize how your job will be posted.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-0 sm:px-6">
-              <div className="space-y-8">
-                <div className="space-y-4">
+    // <Form {...form}>
+    //   <form onSubmit={form.handleSubmit(onPublish)}>
+    <div className="space-y-8">
+      <Card className="border-0 shadow-none sm:border sm:shadow-sm">
+        <CardHeader className="px-0 sm:px-6">
+          <CardTitle>
+            {/* Publish Configuration */}
+            Publish Job
+          </CardTitle>
+          <CardDescription>
+            {/* Customize how your job will be posted. */}
+            For the mean time, you can publish jobs on our platform for FREE.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="px-0 sm:px-6">
+          <div className="space-y-8">
+            {/* <div className="space-y-4">
                   <FormItem className="p-4 border-2 rounded-lg border-primary">
                     <div className="w-full">
                       <h1>{`$${posting.price}`}</h1>
@@ -223,20 +248,58 @@ export function JobPublishForm({
                       <div className="text-4xl font-bold">{`$${price}.00`}</div>
                     </CardContent>
                   </Card>
-                </div>
+                </div> */}
 
-                <div className="flex flex-col gap-2 md:flex-row">
-                  <button
-                    type="button"
-                    onClick={() => setActive((prev) => prev - 1)}
-                    className={cn(
-                      buttonVariants({ variant: "secondary" }),
-                      "w-full md:w-fit"
-                    )}
-                  >
-                    Go back
-                  </button>
-                  <Dialog>
+            <div className="border rounded-md border-border">
+              <div className="relative flex justify-center object-contain w-full h-80">
+                <img
+                  className="h-full"
+                  // className="object-contain"
+                  src="/images/promo/shaking-hands.svg"
+                  alt="Two people shaking hands"
+                />
+                <span className="absolute text-xs bottom-1 right-2 text-muted-foreground">
+                  Illustration by <a href="https://popsy.co/">popsy.co</a>
+                </span>
+              </div>
+
+              <Separator />
+              <div className="p-4 space-y-1 text-sm bg-muted">
+                <span className="text-base font-semibold sm:text-lg">
+                  Welcome to our early release!
+                </span>
+                <p className="text-muted-foreground">
+                  Early adopters can post their jobs on our platform and use all
+                  other features for <strong>FREE</strong>. This promo is
+                  available for a limited time only. Don't miss your chance and
+                  start posting now!
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2 md:flex-row">
+              <button
+                type="button"
+                onClick={() => setActive((prev) => prev - 1)}
+                className={cn(
+                  buttonVariants({ variant: "secondary" }),
+                  "w-full md:w-fit"
+                )}
+                disabled={isPublishing}
+              >
+                Go back
+              </button>
+              <Button
+                className="w-full md:w-fit"
+                onClick={onPublish}
+                disabled={published || isPublishing}
+              >
+                {isPublishing && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                Publish for free
+              </Button>
+              {/* <Dialog>
                     <DialogTrigger asChild>
                       <Button
                         type="submit"
@@ -256,35 +319,32 @@ export function JobPublishForm({
                       </DialogHeader>
                       <Checkout paymentIntentId={paymentIntentId} />
                     </DialogContent>
-                  </Dialog>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                  </Dialog> */}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Please note:</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  1. Posted job will be visible on our our website for 30 days,
-                  once the payment goes through. You&apos;ll receive a
-                  confirmation email together with the copy of Invoice.
-                </li>
-                <li>
-                  2. Please make sure that all the details of your job is
-                  correct.
-                </li>
-                <li>
-                  3. Posted job cannot be edited. To edit, please contact us.
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </form>
-    </Form>
+      <Card>
+        <CardHeader>
+          <CardTitle>Please note:</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ol className="space-y-2 text-sm">
+            <li>
+              Posted job will be visible on our our website for 30 days.
+              {/* once the payment goes through. You&apos;ll receive a
+                  confirmation email together with the copy of Invoice. */}
+            </li>
+            <li>
+              Please make sure that all the details of your job is correct.
+            </li>
+            <li>Posted job cannot be edited. To edit, please contact us.</li>
+          </ol>
+        </CardContent>
+      </Card>
+    </div>
+    //   </form>
+    // </Form>
   )
 }

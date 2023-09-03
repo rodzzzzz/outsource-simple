@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth"
 import * as z from "zod"
 
+import { jobEditorSteps } from "@/config/jobEditorSteps"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { postConfigPatchSchema } from "@/lib/validations/post"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -11,41 +11,17 @@ const routeContextSchema = z.object({
   }),
 })
 
-// export async function DELETE(
-//   req: Request,
-//   context: z.infer<typeof routeContextSchema>
-// ) {
-//   try {
-//     // Validate the route params.
-//     const { params } = routeContextSchema.parse(context)
-
-//     // Check if the user has access to this post.
-//     if (!(await verifyCurrentUserHasAccessToPost(params.postId))) {
-//       return new Response(null, { status: 403 })
-//     }
-
-//     // Delete the post.
-//     await db.job.delete({
-//       where: {
-//         id: params.postId as string,
-//       },
-//     })
-
-//     return new Response(null, { status: 204 })
-//   } catch (error) {
-//     if (error instanceof z.ZodError) {
-//       return new Response(JSON.stringify(error.issues), { status: 422 })
-//     }
-
-//     return new Response(null, { status: 500 })
-//   }
-// }
-
 export async function POST(
   req: Request,
   context: z.infer<typeof routeContextSchema>
 ) {
   try {
+    const session = await getServerSession(authOptions)
+
+    if (!session) {
+      return new Response("Unauthorized", { status: 401 })
+    }
+
     // Validate route params.
     const { params } = routeContextSchema.parse(context)
 
@@ -54,25 +30,37 @@ export async function POST(
       return new Response(null, { status: 403 })
     }
 
-    // Get the request body and validate it.
-    const json = await req.json()
-    const body = postConfigPatchSchema.parse(json)
-
-    const today = new Date()
-    today.setDate(today.getDate() + 7)
-    const featuredExpirationDate = body.featured ? today : null
-
     // Publish the post.
     await db.postedJob.create({
       data: {
         jobId: params.postId,
-        ...body,
-        featuredExpirationDate,
+      },
+    })
+
+    await db.job.update({
+      where: {
+        id: params.postId,
+        postedById: session.user.id,
+      },
+      data: {
+        step: jobEditorSteps.length,
+      },
+    })
+
+    // Add data to transactions
+    await db.transaction.create({
+      data: {
+        jobId: params.postId,
+        userId: session.user.id,
+        amount: 0,
+        items: ["Posting (Early access)"],
+        status: "SUCCESS",
       },
     })
 
     return new Response(null, { status: 200 })
   } catch (error) {
+    console.log(error)
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }

@@ -6,6 +6,8 @@ import { Icons } from "@/components/icons"
 
 export const metadata = {
   title: "Pricing",
+  description:
+    "Reduce your payroll by outsourcing talents worldwide. Get started now and save yourself from the headache of outsourcing with our seamless process.",
 }
 
 export default function PricingPage() {

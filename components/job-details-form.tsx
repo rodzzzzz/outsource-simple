@@ -379,6 +379,7 @@ export function JobDetailsForm({
                       Position/Title
                       <span className="ml-1 text-destructive">*</span>
                     </FormLabel>
+
                     <FormControl>
                       <Input
                         className="w-full"
@@ -388,6 +389,11 @@ export function JobDetailsForm({
                         disabled={published}
                       />
                     </FormControl>
+                    <FormDescription>
+                      *Note: We discourages special characters such as * and !
+                      which can cause the Googlebot to label your job posting as
+                      spammy
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

@@ -40,6 +40,7 @@ interface JobViewerProps {
     | "startingSalary"
     | "maxSalary"
   >
+  jobDescription: string
   publishedAt: PostedJob["publishedAt"]
   company: Pick<
     Company,
@@ -51,6 +52,7 @@ interface JobViewerProps {
     | "city"
     | "companySize"
   >
+
   count: {
     applications: number
     jobVisits: number
@@ -70,6 +72,7 @@ interface JobViewerProps {
 export function JobViewer({
   jobId,
   job,
+  jobDescription,
   publishedAt,
   company,
   count,
@@ -77,8 +80,6 @@ export function JobViewer({
   saved,
 }: JobViewerProps) {
   const currencySymbol = getCurrencySymbol(job.salaryCurrency!)
-  const jobDescription = jsonToHtml(job.jobDescription)
-  const sanitized = DOMPurify.sanitize(jobDescription)
   const applicationCount = count.applications
   const visitCount = count.jobVisits
   const elapsedDuration = getElapsedDuration(publishedAt)
@@ -224,7 +225,7 @@ export function JobViewer({
 
           <div
             className="space-y-4 leading-loose whitespace-pre-wrap"
-            dangerouslySetInnerHTML={{ __html: sanitized }}
+            dangerouslySetInnerHTML={{ __html: jobDescription }}
           />
         </div>
 

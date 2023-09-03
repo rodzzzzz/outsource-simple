@@ -1,10 +1,13 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { getLocationRequirements } from "@/constant/countries"
 import { Job, PostedJob, User } from "@prisma/client"
+import DOMPurify from "isomorphic-dompurify"
+import { AdministrativeArea, JobPosting, WithContext } from "schema-dts"
 
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { absoluteUrl } from "@/lib/utils"
+import { absoluteUrl, jsonToHtml } from "@/lib/utils"
 import { JobViewer } from "@/components/job-viewer"
 
 interface JobPageProps {
@@ -121,6 +124,36 @@ export default async function JobPage({ params }: JobPageProps) {
     notFound()
   }
 
+  const { job } = postedJob
+
+  const jobDescription = jsonToHtml(job.jobDescription)
+  const sanitizedJobDescription = DOMPurify.sanitize(jobDescription)
+
+  const jsonLd: WithContext<JobPosting> = {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: sanitizedJobDescription,
+    datePosted: postedJob.publishedAt.toDateString(),
+    validThrough: postedJob.expirationDate.toDateString(),
+    jobLocationType: "TELECOMMUTE",
+    employmentType: job.type as string,
+    hiringOrganization: {
+      "@type": "Organization",
+      name: job.company.name,
+      sameAs: job.company.websiteUrl ?? "",
+    },
+    applicantLocationRequirements: getLocationRequirements(
+      "US"
+    ) as AdministrativeArea,
+    baseSalary: {
+      "@type": "MonetaryAmount",
+      currency: job.salaryCurrency!,
+      minValue: job.startingSalary || 0,
+      maxValue: job.maxSalary || 0,
+    },
+  }
+
   const user = await getCurrentUser()
   let application: { id: string; jobId: string; applicantId: string } | null =
     null
@@ -131,17 +164,24 @@ export default async function JobPage({ params }: JobPageProps) {
     saved = await getSave(params.jobId, user?.id!)
   }
 
-  postJobVisit(params.jobId, postedJob.job?.postedById!)
+  postJobVisit(params.jobId, job?.postedById!)
 
   return (
-    <JobViewer
-      jobId={params.jobId}
-      job={postedJob.job!}
-      publishedAt={postedJob.publishedAt}
-      company={postedJob.job?.company!}
-      count={postedJob.job?._count!}
-      application={application}
-      saved={saved}
-    />
+    <section className="w-full">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <JobViewer
+        jobId={params.jobId}
+        job={postedJob.job!}
+        jobDescription={sanitizedJobDescription}
+        publishedAt={postedJob.publishedAt}
+        company={postedJob.job?.company!}
+        count={postedJob.job?._count!}
+        application={application}
+        saved={saved}
+      />
+    </section>
   )
 }

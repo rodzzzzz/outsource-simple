@@ -144,7 +144,7 @@ export default async function JobPage({ params }: JobPageProps) {
       sameAs: job.company.websiteUrl ?? "",
     },
     applicantLocationRequirements: getLocationRequirements(
-      "US"
+      job.locationRestriction!
     ) as AdministrativeArea,
     baseSalary: {
       "@type": "MonetaryAmount",

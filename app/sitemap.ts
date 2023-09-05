@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   const routes = ["", "/pricing", "/blog"].map((route) => ({
-    url: `${siteConfig.url}/${route}`,
+    url: `${siteConfig.url}${route}`,
     lastModified: new Date().toISOString(),
   }))
 

@@ -92,10 +92,13 @@ export const metadata: Metadata = {
       sizes: "16x16",
       url: "/favicon-16x16.png",
     },
+    {
+      rel: "icon",
+      type: "image/ico",
+      sizes: "144x144",
+      url: "/favicon.ico",
+    },
     { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#5bbad5" },
-    //   // icon: [{href:"/favicon.ico", sizes: }],
-    //   // shortcut: "/favicon-32x32.png",
-    //   // apple: "/apple-touch-icon.png",
   ],
   manifest: `${siteConfig.url}/site.webmanifest`,
   robots: {

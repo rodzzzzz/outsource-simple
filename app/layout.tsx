@@ -78,11 +78,25 @@ export const metadata: Metadata = {
     images: [{ url: siteConfig.ogImage }],
     creator: "@rodny",
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-32x32.png",
-    apple: "/apple-touch-icon.png",
-  },
+  icons: [
+    { rel: "apple-touch-icon", sizes: "180x180", url: "/apple-touch-icon.png" },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      url: "/favicon-32x32.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+      url: "/favicon-16x16.png",
+    },
+    { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#5bbad5" },
+    //   // icon: [{href:"/favicon.ico", sizes: }],
+    //   // shortcut: "/favicon-32x32.png",
+    //   // apple: "/apple-touch-icon.png",
+  ],
   manifest: `${siteConfig.url}/site.webmanifest`,
   robots: {
     index: true,

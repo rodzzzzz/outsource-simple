@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 
 import "@/styles/globals.css"
 import { Metadata } from "next"
+import { SearchAction, WebSite, WithContext } from "schema-dts"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -107,10 +108,38 @@ export const metadata: Metadata = {
   },
 }
 
+type QueryAction = SearchAction & {
+  "query-input": string
+}
+
 export default function RootLayout({ children, authModal }: RootLayoutProps) {
+  const potentialAction: QueryAction = {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate:
+        "https://outsourcesimple.com/?searchQuery={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  }
+
+  const jsonLd: WithContext<WebSite> = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    alternateName: ["OS", "Outsource Simple LLC", "Outsourcing made Simple"],
+    url: siteConfig.url,
+    potentialAction,
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

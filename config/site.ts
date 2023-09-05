@@ -7,7 +7,6 @@ export const siteConfig: SiteConfig = {
   url: "https://outsourcesimple.com",
   ogImage: "https://outsourcesimple.com/og.jpg",
   links: {
-    twitter: "https://twitter.com/rodzzz",
-    github: "https://github.com/rodzzz/taxonomy",
+    facebook: "https://www.facebook.com/outsourcesimple",
   },
 }

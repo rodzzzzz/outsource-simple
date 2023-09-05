@@ -54,9 +54,9 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
       <div className="p-6 space-y-4">
         <div className="flex justify-between space-x-3">
           <div className="flex flex-col items-start space-y-1">
-            <h1 className="text-base font-bold leading-snug text-left hover:underline md:leading-tight">
+            <span className="text-base font-bold leading-snug text-left hover:underline md:leading-tight">
               {job.title}
-            </h1>
+            </span>
 
             <p className="text-muted-foreground">{company.name}</p>
           </div>

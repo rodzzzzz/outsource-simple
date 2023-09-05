@@ -2,6 +2,8 @@ import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
 import "@/styles/globals.css"
+import { Metadata } from "next"
+
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
@@ -27,7 +29,7 @@ interface RootLayoutProps {
   authModal: React.ReactNode
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
@@ -82,6 +84,10 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({ children, authModal }: RootLayoutProps) {

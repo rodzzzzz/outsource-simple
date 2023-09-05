@@ -20,7 +20,7 @@ export async function generateMetadata({
   const postedJob = await getPostedJob(params.jobId)
 
   return {
-    title: postedJob?.job?.title,
+    title: `${postedJob?.job.company.name} is looking for ${postedJob?.job?.title}`,
   }
 }
 

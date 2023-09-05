@@ -25,5 +25,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: job.publishedAt.toISOString(),
   }))
 
-  return jobPosts
+  const routes = ["", "/pricing", "/blog"].map((route) => ({
+    url: `${URL}${route}`,
+    lastModified: new Date().toISOString(),
+  }))
+
+  return [...routes, ...jobPosts]
 }

@@ -10,9 +10,9 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="flex flex-col items-center gap-2 px-8 text-sm md:gap-4 md:items-start">
           <span className="flex flex-col items-center md:flex-row md:gap-2 md:px-0">
             <Icons.logo className="w-8 h-8 fill-primary" />
-            <h1 className="text-sm font-semibold leading-loose text-center md:text-left">
+            <strong className="text-sm font-semibold leading-loose text-center md:text-left">
               Outsource Simple
-            </h1>
+            </strong>
           </span>
           <p className="text-center md:text-left max-w-[30rem]">
             We highly advocate that employers adopt diversity, equity, and

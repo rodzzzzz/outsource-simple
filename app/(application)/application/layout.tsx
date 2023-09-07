@@ -4,7 +4,7 @@ interface JobProps {
 
 export default function JobLayout({ children }: JobProps) {
   return (
-    <div className="mx-auto grid max-w-6xl items-start gap-10 p-8">
+    <div className="grid items-start max-w-6xl gap-10 p-8 mx-auto">
       {children}
     </div>
   )

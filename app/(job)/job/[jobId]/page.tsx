@@ -20,7 +20,8 @@ export async function generateMetadata({
   const postedJob = await getPostedJob(params.jobId)
 
   return {
-    title: `${postedJob?.job.company.name} is looking for ${postedJob?.job?.title}`,
+    title: `${postedJob?.job?.title} - Remote Job`,
+    description: `${postedJob?.job.company.name} is looking for ${postedJob?.job?.title}. Apply with this remote job and enjoy working from home.`,
   }
 }
 

@@ -18,6 +18,18 @@ interface JobPageProps {
 
 export const metadata: Metadata = {
   title: "Send Job Application",
+  description:
+    "Send your job by filling out the forms and we'll take care of the rest.",
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
 }
 
 async function getJob(id: Job["id"]) {

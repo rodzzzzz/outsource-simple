@@ -8,6 +8,7 @@ import {
 } from "@prisma/client"
 import qs from "qs"
 
+import { siteConfig } from "@/config/site"
 import { db } from "@/lib/db"
 import { cn, isEmptyArray } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -166,20 +167,54 @@ export default async function IndexPage(props: Props) {
 
   const urlSearchParams = new URLSearchParams(searchParams)
   const modified = urlSearchParams.toString().replace(/%2C/g, ",")
-  const parsed = qs.parse(modified, { comma: true })
+  const parsed = qs.parse(modified, { comma: true }) as SearchParams
 
-  const jobs = await getAllJobs(parsed as SearchParams)
+  const jobs = await getAllJobs(parsed)
 
   return (
-    <section className="px-6 pt-12 pb-8 space-y-6 md:pb-12 md:pt-32 lg:py-32">
-      <div className="mx-auto flex max-w-[60rem] flex-col items-center space-y-6 sm:space-y-10 text-center">
-        <div className="flex flex-col space-y-6">
-          <h1 className="text-4xl font-heading sm:text-5xl md:text-6xl lg:text-7xl">
-            Find the perfect remote job for you.
+    <>
+      <section className="container py-12 space-y-6 md:py-32 lg:py-32">
+        <div className="mx-auto flex max-w-[60rem] flex-col sm:items-center gap-2 sm:gap-4 sm:text-center">
+          <h2
+            className={cn(
+              "hidden font-medium sm:block sm:text-2xl",
+              parsed.searchQuery && "hidden sm:hidden"
+            )}
+          >
+            Find the perfect remote job for you
+          </h2>
+          <h1
+            className={cn(
+              "text-5xl font-heading md:text-7xl",
+              parsed.searchQuery && "text-4xl"
+            )}
+          >
+            {parsed.searchQuery
+              ? `Remote ${parsed.searchQuery} jobs`
+              : siteConfig.name}
           </h1>
-          <JobListToolbar />
+          <p className="max-w-[50rem] leading-normal text-muted-foreground sm:text-lg sm:leading-8">
+            {parsed.searchQuery ? (
+              <>
+                Look for your dream{" "}
+                <strong>remote {parsed.searchQuery} job</strong>.
+              </>
+            ) : (
+              `Explore the world of remote jobs with ${siteConfig.name}.`
+            )}
+            &nbsp;Work on your terms, achieve work-life balance, and access a
+            world of diverse opportunities by working remote today!
+          </p>
+          <div className="w-full mt-6">
+            <JobListToolbar />
+          </div>
         </div>
-        <div className="flex flex-col w-full gap-6" id="main">
+      </section>
+      <section className="container pb-8 md:pb-12 lg:pb-24">
+        <div
+          className="flex flex-col w-full max-w-[60rem] mx-auto gap-6"
+          id="main"
+        >
           {!isEmptyArray(jobs.jobs) ? (
             <>
               <JobList jobs={jobs.jobs} />
@@ -198,8 +233,8 @@ export default async function IndexPage(props: Props) {
             </EmptyPlaceholder>
           )}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 

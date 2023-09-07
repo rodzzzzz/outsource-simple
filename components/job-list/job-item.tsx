@@ -147,7 +147,8 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
                   <Badge
                     variant="outline"
                     className={cn(
-                      postedJob.highlighted && "rounded-sm border-primary"
+                      "rounded-sm",
+                      postedJob.highlighted && "border-primary"
                     )}
                     key={skill}
                   >
@@ -169,7 +170,8 @@ export function JobItem({ postedJob, job, company, ...props }: JobItemProps) {
                   <Badge
                     variant="outline"
                     className={cn(
-                      postedJob.highlighted && "rounded-sm border-primary"
+                      "rounded-sm",
+                      postedJob.highlighted && "border-primary"
                     )}
                     key={skill}
                   >

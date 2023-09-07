@@ -126,8 +126,8 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
   const jsonLd: WithContext<WebSite> = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteConfig.name,
-    alternateName: ["OS", "Outsource Simple LLC", "Outsourcing made Simple"],
+    name: `${siteConfig.name}: Remote jobs any anywhere in the world`,
+    alternateName: ["Outsource Simple", "Outsource Simple: Remote jobs"],
     url: siteConfig.url,
     potentialAction,
   }

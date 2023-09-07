@@ -33,7 +33,7 @@ interface RootLayoutProps {
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.name,
+    default: `${siteConfig.name}: Remote jobs anywhere in the world`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -128,9 +128,9 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
     "@type": "WebSite",
     name: `${siteConfig.name}: Remote jobs anywhere in the world`,
     alternateName: [
-      "Outsource Simple",
-      "Outsource Simple: Remote jobs",
-      "Outsource Simple: Work from home",
+      siteConfig.name,
+      `${siteConfig.name}: Remote jobs`,
+      `${siteConfig.name}: Work from home`,
     ],
     url: siteConfig.url,
     potentialAction,

@@ -70,7 +70,15 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage }],
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 2400,
+        height: 1260,
+        type: "image/jpeg",
+        secureUrl: siteConfig.ogImage,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",

@@ -38,6 +38,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
+    siteConfig.name,
     "Remote job listings",
     "Advanced search filters",
     "Location-based search",

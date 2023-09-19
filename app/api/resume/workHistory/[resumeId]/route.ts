@@ -3,7 +3,7 @@ import { z } from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { workHistorySchema } from "@/lib/validations/resume"
+import { workHistoryApiSchema } from "@/lib/validations/resume"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -27,7 +27,7 @@ export async function PATCH(
 
     // Get the request body and validate it.
     const body = await req.json()
-    const payload = workHistorySchema.parse(body)
+    const payload = workHistoryApiSchema.parse(body)
     const data = payload.workHistories.map((obj) =>
       Object.assign(obj, { resumeId: params.resumeId })
     )

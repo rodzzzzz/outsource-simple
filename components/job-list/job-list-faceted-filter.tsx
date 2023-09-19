@@ -20,8 +20,7 @@ import {
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/icons"
-
-import { FormControl } from "../react-hook-form/form"
+import { FormControl } from "@/components/react-hook-form/form"
 
 interface JobListFacetedFilterProps {
   title?: string

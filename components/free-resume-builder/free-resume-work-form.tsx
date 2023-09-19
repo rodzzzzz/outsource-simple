@@ -28,6 +28,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import RequiredMark from "@/components/ui/required-mark"
 import {
   Select,
   SelectContent,
@@ -37,6 +38,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Textarea } from "@/components/ui/textarea"
+import { Icons } from "@/components/icons"
 import {
   Form,
   FormControl,
@@ -45,9 +47,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/react-hook-form/form"
-
-import { Icons } from "../icons"
-import RequiredMark from "../ui/required-mark"
 
 function arrayToObject(arr: Array<string>): Array<MultiSelectOptions> {
   return arr?.map((v) => ({ label: v, value: v }))

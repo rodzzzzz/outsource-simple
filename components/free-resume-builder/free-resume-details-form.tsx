@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { MultiSelect, MultiSelectOptions } from "@/components/ui/multi-select"
+import { Separator } from "@/components/ui/separator"
 import { Textarea } from "@/components/ui/textarea"
 import {
   Form,
@@ -29,8 +30,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/react-hook-form/form"
-
-import { Separator } from "../ui/separator"
 
 function arrayToObject(arr: Array<string>): Array<MultiSelectOptions> {
   return arr?.map((v) => ({ label: v, value: v }))

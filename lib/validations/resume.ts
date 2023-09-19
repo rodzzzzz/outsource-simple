@@ -118,6 +118,24 @@ export const workHistorySchema = z.object({
   ),
 })
 
+export const workHistoryApiSchema = z.object({
+  workHistories: z.array(
+    z.object({
+      company: z.string().min(1).max(128, "Please enter a valid company name"),
+      jobTitle: z.string().min(1).max(128, "Please enter a valid job title"),
+      employmentType: z.nativeEnum(EmploymentType),
+      fromDate: z.any(),
+      toDate: z.any(),
+      currentlyWorking: z.boolean(),
+      skillSet: z.array(z.string()).max(12, "Maximum of 12 skills is allowed"),
+      details: z
+        .string()
+        .max(1500, "Maximum of 1500 characters is allowed")
+        .optional(),
+    })
+  ),
+})
+
 export const educationalBackgroundSchema = z.object({
   educations: z.array(
     z
@@ -200,6 +218,29 @@ export const educationalBackgroundSchema = z.object({
 
         return true
       })
+  ),
+})
+
+export const educationalBackgroundApiSchema = z.object({
+  educations: z.array(
+    z.object({
+      schoolName: z
+        .string()
+        .min(1)
+        .max(128, "Please enter a valid school name"),
+      level: z.nativeEnum(EducationLevel),
+      fieldOfStudy: z
+        .string()
+        .min(1)
+        .max(128, "Please enter a valid field of study"),
+      fromDate: z.any(),
+      toDate: z.any(),
+      currentlyStudying: z.boolean(),
+      details: z
+        .string()
+        .max(1500, "Maximum of 1500 characters is allowed")
+        .optional(),
+    })
   ),
 })
 

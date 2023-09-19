@@ -119,15 +119,15 @@ model Resume {
 }
 
 model WorkHistory {
-  id               String          @id @default(cuid())
-  company          String?
-  jobTitle         String?         @map(name: "job_title")
-  employmentType   EmploymentType? @map(name: "employment_type")
-  fromDate         DateTime?       @map(name: "from_date") @db.Date()
-  toDate           DateTime?       @map(name: "to_date") @db.Date()
-  currentlyWorking Boolean         @map(name: "currently_working")
-  skillSet         String[]        @map(name: "skill_set")
-  details          String?         @db.VarChar(1500)
+  id               String         @id @default(cuid())
+  company          String
+  jobTitle         String         @map(name: "job_title")
+  employmentType   EmploymentType @map(name: "employment_type")
+  fromDate         DateTime?      @map(name: "from_date") @db.Date()
+  toDate           DateTime?      @map(name: "to_date") @db.Date()
+  currentlyWorking Boolean        @map(name: "currently_working")
+  skillSet         String[]       @map(name: "skill_set")
+  details          String?        @db.VarChar(1500)
 
   resumeId String @map(name: "resume_id")
   resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
@@ -147,14 +147,14 @@ enum EmploymentType {
 }
 
 model Education {
-  id                String          @id @default(cuid())
-  schoolName        String?         @map(name: "school_name")
-  level             EducationLevel?
-  fieldOfStudy      String?         @map(name: "field_of_study")
-  fromDate          DateTime?       @map(name: "from_date") @db.Date()
-  toDate            DateTime?       @map(name: "to_date") @db.Date()
-  currentlyStudying Boolean         @map(name: "currently_studying")
-  details           String?         @db.VarChar(1500)
+  id                String         @id @default(cuid())
+  schoolName        String         @map(name: "school_name")
+  level             EducationLevel
+  fieldOfStudy      String         @map(name: "field_of_study")
+  fromDate          DateTime?      @map(name: "from_date") @db.Date()
+  toDate            DateTime?      @map(name: "to_date") @db.Date()
+  currentlyStudying Boolean        @map(name: "currently_studying")
+  details           String?        @db.VarChar(1500)
 
   resumeId String @map(name: "resume_id")
   resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)

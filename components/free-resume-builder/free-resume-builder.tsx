@@ -75,12 +75,14 @@ export function FreeResumeBuilder() {
     if (active > done) {
       setDone(active)
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active])
 
   return (
     <React.Fragment>
       <div className="space-y-3 sm:space-y-6">
-        <div className="flex flex-wrap-reverse items-center justify-between gap-x-6 gap-y-6">
+        <div className="flex flex-wrap-reverse items-center justify-between gap-6">
           <FreeResumeBuilderSteps
             steps={freeResumeBuilderSteps}
             active={active}
@@ -134,7 +136,7 @@ export function FreeResumeBuilder() {
       <Sheet open={openPreview} onOpenChange={setOpenPreview}>
         <SheetContent position="bottom" size="content">
           <SheetHeader>
-            <SheetTitle>Here's your resume! 🎉</SheetTitle>
+            <SheetTitle>Here&apos;s your resume! 🎉</SheetTitle>
             <SheetDescription>
               Make sure that all your details are correct. You can still go back
               and edit.

@@ -30,7 +30,7 @@ export function FreeResumeBuilderSteps({
               >
                 <div
                   className={cn(
-                    "flex items-center text-muted-foreground after:mx-2 after:content-['/'] flex-shrink-0",
+                    "flex items-center text-muted-foreground after:mx-2 after:content-['/'] shrink-0",
                     index <= active && "text-primary"
                   )}
                 >

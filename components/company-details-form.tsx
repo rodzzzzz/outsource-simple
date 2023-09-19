@@ -249,16 +249,18 @@ export function CompanyDetailsForm({
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      Make sure your link is working.{" "}
-                      <Link
-                        href={form.getValues("websiteUrl")!}
-                        target="_blank"
-                        className="underline"
-                      >
-                        Check here
-                      </Link>
-                    </FormDescription>
+                    {form.getValues("websiteUrl")?.length! >= 7 && (
+                      <FormDescription>
+                        Make sure your link is working.{" "}
+                        <Link
+                          href={form.getValues("websiteUrl")!}
+                          target="_blank"
+                          className="underline"
+                        >
+                          Check here
+                        </Link>
+                      </FormDescription>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}

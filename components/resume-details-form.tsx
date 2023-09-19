@@ -201,16 +201,18 @@ export function ResumeDetailsForm({
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      Make sure your link is working.{" "}
-                      <Link
-                        href={form.getValues("portfolioUrl")!}
-                        target="_blank"
-                        className="underline"
-                      >
-                        Check here
-                      </Link>
-                    </FormDescription>
+                    {form.getValues("portfolioUrl")?.length! >= 7 && (
+                      <FormDescription>
+                        Make sure your link is working.{" "}
+                        <Link
+                          href={form.getValues("portfolioUrl")!}
+                          target="_blank"
+                          className="underline"
+                        >
+                          Check here
+                        </Link>
+                      </FormDescription>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}

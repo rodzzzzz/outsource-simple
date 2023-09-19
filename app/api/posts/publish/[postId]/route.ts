@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth"
 import * as z from "zod"
 
-import { jobEditorSteps } from "@/config/jobEditorSteps"
+import { jobEditorSteps } from "@/config/steps"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 

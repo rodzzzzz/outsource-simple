@@ -37,5 +37,8 @@ export const socialsSchema = z
 export const userSocialSchema = z.object({
   socials: z
     .array(socialsSchema)
-    .max(socials.length, `Maximum of ${socials.length + 1} skills is allowed`),
+    .max(
+      socials.length,
+      `Maximum of ${socials.length + 1} social handles is allowed`
+    ),
 })

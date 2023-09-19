@@ -2,8 +2,8 @@ import { headers } from "next/headers"
 import Stripe from "stripe"
 
 import { env } from "@/env.mjs"
-import { jobEditorSteps } from "@/config/jobEditorSteps"
 import { featured, highlighted, posting } from "@/config/price"
+import { jobEditorSteps } from "@/config/steps"
 import { db } from "@/lib/db"
 import { stripe } from "@/lib/stripe"
 

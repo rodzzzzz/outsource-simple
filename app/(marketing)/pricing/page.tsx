@@ -13,7 +13,7 @@ export const metadata = {
 export default function PricingPage() {
   return (
     <section className="container flex flex-col  gap-6 py-8 md:max-w-[64rem] md:py-12 lg:py-24">
-      <div className="mx-auto flex w-full flex-col gap-1 md:gap-4 md:max-w-[58rem]">
+      <div className="flex flex-col w-full gap-1 mx-auto md:gap-2">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
           Simple, transparent pricing
         </h2>
@@ -24,7 +24,7 @@ export default function PricingPage() {
       <div className="grid w-full items-start gap-10 rounded-lg border p-10 md:grid-cols-[1fr_200px]">
         <div className="grid gap-6">
           <h3 className="text-xl font-bold sm:text-2xl">
-            What&apos;s included:
+            🚀 What&apos;s included:
           </h3>
           <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
             <li className="flex items-center">

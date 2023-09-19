@@ -6,7 +6,7 @@ import Link from "next/link"
 import "@/styles/editor.css"
 import { Company, Job, PostedJob, QuestionForm, User } from "@prisma/client"
 
-import { jobEditorSteps } from "@/config/jobEditorSteps"
+import { jobEditorSteps } from "@/config/steps"
 import { absoluteUrl, cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"

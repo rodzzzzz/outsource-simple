@@ -251,7 +251,7 @@ export function ResumeEducationForm({
                           <Input
                             size={32}
                             {...field}
-                            placeholder="ex. Bachelor of Science in Computer Science"
+                            placeholder="ex. Computer Science"
                           />
                         </FormControl>
                         <FormMessage />

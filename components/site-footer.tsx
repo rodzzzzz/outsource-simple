@@ -1,4 +1,5 @@
 import * as React from "react"
+import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
@@ -6,24 +7,115 @@ import { Icons } from "@/components/icons"
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn(className)}>
-      <div className="container flex flex-col items-center justify-between gap-10 py-10 md:flex-row md:py-6">
-        <div className="flex flex-col items-center gap-2 px-8 text-sm md:gap-4 md:items-start">
-          <span className="flex flex-col items-center md:flex-row md:gap-2 md:px-0">
-            <Icons.logo className="w-8 h-8 fill-primary" />
-            <strong className="text-sm font-semibold leading-loose text-center md:text-left">
-              Outsource Simple
-            </strong>
-          </span>
-          <p className="text-center md:text-left max-w-[30rem]">
-            We highly advocate that employers adopt diversity, equity, and
-            inclusion as core principles when recruiting through Outsource
-            Simple.
-          </p>
-          <span className="text-muted-foreground">Copyright © 2023</span>
+      <div className="flex flex-col items-center justify-between gap-10 py-12 md:container md:py-16">
+        <div className="flex flex-wrap items-start justify-between w-full gap-10 p-10 md:rounded-3xl bg-primary text-secondary">
+          <div className="flex flex-col gap-6 text-sm">
+            <span className="inline-flex items-center gap-2 px-0">
+              <Icons.logo className="w-12 h-12 fill-secondary" />
+              <strong className="text-lg font-semibold leading-tight">
+                Outsource
+                <br /> Simple
+              </strong>
+            </span>
+            <p className="max-w-[17rem] lg:max-w-[28rem]">
+              We highly advocate that employers adopt diversity, equity, and
+              inclusion as core principles when recruiting through Outsource
+              Simple.
+            </p>
+            <span className="inline-flex w-full space-x-5">
+              <Link href="#" className="p-1 rounded-md bg-secondary">
+                <Icons.facebook className="w-5 h-5 fill-secondary-foreground stroke-none" />
+                <span className="sr-only">Facebook page</span>
+              </Link>
+              <Link href="#" className="p-1 rounded-md bg-secondary">
+                <Icons.twitter className="w-5 h-5 fill-secondary-foreground stroke-none" />
+                <span className="sr-only">Twitter page</span>
+              </Link>
+              <Link href="#" className="p-1 rounded-md bg-secondary">
+                <Icons.linkedin className="w-5 h-5 fill-secondary-foreground stroke-none" />
+                <span className="sr-only">Linkedin page</span>
+              </Link>
+            </span>
+          </div>
+
+          <div className="inline-flex flex-wrap gap-10">
+            <div>
+              <h2 className="mb-4 text-xs text-muted-foreground">PRODUCT</h2>
+              <ul className="space-y-2 list-none">
+                <li>
+                  <Link href="/" className="hover:underline">
+                    For employers
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="hover:underline">
+                    For job seekers
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="hover:underline">
+                    Pricing
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="mb-4 text-xs text-muted-foreground">COMPANY</h2>
+              <ul className="space-y-2 list-none">
+                <li>
+                  <Link href="/" className="hover:underline">
+                    About us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="hover:underline">
+                    Get in touch
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="hover:underline">
+                    FAQs
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="mb-4 text-xs text-muted-foreground">RESOURCES</h2>
+              <ul className="space-y-2 list-none">
+                <li>
+                  <Link href="/" className="hover:underline">
+                    Blogs
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="hover:underline">
+                    Companies
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="hover:underline">
+                    Resume Builder
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <p className="px-3 py-1 text-xs leading-loose rounded-md bg-muted text-muted-foreground">
-          Early release
-        </p>
+
+        <div className="flex flex-wrap-reverse items-center w-full gap-4 px-4 md:justify-between">
+          <span className="w-full text-sm text-center text-muted-foreground md:w-fit">
+            © 2023{" "}
+            <Link href="/" className="hover:underline">
+              Outsource Simple
+            </Link>
+            . All Rights Reserved.
+          </span>
+          <span className="w-full text-sm font-semibold text-center md:w-fit">
+            Outsourcing made simple ✨
+          </span>
+        </div>
       </div>
     </footer>
   )

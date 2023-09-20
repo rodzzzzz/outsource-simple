@@ -25,6 +25,7 @@ import {
   DollarSign,
   ExternalLink,
   Eye,
+  Facebook,
   File,
   FileEdit,
   FileText,
@@ -33,6 +34,7 @@ import {
   HelpCircle,
   Image,
   Laptop,
+  Linkedin,
   Loader2,
   LucideProps,
   MapPin,
@@ -208,7 +210,7 @@ export const Icons = {
       />
     </svg>
   ),
-  linkedin: ({ ...props }: LucideProps) => (
+  linkedinColored: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
       focusable="false"
@@ -228,9 +230,10 @@ export const Icons = {
         fill="#fff"
       />
     </svg>
-    // <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64"></svg>
   ),
+  linkedin: Linkedin,
   twitter: Twitter,
+  facebook: Facebook,
   check: Check,
   checkCircle: CheckCircle2,
   facebookOutline: ({ ...props }: LucideProps) => (

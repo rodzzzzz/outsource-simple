@@ -1,8 +1,15 @@
 import Link from "next/link"
+import { SubscriptionPlan } from "@/types"
 
+import { employerPlans } from "@/config/subsctiption"
 import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+import {
+  PricingPeriodSwitcher,
+  PricingPeriodType,
+} from "@/components/pricing-period-switcher"
 
 export const metadata = {
   title: "Pricing",
@@ -10,72 +17,117 @@ export const metadata = {
     "Reduce your payroll by outsourcing talents worldwide. Get started now and save yourself from the headache of outsourcing with our seamless process.",
 }
 
-export default function PricingPage() {
-  return (
-    <section className="container flex flex-col  gap-6 py-8 md:max-w-[64rem] md:py-12 lg:py-24">
-      <div className="flex flex-col w-full gap-1 mx-auto md:gap-2">
-        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          Simple, transparent pricing
-        </h2>
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          <strong>All features free.</strong> Just pay for the job posting.
-        </p>
-      </div>
-      <div className="grid w-full items-start gap-10 rounded-lg border p-10 md:grid-cols-[1fr_200px]">
-        <div className="grid gap-6">
-          <h3 className="text-xl font-bold sm:text-2xl">
-            🚀 What&apos;s included:
-          </h3>
-          <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
-            <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Job Posting for 30 days
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Get posted on Google Jobs
-            </li>
+const RECOMMENDED_PLAN: number = 1
 
-            <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Applicant Management Tool
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Dashboard Analytics
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Customizable Question
-              Forms
-            </li>
-            <li className="flex items-center">
-              <Icons.check className="w-4 h-4 mr-2" /> Premium Support
-            </li>
-          </ul>
-          <Link
-            href="/employer/posts"
-            className={cn(buttonVariants({ size: "lg" }), "md:hidden mt-4")}
-          >
-            Get Started
-          </Link>
-        </div>
-        <div className="flex flex-col gap-4 text-center -order-1 md:order-1">
-          <div className="flex flex-col">
-            <span className="relative font-semibold line-through decoration-2 decoration-destructive text-muted-foreground">
-              $299
-            </span>
-            <h4 className="font-bold text-7xl">$0</h4>
-            <p className="mt-2 text-sm font-medium">per job posting</p>
-            <p className="text-xs font-medium text-muted-foreground">
-              *limited time only
+type Props = {
+  searchParams?: PricingPeriodType
+}
+
+export default function PricingPage(props: Props) {
+  const { searchParams } = props
+  const isYearly = searchParams?.period === "annual"
+
+  const plansEmoji = ["✨", "🚀", "🔥"]
+
+  const SubscriptionCard = ({
+    subscription,
+    recommended,
+    emoji,
+  }: {
+    subscription: Pick<
+      SubscriptionPlan,
+      "name" | "description" | "price" | "features"
+    >
+    recommended: boolean
+    emoji?: string
+  }) => {
+    const price = isYearly ? subscription.price * 10 : subscription.price
+    return (
+      <div
+        className={cn(
+          "items-start w-full gap-10 p-8 xl:p-10 border rounded-3xl",
+          recommended && "border-primary border-2 shadow-xl"
+        )}
+      >
+        <div className="flex flex-col gap-6">
+          <span className="inline-flex justify-between">
+            <h3
+              className={cn(
+                "text-xl font-semibold",
+                recommended && "font-bold"
+              )}
+            >
+              {`${subscription.name} ${emoji}`}
+            </h3>
+            {recommended && <Badge variant="default">Recommended</Badge>}
+          </span>
+
+          <p className="text-sm leading-7 text-muted-foreground">
+            {subscription.description}
+          </p>
+          <div className="flex items-baseline gap-1">
+            <h4 className="text-4xl font-bold">{`$${price}`}</h4>
+            <p className="mt-2 text-sm font-semibold text-muted-foreground">
+              {isYearly ? "/year" : "/month"}
             </p>
           </div>
           <Link
             href="/employer/posts"
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "hidden md:inline-flex"
-            )}
+            className={
+              recommended
+                ? buttonVariants({ size: "lg" })
+                : buttonVariants({ size: "lg", variant: "secondary" })
+            }
           >
             Get Started
           </Link>
+          <ul className="flex flex-col gap-4 text-sm text-muted-foreground">
+            {subscription.features.map((item, index) => (
+              <li
+                key={`${subscription.name}-feature-${index}`}
+                className="flex items-center"
+              >
+                <Icons.check className="w-5 h-5 mr-4 stroke-green-600" /> {item}
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
+    )
+  }
+
+  return (
+    <section className="container max-w-[80rem] items-center flex flex-col gap-10 py-16 md:py-24 mt-24">
+      <div className="flex flex-col items-center w-full gap-6 mx-auto text-center">
+        <h1 className="font-heading text-5xl leading-[1.1] sm:text-6xl [text-wrap:balance]">
+          Pricing plans for teams of all sizes
+        </h1>
+        <p className="max-w-[45rem] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+          Choose an affordable plan that&apos;s packed with the best features
+          for growing and managing your remote team.
+        </p>
+      </div>
+
+      <PricingPeriodSwitcher />
+      <span className="text-muted-foreground">
+        Choose <strong className="text-foreground">annual</strong> and get{" "}
+        <strong className="text-foreground circle-sketch-highlight">
+          2 months free
+        </strong>{" "}
+        every year.
+      </span>
+      <div className="flex flex-col gap-6 lg:flex-row">
+        {employerPlans.plans.map((item, index) => {
+          const recommended = index === RECOMMENDED_PLAN
+          return (
+            <SubscriptionCard
+              key={`employer-subscription-${index}`}
+              subscription={item}
+              emoji={plansEmoji[index]}
+              recommended={recommended}
+            />
+          )
+        })}
       </div>
     </section>
   )

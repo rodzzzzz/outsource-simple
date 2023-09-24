@@ -51,6 +51,20 @@ export type DashboardConfig = {
   employerNav: MainNavItem[]
 }
 
+export type HomePageFeaturesItem = {
+  title: string
+  description: string
+  cta: string
+  url: string
+  image: string
+  className: React.ComponentProps<"div">["className"]
+}
+
+export type HomePageFeaturesConfig = {
+  employerPage: HomePageFeaturesItem[]
+  remoteTalentPage: HomePageFeaturesItem[]
+}
+
 export type Price = {
   name: string
   label: string
@@ -63,6 +77,13 @@ export type SubscriptionPlan = {
   name: string
   description: string
   stripePriceId: string
+  price: number
+  features: Array<string>
+}
+
+export type SubscriptionPlanConfig = {
+  userType: "EMPLOYER" | "APPLICANT"
+  plans: Array<SubscriptionPlan>
 }
 
 export type UserSubscriptionPlan = SubscriptionPlan &

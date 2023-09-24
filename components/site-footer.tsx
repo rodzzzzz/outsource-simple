@@ -8,10 +8,12 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn(className)}>
       <div className="flex flex-col items-center justify-between gap-10 py-12 md:container md:py-16">
-        <div className="flex flex-wrap items-start justify-between w-full gap-10 p-10 md:rounded-3xl bg-primary text-secondary">
+        <div className="flex flex-wrap items-start justify-between w-full gap-10 p-10 md:rounded-3xl bg-foreground/90 text-background">
           <div className="flex flex-col gap-6 text-sm">
             <span className="inline-flex items-center gap-2 px-0">
-              <Icons.logo className="w-12 h-12 fill-secondary" />
+              <Link href="/" className="hidden bg-black rounded-full md:block">
+                <Icons.logo className="w-12 h-12 fill-primary" />
+              </Link>
               <strong className="text-lg font-semibold leading-tight">
                 Outsource
                 <br /> Simple
@@ -23,16 +25,16 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
               Simple.
             </p>
             <span className="inline-flex w-full space-x-5">
-              <Link href="#" className="p-1 rounded-md bg-secondary">
-                <Icons.facebook className="w-5 h-5 fill-secondary-foreground stroke-none" />
+              <Link href="#" className="p-1 rounded bg-secondary">
+                <Icons.facebook className="w-5 h-5 fill-foreground stroke-none" />
                 <span className="sr-only">Facebook page</span>
               </Link>
-              <Link href="#" className="p-1 rounded-md bg-secondary">
-                <Icons.twitter className="w-5 h-5 fill-secondary-foreground stroke-none" />
+              <Link href="#" className="p-1 rounded bg-secondary">
+                <Icons.twitter className="w-5 h-5 fill-foreground stroke-none" />
                 <span className="sr-only">Twitter page</span>
               </Link>
-              <Link href="#" className="p-1 rounded-md bg-secondary">
-                <Icons.linkedin className="w-5 h-5 fill-secondary-foreground stroke-none" />
+              <Link href="#" className="p-1 rounded bg-secondary">
+                <Icons.linkedin className="w-5 h-5 fill-foreground stroke-none" />
                 <span className="sr-only">Linkedin page</span>
               </Link>
             </span>
@@ -43,12 +45,12 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
               <h2 className="mb-4 text-xs text-muted-foreground">PRODUCT</h2>
               <ul className="space-y-2 list-none">
                 <li>
-                  <Link href="/" className="hover:underline">
+                  <Link href="/for-employers" className="hover:underline">
                     For employers
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="hover:underline">
+                  <Link href="/for-job-seekers" className="hover:underline">
                     For job seekers
                   </Link>
                 </li>
@@ -95,7 +97,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="hover:underline">
+                  <Link href="/resume-builder" className="hover:underline">
                     Resume Builder
                   </Link>
                 </li>

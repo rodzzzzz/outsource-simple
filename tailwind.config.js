@@ -60,6 +60,9 @@ module.exports = {
           DEFAULT: "hsl(var(--badge))",
           foreground: "hsl(var(--badge-foreground))",
         },
+        orange: "hsl(var(--orange))",
+        rose: "hsl(var(--rose))",
+        pink: "hsl(var(--pink))",
       },
       borderRadius: {
         lg: `var(--radius)`,

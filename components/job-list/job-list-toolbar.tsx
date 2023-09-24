@@ -75,8 +75,17 @@ export function JobListToolbar() {
     startingSalary: null,
   }
 
+  const ignoreParams = ["page", "pageDisplay"]
+  const arrayParams = [
+    "category",
+    "employmentType",
+    "locationRestriction",
+    "skillSet",
+  ]
+
   const router = useRouter()
   const searchParams = useSearchParams()
+
   const form = useForm<FormData>({
     defaultValues: emptyValues,
   })
@@ -92,31 +101,8 @@ export function JobListToolbar() {
   const [openType, setOpenType] = React.useState(false)
   const [openLocation, setOpenLocation] = React.useState(false)
 
-  React.useEffect(() => {
-    setOpenFilter(false)
-    setIsSaving(false)
-    setIsResetting(false)
-
-    const queryParams = searchParamsToObject(searchParams)
-    const merged = Object.assign({}, emptyValues, queryParams)
-
-    reset(merged)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
-
-  async function onSubmit() {
-    // this is useful if you have any parameters, e.g. pagination that are
-    // controlled via links and not a search form
-    const ignoreParams = ["page"]
-    const arrayParams = [
-      "category",
-      "employmentType",
-      "locationRestriction",
-      "skillSet",
-    ]
-
-    const newQuery = Object.fromEntries(
+  const newQueryObject = () => {
+    return Object.fromEntries(
       Object.entries(values)
         // remove any ignored params
         .filter(([key]) => !ignoreParams.includes(key))
@@ -133,7 +119,25 @@ export function JobListToolbar() {
           return [key, value]
         })
     )
+  }
 
+  const filterCount = Object.entries(newQueryObject()).length
+
+  React.useEffect(() => {
+    setOpenFilter(false)
+    setIsSaving(false)
+    setIsResetting(false)
+
+    const queryParams = searchParamsToObject(searchParams)
+    const merged = Object.assign({}, emptyValues, queryParams)
+
+    reset(merged)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
+
+  async function onSubmit() {
+    const newQuery = newQueryObject()
     const queryParamsObject = searchParamsToObject(searchParams)
 
     // if query without ignored params is equal to newQuery,
@@ -159,8 +163,8 @@ export function JobListToolbar() {
 
       const queryParams = new URLSearchParams(newQuery as Record<string, any>)
       const query = !!queryParams.toString()
-        ? `/?${queryParams.toString()}#main`
-        : "/"
+        ? `/jobs?${queryParams.toString()}#main`
+        : "/jobs"
 
       router.refresh()
       router.replace(query)
@@ -202,7 +206,7 @@ export function JobListToolbar() {
                   <Button variant="outline" className="shrink-0">
                     <Icons.filter className="w-4 h-4 sm:mr-2" />
                     <span className="hidden sm:block">Filter</span>
-                    {[...new Set(searchParams?.keys())].length > 0 && (
+                    {filterCount > 0 && (
                       <>
                         <Separator
                           orientation="vertical"
@@ -212,7 +216,7 @@ export function JobListToolbar() {
                           variant="secondary"
                           className="px-1 font-normal rounded-sm"
                         >
-                          {[...new Set(searchParams?.keys())].length}
+                          {filterCount}
                         </Badge>
                       </>
                     )}

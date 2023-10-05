@@ -33,8 +33,8 @@ export function MobileNav({
       <div className="relative z-20 grid gap-4 p-4 border rounded-md shadow-md border-border bg-popover text-popover-foreground">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <Icons.logo className="w-9 h-9 fill-primary" />
-            <span className="max-w-[9ch] font-semibold text-sm leading-4 text-primary">
+            <Icons.logo className="w-9 h-9 fill-foreground" />
+            <span className="max-w-[9ch] font-semibold text-sm leading-4 text-foreground">
               {siteConfig.name}
             </span>
           </Link>
@@ -51,7 +51,7 @@ export function MobileNav({
               className={cn(
                 "flex w-full items-center rounded-md p-2 text-sm hover:underline text-foreground",
                 item.disabled && "cursor-not-allowed opacity-60",
-                path === item.href && "font-semibold text-foreground"
+                path === item.href && "font-semibold text-primary"
               )}
             >
               {item.title}

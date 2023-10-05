@@ -12,7 +12,7 @@ import { Icons } from "@/components/icons"
 
 const returnUrl = absoluteUrl("/checkout/success")
 
-export default function CheckoutForm({
+export default function StripeCardElementForm({
   paymentIntent,
 }: {
   paymentIntent: Stripe.PaymentIntent
@@ -124,13 +124,13 @@ export default function CheckoutForm({
           </Link>
         </p>
         <Button
-          className="mt-8 h-11 w-full"
+          className="w-full mt-8 h-11"
           disabled={isLoading || !stripe || !elements}
           type="submit"
         >
           <span id="button-text">
             {isLoading ? (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
             ) : (
               `Pay $${paymentIntent.amount / 100}.00`
             )}
@@ -141,7 +141,7 @@ export default function CheckoutForm({
         {message && (
           <div
             id="payment-message"
-            className="mt-3 text-center text-sm leading-tight text-destructive"
+            className="mt-3 text-sm leading-tight text-center text-destructive"
           >
             {message}
           </div>

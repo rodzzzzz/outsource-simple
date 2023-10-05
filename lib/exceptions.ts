@@ -16,12 +16,6 @@ export class RequiresCompanyCreatedError extends Error {
   }
 }
 
-export class DefaultCompanyError extends Error {
-  constructor(message = "This action is not for default company") {
-    super(message)
-  }
-}
-
 export class DefaultResumeError extends Error {
   constructor(message = "This action is not for default resume") {
     super(message)

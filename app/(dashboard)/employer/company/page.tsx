@@ -3,7 +3,7 @@ import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { CompanyDetails } from "@/components/company-details"
+import { CompanyDetailsForm } from "@/components/company-details-form"
 import { DashboardHeader } from "@/components/header"
 import { DashboardShell } from "@/components/shell"
 
@@ -18,7 +18,7 @@ export default async function DashboardPage() {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  const companies = await db.company.findMany({
+  const company = await db.company.findFirst({
     where: {
       userId: user.id,
     },
@@ -32,13 +32,8 @@ export default async function DashboardPage() {
       description: true,
       companySize: true,
       dateFounded: true,
-      default: true,
-      published: true,
     },
     orderBy: [
-      {
-        default: "desc",
-      },
       {
         name: "asc",
       },
@@ -51,7 +46,7 @@ export default async function DashboardPage() {
         heading="Company Details"
         text="Make your company more pleasing to job applicants."
       ></DashboardHeader>
-      <CompanyDetails companies={companies} />
+      <CompanyDetailsForm company={company!} />
     </DashboardShell>
   )
 }

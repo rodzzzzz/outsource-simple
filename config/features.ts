@@ -24,7 +24,7 @@ export const homePageFeaturesConfig: HomePageFeaturesConfig = {
       cta: "Get started",
       url: "#",
       image: "/og.jpg",
-      className: "bg-rose",
+      className: "bg-pink",
     },
   ],
   remoteTalentPage: [

@@ -14,6 +14,7 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/activate-account")
 
     const isSetupPage = req.nextUrl.pathname.startsWith("/setup")
+    const isGetStartedPage = req.nextUrl.pathname.startsWith("/get-started")
 
     const isApplicantPage =
       req.nextUrl.pathname.startsWith("/dashboard") ||
@@ -28,15 +29,31 @@ export default withAuth(
         if (!token.emailVerified) {
           return NextResponse.redirect(new URL("/activate-account", req.url))
         } else {
-          if (!token.setup) {
+          if (!token.setup && !token.userType) {
             return NextResponse.redirect(new URL("/setup", req.url))
           }
 
-          if (token.userType === "EMPLOYER") {
-            return NextResponse.redirect(new URL("/employer", req.url))
+          if (!token.setup && token.userType) {
+            switch (token.userType) {
+              case "EMPLOYER":
+                return NextResponse.redirect(
+                  new URL("/get-started/employer", req.url)
+                )
+
+              case "APPLICANT":
+                return NextResponse.redirect(
+                  new URL("/get-started/applicant", req.url)
+                )
+            }
           }
 
-          return NextResponse.redirect(new URL("/dashboard", req.url))
+          switch (token.userType) {
+            case "EMPLOYER":
+              return NextResponse.redirect(new URL("/employer", req.url))
+
+            case "APPLICANT":
+              return NextResponse.redirect(new URL("/dashboard", req.url))
+          }
         }
       }
 
@@ -47,7 +64,20 @@ export default withAuth(
       if (isAuth) {
         if (token.emailVerified) {
           if (!token.setup) {
-            return NextResponse.redirect(new URL("/setup", req.url))
+            switch (token.userType) {
+              case "EMPLOYER":
+                return NextResponse.redirect(
+                  new URL("/get-started/employer", req.url)
+                )
+
+              case "APPLICANT":
+                return NextResponse.redirect(
+                  new URL("/get-started/applicant", req.url)
+                )
+
+              default:
+                return NextResponse.redirect(new URL("/setup", req.url))
+            }
           }
           if (token.userType === "EMPLOYER") {
             return NextResponse.redirect(new URL("/employer", req.url))
@@ -64,15 +94,57 @@ export default withAuth(
         if (!token.emailVerified) {
           return NextResponse.redirect(new URL("/activate-account", req.url))
         } else {
-          if (token.setup) {
-            if (token.userType === "EMPLOYER") {
-              return NextResponse.redirect(new URL("/employer", req.url))
-            }
-            return NextResponse.redirect(new URL("/dashboard", req.url))
-          }
-        }
+          if (!token.setup && token.userType) {
+            switch (token.userType) {
+              case "EMPLOYER":
+                return NextResponse.redirect(
+                  new URL("/get-started/employer", req.url)
+                )
 
-        return null
+              case "APPLICANT":
+                return NextResponse.redirect(
+                  new URL("/get-started/applicant", req.url)
+                )
+            }
+          }
+
+          if (token.setup && token.userType) {
+            switch (token.userType) {
+              case "EMPLOYER":
+                return NextResponse.redirect(new URL("/employer", req.url))
+
+              case "APPLICANT":
+                return NextResponse.redirect(new URL("/dashboard", req.url))
+            }
+          }
+
+          return null
+        }
+      }
+
+      return NextResponse.redirect(new URL("/login", req.url))
+    }
+
+    if (isGetStartedPage) {
+      if (isAuth) {
+        if (!token.emailVerified) {
+          return NextResponse.redirect(new URL("/activate-account", req.url))
+        } else {
+          if (!token.setup && !token.userType) {
+            return NextResponse.redirect(new URL("/setup", req.url))
+          }
+
+          if (token.userType && token.setup) {
+            switch (token.userType) {
+              case "EMPLOYER":
+                return NextResponse.redirect(new URL("/employer", req.url))
+
+              case "APPLICANT":
+                return NextResponse.redirect(new URL("/dashboard", req.url))
+            }
+          }
+          return null
+        }
       }
 
       return NextResponse.redirect(new URL("/login", req.url))
@@ -83,8 +155,22 @@ export default withAuth(
         if (!token.emailVerified) {
           return NextResponse.redirect(new URL("/activate-account", req.url))
         } else {
-          if (!token.setup) {
+          if (!token.setup && !token.userType) {
             return NextResponse.redirect(new URL("/setup", req.url))
+          }
+
+          if (!token.setup && token.userType) {
+            switch (token.userType) {
+              case "EMPLOYER":
+                return NextResponse.redirect(
+                  new URL("/get-started/employer", req.url)
+                )
+
+              case "APPLICANT":
+                return NextResponse.redirect(
+                  new URL("/get-started/applicant", req.url)
+                )
+            }
           }
 
           if (token.userType === "EMPLOYER") {
@@ -103,8 +189,22 @@ export default withAuth(
         if (!token.emailVerified) {
           return NextResponse.redirect(new URL("/activate-account", req.url))
         } else {
-          if (!token.setup) {
+          if (!token.setup && !token.userType) {
             return NextResponse.redirect(new URL("/setup", req.url))
+          }
+
+          if (!token.setup && token.userType) {
+            switch (token.userType) {
+              case "EMPLOYER":
+                return NextResponse.redirect(
+                  new URL("/get-started/employer", req.url)
+                )
+
+              case "APPLICANT":
+                return NextResponse.redirect(
+                  new URL("/get-started/applicant", req.url)
+                )
+            }
           }
 
           if (token.userType === "APPLICANT") {
@@ -146,6 +246,7 @@ export const config = {
     "/dashboard/:path*",
     "/employer/:path*",
     "/setup/:path*",
+    "/get-started/:path*",
     "/activate-account/:path*",
     "/editor/:path*",
     "/resume/:path*",

@@ -8,7 +8,6 @@ export const userLocationSchema = z.object({
 
 export const userTypeSchema = z.object({
   userType: z.nativeEnum(UserType),
-  setup: z.boolean().optional(),
 })
 
 export const userNameSchema = z.object({

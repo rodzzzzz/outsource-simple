@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 
 import "@/styles/editor.css"
-import { Company, Job, PostedJob, QuestionForm, User } from "@prisma/client"
+import { Job, PostedJob, QuestionForm, User } from "@prisma/client"
 
 import { jobEditorSteps } from "@/config/steps"
 import { absoluteUrl, cn } from "@/lib/utils"
@@ -40,16 +40,12 @@ interface JobEditorProps {
     QuestionForm,
     "id" | "name" | "description" | "questions" | "published"
   >[]
-  companies: Pick<Company, "id" | "name" | "default">[]
-  paymentIntentId: string | undefined
   userId: User["id"]
 }
 export function JobEditor({
   post,
   config,
   questionnaires,
-  companies,
-  paymentIntentId,
   userId,
 }: JobEditorProps) {
   const [active, setActive] = React.useState<number>(0)
@@ -100,7 +96,6 @@ export function JobEditor({
         {active === 0 && (
           <JobDetailsForm
             post={post}
-            companies={companies}
             setActive={setActive}
             published={published}
           />
@@ -118,7 +113,6 @@ export function JobEditor({
             postId={post.id}
             config={config}
             userId={userId}
-            paymentIntentId={paymentIntentId}
             setActive={setActive}
             published={published}
           />

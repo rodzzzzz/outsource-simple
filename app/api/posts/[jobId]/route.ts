@@ -100,7 +100,6 @@ export async function PATCH(
         id: params.jobId,
       },
       data: {
-        companyId: body.companyId,
         title: body.title,
         jobDescription: blocks,
         category: body.category,

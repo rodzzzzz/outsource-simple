@@ -27,7 +27,7 @@ export function JobEditorSteps({
               <li
                 className={cn(
                   "flex items-center after:mx-6 after:hidden after:h-[1px] after:w-full after:bg-muted after:content-[''] sm:after:inline-block md:w-full xl:after:mx-10",
-                  index < active && "after:bg-primary"
+                  index < active && "after:bg-foreground"
                 )}
               >
                 <button
@@ -35,14 +35,11 @@ export function JobEditorSteps({
                   disabled={!(done > index - 1) && index !== 0}
                   className={cn(
                     "flex items-center text-muted-foreground after:mx-2 after:content-['/'] sm:after:hidden",
-                    index <= active && "text-primary"
+                    index <= active && "text-foreground"
                   )}
                 >
                   {done > index ? (
-                    <Icons.checkCircle
-                      fill="currentColor"
-                      className="mr-2.5 h-3.5 w-3.5 stroke-primary-foreground sm:h-4 sm:w-4"
-                    />
+                    <Icons.checkCircle className="mr-2.5 h-3.5 w-3.5 stroke-current sm:h-4 sm:w-4" />
                   ) : (
                     <span className="mr-2">{index + 1}</span>
                   )}
@@ -59,14 +56,11 @@ export function JobEditorSteps({
                   disabled={!(done > index - 1)}
                   className={cn(
                     "flex items-center",
-                    index <= active && "text-primary"
+                    index <= active && "text-foreground"
                   )}
                 >
                   {done > index ? (
-                    <Icons.checkCircle
-                      fill="currentColor"
-                      className="mr-2.5 h-3.5 w-3.5 stroke-primary-foreground sm:h-4 sm:w-4"
-                    />
+                    <Icons.checkCircle className="mr-2.5 h-3.5 w-3.5 stroke-current sm:h-4 sm:w-4" />
                   ) : (
                     <span className="mr-2">{index + 1}</span>
                   )}

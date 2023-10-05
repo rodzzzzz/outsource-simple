@@ -23,15 +23,6 @@ async function getPostConfig(postId: Job["id"]) {
   })
 }
 
-async function getPaymentIntent(postId: Job["id"], userId: User["id"]) {
-  return await db.paymentIntent.findFirst({
-    where: {
-      userId,
-      jobId: postId,
-    },
-  })
-}
-
 async function getUserCompaniesAndQuestionnaires(userId: User["id"]) {
   return await db.user.findFirst({
     where: {
@@ -57,19 +48,7 @@ async function getUserCompaniesAndQuestionnaires(userId: User["id"]) {
         select: {
           id: true,
           name: true,
-          default: true,
         },
-        where: {
-          published: true,
-        },
-        orderBy: [
-          {
-            default: "desc",
-          },
-          {
-            name: "asc",
-          },
-        ],
       },
     },
   })
@@ -93,7 +72,6 @@ export default async function EditorPage({ params }: EditorPageProps) {
   }
 
   const config = await getPostConfig(params.postId)
-  const paymentIntent = await getPaymentIntent(params.postId, user.id)
   const switcherValues = await getUserCompaniesAndQuestionnaires(user.id)
 
   return (
@@ -108,8 +86,6 @@ export default async function EditorPage({ params }: EditorPageProps) {
         highlighted: config?.highlighted!,
       }}
       questionnaires={switcherValues?.questionForms!}
-      companies={switcherValues?.company!}
-      paymentIntentId={paymentIntent?.id}
       userId={user.id}
     />
   )

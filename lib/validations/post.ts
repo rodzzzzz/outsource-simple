@@ -23,7 +23,6 @@ const blocks: ZodShape<OutputBlockData> = {
 }
 
 export const postPatchSchema = z.object({
-  companyId: z.string(),
   title: z
     .string()
     .min(1, "Please enter a position or job title")

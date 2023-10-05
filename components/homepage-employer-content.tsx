@@ -27,8 +27,7 @@ const HomePageFeature = ({ feature, className }: HomePageFeatureProps) => {
       viewport={{ once: false, amount: 0.5 }}
       className={cn(
         "px-8 py-12 space-y-6 grid place-content-center md:my-auto md:h-screen shrink-0 overflow-hidden",
-        className,
-        feature.className
+        className
       )}
     >
       <div className="grid grid-cols-1 w-full max-w-[1400px] gap-6 mx-auto md:grid-cols-2 place-items-center h-full">
@@ -89,7 +88,7 @@ export const HomePageEmployerHero = () => {
       <motion.div
         initial="hidden"
         whileInView="show"
-        exit={{ opacity: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
         className="container flex max-w-[65rem] flex-col items-center gap-4 text-center"
       >
         <motion.h1
@@ -123,7 +122,7 @@ export const HomePageEmployerHero = () => {
             <span>Discover remote talents</span>
           </Link>
           <Link
-            href="/login"
+            href={{ pathname: "register" }}
             className={cn(
               buttonVariants({ size: "lg" }),
               "md:text-base font-semibold"
@@ -142,19 +141,76 @@ export function HomePageEmployerContent() {
   return (
     <React.Fragment>
       {homePageFeaturesConfig.employerPage.map((feature) => (
-        <HomePageFeature key={feature.title} feature={feature} />
+        <HomePageFeature
+          key={feature.title}
+          feature={feature}
+          className={feature.className}
+        />
       ))}
 
       <section className="container py-8 md:py-12 lg:py-24">
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-          <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            Proudly Bootstraped
-          </h2>
-          <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            We&apos;ve built Outsource Simple from the ground up, remaining
-            truely committed to our mission of making remote hiring seamless and
-            simple for companies of all size.
-          </p>
+        <div className="max-w-5xl mx-auto my-32 sm:mt-56">
+          <div className="px-6 mb-12 lg:px-8">
+            <div className="max-w-2xl mx-auto sm:text-center">
+              <h2 className="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">
+                Start chatting in minutes
+              </h2>
+              <p className="mt-4 text-lg text-gray-600">
+                Chatting to your PDF files has never been easier than with
+                Quill.
+              </p>
+            </div>
+          </div>
+          <ol className="pt-8 my-8 space-y-4 md:flex md:space-x-12 md:space-y-0">
+            <li className="md:flex-1">
+              <div className="flex flex-col py-2 pl-4 space-y-2 border-l-4 border-zinc-300 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
+                <span className="text-sm font-medium text-blue-600">
+                  Step 1
+                </span>
+                <span className="text-xl font-semibold">
+                  Sign up for an account
+                </span>
+                <span className="mt-2 text-zinc-700">
+                  Either starting out with a free plan or choose our{" "}
+                  <Link
+                    href="/pricing"
+                    className="text-blue-700 underline underline-offset-2"
+                  >
+                    pro plan
+                  </Link>
+                  .
+                </span>
+              </div>
+            </li>
+            <li className="md:flex-1">
+              <div className="flex flex-col py-2 pl-4 space-y-2 border-l-4 border-zinc-300 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
+                <span className="text-sm font-medium text-blue-600">
+                  Step 2
+                </span>
+                <span className="text-xl font-semibold">
+                  Upload your PDF file
+                </span>
+                <span className="mt-2 text-zinc-700">
+                  We&apos;ll process your file and make it ready for you to chat
+                  with.
+                </span>
+              </div>
+            </li>
+            <li className="md:flex-1">
+              <div className="flex flex-col py-2 pl-4 space-y-2 border-l-4 border-zinc-300 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
+                <span className="text-sm font-medium text-blue-600">
+                  Step 3
+                </span>
+                <span className="text-xl font-semibold">
+                  Start asking questions
+                </span>
+                <span className="mt-2 text-zinc-700">
+                  It&apos;s that simple. Try out Quill today - it really takes
+                  less than a minute.
+                </span>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
     </React.Fragment>

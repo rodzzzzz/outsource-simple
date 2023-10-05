@@ -3,7 +3,6 @@
 import React, { Dispatch, createContext, useReducer } from "react"
 
 type StateType = {
-  companyId: string | null
   questionnaireId: string | null
   resumeId: string | null
 }
@@ -11,14 +10,12 @@ type StateType = {
 type ActionType = {
   type: string
   payload: {
-    companyId?: StateType["companyId"]
     questionnaireId?: StateType["questionnaireId"]
     resumeId?: StateType["resumeId"]
   }
 }
 
 const initialState: StateType = {
-  companyId: null,
   questionnaireId: null,
   resumeId: null,
 }

@@ -75,7 +75,7 @@ export function JobListToolbar() {
     startingSalary: null,
   }
 
-  const ignoreParams = ["page", "pageDisplay"]
+  const ignoreParams = ["page", "userType"]
   const arrayParams = [
     "category",
     "employmentType",

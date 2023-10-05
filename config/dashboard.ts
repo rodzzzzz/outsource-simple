@@ -21,24 +21,74 @@ export const dashboardConfig: DashboardConfig = {
   ],
   employerNav: [
     {
-      title: "Dashboard",
-      href: "/employer",
+      category: "",
+      items: [
+        {
+          title: "Dashboard",
+          href: "/employer",
+          icon: "barchart",
+        },
+        {
+          title: "Discover",
+          href: "#",
+          icon: "discover",
+        },
+        {
+          title: "Messages",
+          href: "#",
+          icon: "message",
+        },
+      ],
     },
     {
-      title: "Job Posts",
-      href: "/employer/posts",
+      category: "",
+      items: [
+        {
+          title: "Jobs",
+          href: "/employer/posts",
+          icon: "briefcase",
+        },
+        {
+          title: "Contracts",
+          href: "/employer/contracts",
+          icon: "post",
+        },
+        {
+          title: "Payroll",
+          href: "/employer/payroll",
+          icon: "banknote",
+        },
+        {
+          title: "Payments",
+          href: "/employer/payments",
+          icon: "wallet",
+        },
+      ],
     },
     {
-      title: "Company",
-      href: "/employer/company",
-    },
-    {
-      title: "Question Forms",
-      href: "/employer/questionnaire",
-    },
-    {
-      title: "Settings",
-      href: "/employer/settings",
+      category: "",
+      items: [
+        {
+          title: "Company",
+          href: "/employer/company",
+          icon: "company",
+        },
+        {
+          title: "Question Forms",
+          href: "/employer/questionnaire",
+          icon: "formBuilder",
+        },
+        {
+          title: "Billing",
+          href: "/employer/billing",
+          icon: "billing",
+        },
+        {
+          title: "Settings",
+          href: "/employer/settings",
+          icon: "settings",
+        },
+      ],
     },
   ],
 }

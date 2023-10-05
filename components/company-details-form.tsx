@@ -37,7 +37,6 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { CompanyDeleteButton } from "@/components/company-delete-button"
 import { Icons } from "@/components/icons"
 import {
   Form,
@@ -62,8 +61,6 @@ interface CompanyDetailsFormProps
     | "description"
     | "companySize"
     | "dateFounded"
-    | "default"
-    | "published"
   >
 }
 
@@ -152,14 +149,6 @@ export function CompanyDetailsForm({
           <CardHeader>
             <CardTitle className="inline-flex h-[1.375rem] items-center gap-2">
               Primary Details
-              {company?.default ? (
-                <Badge className="rounded-sm">Default</Badge>
-              ) : null}
-              {!company?.published ? (
-                <Badge variant="secondary" className="rounded-sm">
-                  Draft
-                </Badge>
-              ) : null}
             </CardTitle>
             <CardDescription>
               Make changes to your company details here.
@@ -352,22 +341,16 @@ export function CompanyDetailsForm({
                 )}
               />
 
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="submit"
-                  className={cn(buttonVariants(), className)}
-                  disabled={disabledButton || isSaving}
-                >
-                  {isSaving && (
-                    <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-                  )}
-                  <span>Update details</span>
-                </button>
-                <CompanyDeleteButton
-                  companyId={company?.id}
-                  disabled={isSaving || company?.default || !company}
-                />
-              </div>
+              <button
+                type="submit"
+                className={cn(buttonVariants(), className)}
+                disabled={disabledButton || isSaving}
+              >
+                {isSaving && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Update details</span>
+              </button>
             </div>
           </CardContent>
         </Card>

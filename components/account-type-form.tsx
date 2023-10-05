@@ -25,10 +25,6 @@ import {
   FormMessage,
 } from "@/components/react-hook-form/form"
 
-interface AccountTypeFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, "id">
-}
-
 type FormData = z.infer<typeof userTypeSchema>
 
 type UserTypeConfig = {
@@ -38,9 +34,17 @@ type UserTypeConfig = {
 }
 
 const userType: UserTypeConfig[] = [
-  { value: "APPLICANT", label: "Remote job seeker", icon: "search" },
-  { value: "EMPLOYER", label: "Employer", icon: "briefcase" },
+  { value: "APPLICANT", label: "Find Remote Jobs", icon: "user" },
+  {
+    value: "EMPLOYER",
+    label: "Make my remote hiring easier",
+    icon: "company",
+  },
 ]
+
+interface AccountTypeFormProps extends React.HTMLAttributes<HTMLFormElement> {
+  user: Pick<User, "id">
+}
 
 export function AccountTypeForm({
   user,
@@ -66,7 +70,6 @@ export function AccountTypeForm({
       },
       body: JSON.stringify({
         userType: data.userType,
-        setup: true,
       }),
     })
 
@@ -80,12 +83,7 @@ export function AccountTypeForm({
       })
     }
 
-    await update({ userType: data.userType, setup: true })
-
-    toast({
-      title: "Welcome to your dashboard.",
-      description: "Your account has been set up successfully.",
-    })
+    await update({ userType: data.userType })
 
     router.refresh()
     router.push("/dashboard")
@@ -111,10 +109,10 @@ export function AccountTypeForm({
       >
         <div className="space-y-1.5">
           <motion.h1
-            className="font-heading text-4xl leading-none tracking-tight md:text-5xl lg:text-6xl"
+            className="text-4xl leading-none tracking-tight font-heading md:text-5xl lg:text-6xl [text-wrap:balance]"
             variants={STAGGER_CHILD_VARIANTS}
           >
-            How do you want to use <br /> Outsource Simple?
+            What brings you to Outsource Simple?
           </motion.h1>
           <motion.p
             className="text-muted-foreground"
@@ -140,7 +138,7 @@ export function AccountTypeForm({
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="grid grid-cols-2 gap-4"
+                        className="flex flex-col gap-4 md:flex-row"
                       >
                         {userType.map((type) => {
                           const Icon = Icons[type.icon!]
@@ -148,14 +146,14 @@ export function AccountTypeForm({
                             <Label
                               key={type.value}
                               htmlFor={type.value}
-                              className="flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-muted bg-popover px-4 py-8 hover:bg-accent hover:text-accent-foreground md:py-12 lg:py-16 [&:has([data-state=checked])]:border-primary"
+                              className="flex w-full cursor-pointer flex-col items-center justify-between rounded-md border-2 border-muted bg-popover px-4 py-8 hover:bg-accent hover:text-accent-foreground md:py-12 lg:py-16 [&:has([data-state=checked])]:border-primary"
                             >
                               <RadioGroupItem
                                 value={type.value}
                                 id={type.value}
                                 className="sr-only"
                               />
-                              <Icon className="mb-3 h-6 w-6" />
+                              <Icon className="w-16 h-16 mb-3" />
                               {type.label}
                             </Label>
                           )
@@ -172,9 +170,10 @@ export function AccountTypeForm({
                 disabled={isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                 )}
-                <span>Finish setup</span>
+                <span>Continue</span>
+                <Icons.arrowRight className="w-4 h-4 ml-2" />
               </button>
             </form>
           </Form>

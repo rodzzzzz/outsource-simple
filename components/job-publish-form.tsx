@@ -42,7 +42,6 @@ import { toast } from "@/components/ui/use-toast"
 import { Icons } from "./icons"
 import { Separator } from "./ui/separator"
 
-// import Checkout from "@/components/checkout"
 // import {
 //   Form,
 //   FormControl,
@@ -58,7 +57,6 @@ interface JobPublishFormProps {
     PostedJob,
     "publishedAt" | "expirationDate" | "featured" | "highlighted"
   >
-  paymentIntentId: string | undefined
   userId: User["id"]
   setActive: React.Dispatch<React.SetStateAction<number>>
   published: boolean
@@ -68,64 +66,13 @@ type FormData = z.infer<typeof postPatchSchema & typeof postConfigPatchSchema>
 
 export function JobPublishForm({
   postId,
-  // config,
-  // paymentIntentId,
-  // userId,
   setActive,
   published,
 }: JobPublishFormProps) {
   const router = useRouter()
   const [isPublishing, setIsPublishing] = React.useState(false)
-  // const form = useForm<FormData>({
-  //   resolver: zodResolver(postPatchSchema),
-  //   defaultValues: {
-  //     featured: config.featured || false,
-  //     highlighted: config.highlighted || false,
-  //   },
-  //   mode: "onChange",
-  // })
-  // const [price, setPrice] = React.useState(0)
-  // const [metadata, setMetadata] = React.useState({})
-  // const [description, setDescription] = React.useState("")
-
-  // const featured = form.getValues("featured")
-  // const highlighted = form.getValues("highlighted")
-
-  // // Setting up the paymentintent update body
-  // React.useEffect(() => {
-  //   const p = posting.price
-  //   const f = featured ? featuredPrice.price : 0
-  //   const h = highlighted ? highlightedPrice.price : 0
-  //   setPrice(p + f + h)
-
-  //   setMetadata({
-  //     jobId: postId,
-  //     userId,
-  //     [posting.label]: posting.price * 100,
-  //     ...(featured && { [featuredPrice.label]: featuredPrice.price * 100 }),
-  //     ...(highlighted && {
-  //       [highlightedPrice.label]: highlightedPrice.price * 100,
-  //     }),
-  //   })
-
-  //   const fd = featured ? ` | ${featuredPrice.name}` : ""
-  //   const hd = highlighted ? ` | ${highlightedPrice.name}` : ""
-  //   setDescription(posting.name + fd + hd)
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [featured, highlighted])
 
   async function onPublish() {
-    // const response = await fetch(`/api/stripe/${paymentIntentId}`, {
-    //   method: "PATCH",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     amount: price * 100,
-    //     metadata,
-    //     description,
-    //   }),
-    // })
-
     setIsPublishing(true)
 
     const response = await fetch(`/api/posts/publish/${postId}`, {
@@ -153,198 +100,75 @@ export function JobPublishForm({
   return (
     // <Form {...form}>
     //   <form onSubmit={form.handleSubmit(onPublish)}>
-    <div className="space-y-8">
-      <Card className="border-0 shadow-none sm:border sm:shadow-sm">
-        <CardHeader className="px-0 sm:px-6">
-          <CardTitle>
-            {/* Publish Configuration */}
-            Publish Job
-          </CardTitle>
-          <CardDescription>
-            {/* Customize how your job will be posted. */}
-            For the mean time, you can publish jobs on our platform for FREE.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="px-0 sm:px-6">
-          <div className="space-y-8">
-            {/* <div className="space-y-4">
-                  <FormItem className="p-4 border-2 rounded-lg border-primary">
-                    <div className="w-full">
-                      <h1>{`$${posting.price}`}</h1>
-                      <div className="space-y-0.5">
-                        <FormLabel className="text-base">
-                          {posting.heading}
-                        </FormLabel>
-                        <FormDescription>{posting.description}</FormDescription>
-                      </div>
-                    </div>
-                  </FormItem>
-                  <FormField
-                    control={form.control}
-                    name="featured"
-                    defaultValue={config.featured}
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center justify-between rounded-lg border-2 p-4  [&:has([data-state=checked])]:border-primary">
-                        <div>
-                          <h1>{`$${featuredPrice.price}`}</h1>
-                          <div className="space-y-0.5">
-                            <FormLabel className="text-base">
-                              {featuredPrice.heading}
-                            </FormLabel>
-                            <FormDescription>
-                              {featuredPrice.description}
-                            </FormDescription>
-                          </div>
-                        </div>
-                        <FormControl>
-                          <Switch
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                            disabled={published}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="highlighted"
-                    defaultValue={config.highlighted}
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center justify-between rounded-lg border-2 p-4 [&:has([data-state=checked])]:border-primary">
-                        <div>
-                          <h1>{`$${highlightedPrice.price}`}</h1>
-                          <div className="space-y-0.5">
-                            <FormLabel className="text-base">
-                              {highlightedPrice.heading}
-                            </FormLabel>
-                            <FormDescription>
-                              {highlightedPrice.description}
-                            </FormDescription>
-                          </div>
-                        </div>
-
-                        <FormControl>
-                          <Switch
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                            disabled={published}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="space-y-4">
-                  <Separator />
-
-                  <Card className="border-none shadow-none">
-                    <CardHeader className="p-0 pb-1">
-                      <CardTitle className="text-sm font-medium">
-                        Total price
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0">
-                      <div className="text-4xl font-bold">{`$${price}.00`}</div>
-                    </CardContent>
-                  </Card>
-                </div> */}
-
-            <div className="border rounded-md border-border">
-              <div className="relative flex justify-center object-contain w-full h-80">
-                <Image
-                  className="h-full"
-                  // className="object-contain"
-                  src="/images/promo/shaking-hands.svg"
-                  alt="Two people shaking hands"
-                />
-                <span className="absolute text-xs bottom-1 right-2 text-muted-foreground">
-                  Illustration by <a href="https://popsy.co/">popsy.co</a>
-                </span>
-              </div>
-
-              <Separator />
-              <div className="p-4 space-y-1 text-sm bg-muted">
-                <span className="text-base font-semibold sm:text-lg">
-                  Welcome to our early release!
-                </span>
-                <p className="text-muted-foreground">
-                  Early adopters can post their jobs on our platform and use all
-                  other features for <strong>FREE</strong>. This promo is
-                  available for a limited time only. Don&apos;t miss your chance
-                  and start posting now!
-                </p>
-              </div>
+    <Card className="border-0 shadow-none sm:border sm:shadow-sm">
+      <CardHeader className="px-0 sm:px-6">
+        <CardTitle>
+          {/* Publish Configuration */}
+          Publish Job
+        </CardTitle>
+        <CardDescription>
+          {/* Customize how your job will be posted. */}
+          For the mean time, you can publish jobs on our platform for FREE.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="px-0 sm:px-6">
+        <div className="space-y-8">
+          <div className="border rounded-md border-border">
+            <div className="relative flex justify-center object-contain w-full h-80">
+              <Image
+                className="h-full"
+                width={400}
+                height={500}
+                // className="object-contain"
+                src="/images/promo/shaking-hands.svg"
+                alt="Two people shaking hands"
+              />
+              <span className="absolute text-xs bottom-1 right-2 text-muted-foreground">
+                Illustration by <a href="https://popsy.co/">popsy.co</a>
+              </span>
             </div>
 
-            <div className="flex flex-col gap-2 md:flex-row">
-              <button
-                type="button"
-                onClick={() => setActive((prev) => prev - 1)}
-                className={cn(
-                  buttonVariants({ variant: "secondary" }),
-                  "w-full md:w-fit"
-                )}
-                disabled={isPublishing}
-              >
-                Go back
-              </button>
-              <Button
-                className="w-full md:w-fit"
-                onClick={onPublish}
-                disabled={published || isPublishing}
-              >
-                {isPublishing && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-                )}
-                Publish for free
-              </Button>
-              {/* <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        type="submit"
-                        className="w-full md:w-fit"
-                        onClick={onPublish}
-                        disabled={published}
-                      >
-                        Pay and publish
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[600px]">
-                      <DialogHeader>
-                        <DialogTitle>Pay and publish</DialogTitle>
-                        <DialogDescription>
-                          Easily pay and get your job published.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <Checkout paymentIntentId={paymentIntentId} />
-                    </DialogContent>
-                  </Dialog> */}
+            <Separator />
+            <div className="p-4 space-y-1 text-sm bg-muted">
+              <span className="text-base font-semibold sm:text-lg">
+                Welcome to our early release!
+              </span>
+              <p className="text-muted-foreground">
+                Early adopters can post their jobs on our platform and use all
+                other features for <strong>FREE</strong>. This promo is
+                available for a limited time only. Don&apos;t miss your chance
+                and start posting now!
+              </p>
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Please note:</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ol className="space-y-2 text-sm">
-            <li>
-              Posted job will be visible on our our website for 30 days.
-              {/* once the payment goes through. You&apos;ll receive a
-                  confirmation email together with the copy of Invoice. */}
-            </li>
-            <li>
-              Please make sure that all the details of your job is correct.
-            </li>
-            <li>Posted job cannot be edited. To edit, please contact us.</li>
-          </ol>
-        </CardContent>
-      </Card>
-    </div>
+          <div className="flex flex-col gap-2 md:flex-row">
+            <button
+              type="button"
+              onClick={() => setActive((prev) => prev - 1)}
+              className={cn(
+                buttonVariants({ variant: "secondary" }),
+                "w-full md:w-fit"
+              )}
+              disabled={isPublishing}
+            >
+              Go back
+            </button>
+            <Button
+              className="w-full md:w-fit"
+              onClick={onPublish}
+              disabled={published || isPublishing}
+            >
+              {isPublishing && (
+                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+              )}
+              Publish for free
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+
     //   </form>
     // </Form>
   )

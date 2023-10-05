@@ -1,9 +1,7 @@
-"use client"
-
 import { cn } from "@/lib/utils"
 import {
   HomePageSwitcher,
-  PageDisplayType,
+  UserAccountType,
 } from "@/components/home-page-switcher"
 import {
   HomePageEmployerContent,
@@ -15,18 +13,19 @@ import {
 } from "@/components/homepage-remote-talent-content"
 
 type Props = {
-  searchParams?: PageDisplayType
+  searchParams?: UserAccountType
 }
 
 export default async function IndexPage(props: Props) {
   const { searchParams } = props
-  const isRemoteTalent = searchParams?.pageDisplay === "remote-talent"
+  const isRemoteTalent = searchParams?.userType === "APPLICANT"
+  const userType = searchParams?.userType || "EMPLOYER"
 
   return (
     <>
       <section
         className={cn(
-          "transition-colors duration-500 pt-24",
+          "transition-colors duration-700 pt-24",
           isRemoteTalent && "bg-foreground"
         )}
       >

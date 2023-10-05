@@ -69,36 +69,6 @@ export async function POST(req: Request) {
       },
     })
 
-    // Create a payment intent for the job posting for future payment
-    const params: Stripe.PaymentIntentCreateParams = {
-      amount: posting.price * 100,
-      currency: "usd",
-      receipt_email: session.user.email!,
-      description: posting.name,
-      automatic_payment_methods: {
-        enabled: true,
-      },
-      // payment_method_data:{
-      //   type:"us_bank_account",
-      //   billing_details: {
-      //     name: "",
-      //   }
-      // }
-    }
-    const paymentIntent = await stripe.paymentIntents.create(params)
-
-    await db.paymentIntent.create({
-      data: {
-        id: paymentIntent.id,
-        clientSecret: paymentIntent.client_secret!,
-        userId: session.user.id,
-        jobId: post.id,
-      },
-      select: {
-        id: true,
-      },
-    })
-
     return new Response(JSON.stringify(post))
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -122,7 +92,6 @@ async function getCurrentUsersDefaultCompany() {
   const company = await db.company.findFirst({
     where: {
       userId: session?.user.id,
-      default: true,
     },
   })
 

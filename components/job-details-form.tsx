@@ -10,7 +10,6 @@ import * as z from "zod"
 import "@/styles/editor.css"
 import { skills } from "@/constant/skills"
 import {
-  Company,
   Job,
   JobCategory,
   JobLocationRestriction,
@@ -19,14 +18,9 @@ import {
 } from "@prisma/client"
 import isEqual from "lodash/isEqual"
 
-import {
-  cn,
-  getCurrencyLabelsFromEnum,
-  getLabelsFromEnum,
-  isEmptyArray,
-} from "@/lib/utils"
+import { cn, getCurrencyLabelsFromEnum, getLabelsFromEnum } from "@/lib/utils"
 import { postConfigPatchSchema, postPatchSchema } from "@/lib/validations/post"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -34,22 +28,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
 import { Input } from "@/components/ui/input"
 import { MonetaryInput } from "@/components/ui/monetary-input"
 import { MultiSelect, MultiSelectOptions } from "@/components/ui/multi-select"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import {
   Select,
   SelectContent,
@@ -58,7 +39,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "@/components/ui/use-toast"
-import { CompanySwitcherGroups } from "@/components/company-switcher"
 import { Icons } from "@/components/icons"
 import {
   Form,
@@ -90,7 +70,6 @@ interface JobDetailsFormProps {
     | "jobDescription"
     | "step"
   >
-  companies: Pick<Company, "id" | "name" | "default">[]
   setActive: React.Dispatch<React.SetStateAction<number>>
   published: boolean
 }
@@ -105,14 +84,12 @@ type FormData = z.infer<typeof postPatchSchema & typeof postConfigPatchSchema>
 
 export function JobDetailsForm({
   post,
-  companies,
   setActive,
   published,
 }: JobDetailsFormProps) {
   const form = useForm<FormData>({
     resolver: zodResolver(postPatchSchema),
     defaultValues: {
-      companyId: post?.companyId || companies[0].id,
       title: post.title || "",
       category: post.category || undefined,
       type: post.type || undefined,
@@ -130,27 +107,6 @@ export function JobDetailsForm({
   const router = useRouter()
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
   const [isMounted, setIsMounted] = React.useState<boolean>(false)
-
-  const companyGroups: CompanySwitcherGroups = [
-    {
-      label: "Default Company",
-      companies: [],
-    },
-    {
-      label: "Companies",
-      companies: [],
-    },
-  ]
-
-  companies?.map((com) => {
-    if (com.default) {
-      companyGroups[0].companies.push({ label: com.name, value: com.id })
-      return true
-    }
-
-    companyGroups[1].companies.push({ label: com.name, value: com.id })
-    return true
-  })
 
   const initializeEditor = React.useCallback(async () => {
     const EditorJS = (await import("@editorjs/editorjs")).default
@@ -293,84 +249,6 @@ export function JobDetailsForm({
             <div className="space-y-8">
               <FormField
                 control={form.control}
-                name="companyId"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col w-full max-w-[400px]">
-                    <FormLabel className="w-fit">
-                      Company<span className="ml-1 text-destructive">*</span>
-                    </FormLabel>
-                    <Popover>
-                      <FormControl>
-                        <PopoverTrigger asChild disabled={published}>
-                          <Button
-                            variant="outline"
-                            role="combobox"
-                            className={cn(
-                              "justify-between",
-                              !field.value && "text-muted-foreground"
-                            )}
-                          >
-                            {field.value
-                              ? companies.find(
-                                  (language) => language.id === field.value
-                                )?.name
-                              : "Select Company"}
-                            <Icons.caretSort className="w-4 h-4 ml-2 opacity-50 shrink-0" />
-                          </Button>
-                        </PopoverTrigger>
-                      </FormControl>
-                      <PopoverContent className="p-0" align="start">
-                        <Command>
-                          <CommandList>
-                            <CommandInput placeholder="Search company..." />
-                            <CommandEmpty>No company found.</CommandEmpty>
-                            {companyGroups.map((group) => (
-                              <React.Fragment key={group.label}>
-                                {!isEmptyArray(group.companies) ? (
-                                  <CommandGroup
-                                    key={group.label}
-                                    heading={group.label}
-                                  >
-                                    {group.companies.map((company) => (
-                                      <CommandItem
-                                        key={company.value}
-                                        onSelect={(value) => {
-                                          field.onChange(value)
-                                        }}
-                                        value={company.value}
-                                        className="gap-1 text-sm"
-                                      >
-                                        <span className="truncate">
-                                          {company.label}
-                                        </span>
-                                        <Icons.check
-                                          className={cn(
-                                            "ml-auto h-4 w-4 shrink-0",
-                                            company.value === field.value
-                                              ? "opacity-100"
-                                              : "opacity-0"
-                                          )}
-                                        />
-                                      </CommandItem>
-                                    ))}
-                                  </CommandGroup>
-                                ) : null}
-                              </React.Fragment>
-                            ))}
-                          </CommandList>
-                        </Command>
-                      </PopoverContent>
-                    </Popover>
-                    <FormDescription>
-                      This is the company that will post the job.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
                 name="title"
                 defaultValue={post.title}
                 render={({ field }) => (
@@ -389,11 +267,6 @@ export function JobDetailsForm({
                         disabled={published}
                       />
                     </FormControl>
-                    <FormDescription>
-                      *Note: We discourages special characters such as * and !
-                      which can cause the Googlebot to label your job posting as
-                      spammy
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

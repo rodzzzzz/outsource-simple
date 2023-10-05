@@ -36,7 +36,6 @@ export async function PATCH(
       },
       data: {
         userType: payload.userType,
-        setup: payload.setup,
       },
     })
 

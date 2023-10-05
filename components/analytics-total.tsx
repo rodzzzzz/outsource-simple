@@ -23,11 +23,11 @@ export function AnalyticsTotal({
   return (
     <div className="grid gap-4 lg:grid-cols-3">
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
           <CardTitle className="text-sm font-medium">
             Total applications
           </CardTitle>
-          <Icons.applications className="h-4 w-4 text-muted-foreground" />
+          <Icons.applications className="w-4 h-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{applications}</div>
@@ -37,9 +37,9 @@ export function AnalyticsTotal({
         </CardContent>
       </Card>
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
           <CardTitle className="text-sm font-medium">Total visits</CardTitle>
-          <Icons.view className="h-4 w-4 text-muted-foreground" />
+          <Icons.view className="w-4 h-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{visits}</div>
@@ -47,11 +47,11 @@ export function AnalyticsTotal({
         </CardContent>
       </Card>
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
           <CardTitle className="text-sm font-medium">
             Total application rate
           </CardTitle>
-          <Icons.percent className="h-4 w-4 text-muted-foreground" />
+          <Icons.percent className="w-4 h-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-4xl font-bold">{`${applicationRate}%`}</div>
@@ -68,12 +68,12 @@ AnalyticsTotal.Skeleton = function AnalyticsTotalSkeleton() {
         <Card key={index}>
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium">
-              <Skeleton className="h-5 w-2/6" />
+              <Skeleton className="w-2/6 h-5" />
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Skeleton className="mb-1 h-7 w-1/5" />
-            <Skeleton className="h-3 w-2/5" />
+            <Skeleton className="w-1/5 mb-1 h-7" />
+            <Skeleton className="w-2/5 h-3" />
           </CardContent>
         </Card>
       ))}

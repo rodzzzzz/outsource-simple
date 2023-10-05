@@ -68,24 +68,28 @@ model User {
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
   userType      UserType? @map(name: "user_type")
 
-  accounts       Account[]
-  sessions       Session[]
-  company        Company[]
-  questionForms  QuestionForm[]
-  resume         Resume[]
-  jobs           Job[]
-  applicant      JobApplication[] @relation("applicant")
-  employer       JobApplication[] @relation("employer")
-  jobVisits      JobVisit[]
-  savedJobs      SavedJob[]
-  paymentIntents PaymentIntent[]
-  transactions   Transaction[]
+  accounts      Account[]
+  sessions      Session[]
+  company       Company?
+  questionForms QuestionForm[]
+  resume        Resume[]
+  jobs          Job[]
+  applicant     JobApplication[] @relation("applicant")
+  employer      JobApplication[] @relation("employer")
+  jobVisits     JobVisit[]
+  savedJobs     SavedJob[]
+  transactions  Transaction[]
 
   emialConfig EmailConfig?
 
   country String?
   city    String?
   socials Json[]
+
+  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?   @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 
   @@map(name: "users")
 }
@@ -186,10 +190,8 @@ model Company {
   description String?      @db.VarChar(1500)
   companySize CompanySize? @map(name: "company_size")
   dateFounded DateTime?    @map(name: "date_founded") @db.Date()
-  default     Boolean
-  published   Boolean
 
-  userId String @map(name: "user_id")
+  userId String @unique @map(name: "user_id")
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   jobs Job[]
@@ -260,8 +262,7 @@ model Job {
   postedById String @map(name: "posted_by_id")
   postedBy   User   @relation(fields: [postedById], references: [id], onDelete: Cascade)
 
-  postedJob     PostedJob?
-  paymentIntent PaymentIntent?
+  postedJob PostedJob?
 
   jobVisits    JobVisit[]
   applications JobApplication[]
@@ -387,22 +388,6 @@ model SavedJob {
   @@index([jobId])
   @@index([userId])
   @@map(name: "saved_jobs")
-}
-
-model PaymentIntent {
-  id           String   @id
-  clientSecret String
-  createdAt    DateTime @default(now()) @map("created_at")
-
-  userId String @map(name: "user_id")
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  jobId String? @unique @map(name: "job_id")
-  job   Job?    @relation(fields: [jobId], references: [id], onDelete: Cascade)
-
-  @@index([jobId])
-  @@index([userId])
-  @@map(name: "payment_intents")
 }
 
 model Transaction {

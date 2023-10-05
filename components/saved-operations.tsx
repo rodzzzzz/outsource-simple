@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Job, SavedJob } from "@prisma/client"
 
+import { cn } from "@/lib/utils"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,6 +25,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+
+import { buttonVariants } from "./ui/button"
 
 async function unsave(savedJobId: string) {
   const response = await fetch(`/api/save/${savedJobId}`, {
@@ -101,7 +104,7 @@ export function SavedOperations({ saved, job }: SavedOperationsProps) {
                   router.refresh()
                 }
               }}
-              className="bg-red-600 focus:ring-red-600"
+              className={cn(buttonVariants({ variant: "destructive" }))}
             >
               {isDeleteLoading ? (
                 <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />

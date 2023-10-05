@@ -37,13 +37,13 @@ export function AccountSetupIntro({
         >
           <div className="grid place-content-center space-y-1.5">
             <motion.h1
-              className="font-heading text-4xl leading-none tracking-tight md:text-5xl lg:text-6xl"
+              className="text-4xl leading-none tracking-tight font-heading md:text-5xl lg:text-6xl"
               variants={STAGGER_CHILD_VARIANTS}
             >
               Welcome to <br /> Outsource Simple?
             </motion.h1>
             <motion.p
-              className="max-w-md text-muted-foreground"
+              className="max-w-xl text-muted-foreground"
               variants={STAGGER_CHILD_VARIANTS}
             >
               From finding remote jobs to outsourcing your workforce, we got you
@@ -54,7 +54,7 @@ export function AccountSetupIntro({
           <motion.button
             variants={STAGGER_CHILD_VARIANTS}
             className={cn(buttonVariants({ size: "lg" }))}
-            onClick={() => router.push("/setup?step=name")}
+            onClick={() => router.push("/setup?step=type")}
           >
             <span>Get started</span>
           </motion.button>

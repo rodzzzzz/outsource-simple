@@ -3,11 +3,11 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { SidebarNavItem } from "types"
+import { DocsSidebarNavItem } from "types"
 import { cn } from "@/lib/utils"
 
 export interface DocsSidebarNavProps {
-  items: SidebarNavItem[]
+  items: DocsSidebarNavItem[]
 }
 
 export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
@@ -17,7 +17,7 @@ export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
     <div className="w-full">
       {items.map((item, index) => (
         <div key={index} className={cn("pb-8")}>
-          <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-medium">
+          <h4 className="px-2 py-1 mb-1 text-sm font-medium rounded-md">
             {item.title}
           </h4>
           {item.items ? (
@@ -30,7 +30,7 @@ export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
 }
 
 interface DocsSidebarNavItemsProps {
-  items: SidebarNavItem[]
+  items: DocsSidebarNavItem[]
   pathname: string | null
 }
 
@@ -39,7 +39,7 @@ export function DocsSidebarNavItems({
   pathname,
 }: DocsSidebarNavItemsProps) {
   return items?.length ? (
-    <div className="grid grid-flow-row auto-rows-max text-sm">
+    <div className="grid grid-flow-row text-sm auto-rows-max">
       {items.map((item, index) =>
         !item.disabled && item.href ? (
           <Link
@@ -57,7 +57,7 @@ export function DocsSidebarNavItems({
             {item.title}
           </Link>
         ) : (
-          <span className="flex w-full cursor-not-allowed items-center rounded-md p-2 opacity-60">
+          <span className="flex items-center w-full p-2 rounded-md cursor-not-allowed opacity-60">
             {item.title}
           </span>
         )

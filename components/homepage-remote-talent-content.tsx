@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
+import { UserAccountType } from "./home-page-switcher"
+
 interface HomePageFeatureProps extends React.HTMLAttributes<HTMLSpanElement> {
   feature: HomePageFeaturesItem
 }
@@ -123,7 +125,9 @@ export const HomePageRemoteTalentHero = () => {
             <span>Discover remote jobs</span>
           </Link>
           <Link
-            href="/login"
+            href={{
+              pathname: "register",
+            }}
             className={cn(
               buttonVariants({ size: "lg" }),
               "md:text-base font-semibold"

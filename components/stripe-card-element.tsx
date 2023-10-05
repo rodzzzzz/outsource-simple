@@ -10,30 +10,25 @@ import Stripe from "stripe"
 
 import { env } from "@/env.mjs"
 import { Skeleton } from "@/components/ui/skeleton"
-import CheckoutForm from "@/components/checkout-form"
 import { Icons } from "@/components/icons"
+import StripeCardElementForm from "@/components/stripe-card-element-form"
 
 const stripe = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
-export default function Checkout({
-  paymentIntentId,
-}: {
-  paymentIntentId: string | undefined
-}) {
+export default function StripeCardElement() {
   const [paymentIntent, setPaymentIntent] = useState<Stripe.PaymentIntent>()
-  useEffect(() => {
-    // Get PaymentIntent as soon as the page loads using our local API
-    fetch(`/api/stripe/${paymentIntentId}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setPaymentIntent(data)
-      })
+  // useEffect(() => {
+  //   // Get PaymentIntent as soon as the page loads using our local API
+  //   fetch(`/api/stripe/${paymentIntentId}`, {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((data) => {
+  //       setPaymentIntent(data)
+  //     })
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   const appearance: Appearance = {
     theme: "stripe",
@@ -51,15 +46,15 @@ export default function Checkout({
       </Head>
       {paymentIntent?.client_secret ? (
         <Elements options={options} stripe={stripe}>
-          <CheckoutForm paymentIntent={paymentIntent} />
+          <StripeCardElementForm paymentIntent={paymentIntent} />
         </Elements>
       ) : (
-        <div className="flex w-full flex-col items-center">
+        <div className="flex flex-col items-center w-full">
           <Icons.spinner
             strokeWidth={1.5}
-            className="h-32 w-32 animate-spin text-muted"
+            className="w-32 h-32 animate-spin text-muted"
           />
-          <Skeleton className="mt-8 h-11 w-full" />
+          <Skeleton className="w-full mt-8 h-11" />
         </div>
       )}
     </div>

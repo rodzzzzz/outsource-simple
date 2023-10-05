@@ -75,37 +75,40 @@ export function JobQuestionnaireForm({
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
 
   async function onSave(data: FormData) {
+    const step = post.step === 1 ? post.step + 1 : post.step
+
+    let body = JSON.stringify({
+      step,
+    })
+
     if (isDirty && !published) {
-      const step = post.step === 1 ? post.step + 1 : post.step
-      setIsSaving(true)
-
-      const response = await fetch(`/api/posts/questionnaire/${post.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          questionnaireId: data.questionnaireId,
-          step,
-        }),
-      })
-
-      setIsSaving(false)
-
-      if (!response?.ok) {
-        return toast({
-          title: "Something went wrong.",
-          description: "Your job was not saved. Please try again.",
-          variant: "destructive",
-        })
-      }
-
-      router.refresh()
-
-      toast({
-        description: "Your job has been saved.",
+      body = JSON.stringify({
+        questionnaireId: data.questionnaireId,
+        step,
       })
     }
+
+    setIsSaving(true)
+
+    const response = await fetch(`/api/posts/questionnaire/${post.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    })
+
+    setIsSaving(false)
+
+    if (!response?.ok) {
+      return toast({
+        title: "Something went wrong.",
+        description: "Your job was not saved. Please try again.",
+        variant: "destructive",
+      })
+    }
+
+    router.refresh()
 
     setActive((prev) => prev + 1)
   }

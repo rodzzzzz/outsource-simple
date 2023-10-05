@@ -153,12 +153,12 @@ export function AccountDeleteForm({
                 //   router.refresh()
                 // }
               }}
-              className="bg-red-600 focus:ring-red-600"
+              className={cn(buttonVariants({ variant: "destructive" }))}
             >
               {isDeleteLoading ? (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
               ) : (
-                <Icons.trash className="mr-2 h-4 w-4" />
+                <Icons.trash className="w-4 h-4 mr-2" />
               )}
               <span>Delete account</span>
             </AlertDialogAction>

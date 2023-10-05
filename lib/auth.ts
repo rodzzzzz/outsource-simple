@@ -1,3 +1,4 @@
+import type { Adapter } from "@auth/core/adapters"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { UserType } from "@prisma/client"
 import { NextAuthOptions } from "next-auth"
@@ -16,7 +17,7 @@ export const authOptions: NextAuthOptions = {
   // huh any! I know.
   // This is a temporary fix for prisma client.
   // @see https://github.com/prisma/prisma/issues/16117
-  adapter: PrismaAdapter(db as any),
+  adapter: PrismaAdapter(db),
   session: {
     strategy: "jwt",
   },

@@ -1,6 +1,7 @@
 import { User } from "@prisma/client"
 import type { Icon } from "lucide-react"
 
+import { PlanNameType } from "@/lib/validations/subscriptions"
 import { Icons } from "@/components/icons"
 
 export type NavItem = {
@@ -12,6 +13,27 @@ export type NavItem = {
 export type MainNavItem = NavItem
 
 export type SidebarNavItem = {
+  category: string
+  items: Array<
+    {
+      title: string
+      disabled?: boolean
+      external?: boolean
+      icon?: keyof typeof Icons
+    } & (
+      | {
+          href: string
+          items?: never
+        }
+      | {
+          href?: string
+          items: NavLink[]
+        }
+    )
+  >
+}
+
+export type DocsSidebarNavItem = {
   title: string
   disabled?: boolean
   external?: boolean
@@ -39,7 +61,7 @@ export type SiteConfig = {
 
 export type DocsConfig = {
   mainNav: MainNavItem[]
-  sidebarNav: SidebarNavItem[]
+  sidebarNav: DocsSidebarNavItem[]
 }
 
 export type MarketingConfig = {
@@ -48,7 +70,7 @@ export type MarketingConfig = {
 
 export type DashboardConfig = {
   applicantNav: MainNavItem[]
-  employerNav: MainNavItem[]
+  employerNav: SidebarNavItem[]
 }
 
 export type HomePageFeaturesItem = {
@@ -74,9 +96,8 @@ export type Price = {
 }
 
 export type SubscriptionPlan = {
-  name: string
+  name: PlanNameType
   description: string
-  stripePriceId: string
   price: number
   features: Array<string>
 }
@@ -89,7 +110,8 @@ export type SubscriptionPlanConfig = {
 export type UserSubscriptionPlan = SubscriptionPlan &
   Pick<User, "stripeCustomerId" | "stripeSubscriptionId"> & {
     stripeCurrentPeriodEnd: number
-    isPro: boolean
+    isCanceled: boolean
+    isSubscribed: boolean
   }
 
 export type SocialsConfig = {

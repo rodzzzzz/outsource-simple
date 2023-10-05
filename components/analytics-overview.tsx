@@ -40,19 +40,14 @@ type DisplayConfig = {
 const displayItems: {
   applications: DisplayConfig
   visits: DisplayConfig
-  applicationRate: DisplayConfig
 } = {
   applications: {
     label: "Applications",
-    color: "#adfa1d",
+    color: "hsl(var(--pink))",
   },
   visits: {
     label: "Visits",
-    color: "#dcfc9f",
-  },
-  applicationRate: {
-    label: "Application rate",
-    color: "#39B5E0",
+    color: "hsl(var(--primary))",
   },
 }
 
@@ -70,8 +65,8 @@ const CustomTooltip = (
   const { active, payload, label } = props
   if (active && payload && payload.length) {
     return (
-      <div className="rounded border bg-popover px-6 py-4 shadow-lg">
-        <h1 className="mb-3 text-lg font-bold text-primary">{label}</h1>
+      <div className="px-6 py-4 border rounded shadow-lg bg-popover">
+        <h1 className="mb-3 text-lg font-bold text-foreground">{label}</h1>
         <table>
           <tbody className="text-sm">
             {payload.map(
@@ -98,7 +93,7 @@ const CustomLegend = (props: LegendProps) => {
   const { payload } = props
 
   return (
-    <ul className="flex w-full justify-center gap-6">
+    <ul className="flex justify-center w-full gap-6">
       {payload?.map((entry: LegendPayload, index: number) => {
         const item = displayItems[entry.value] as DisplayConfig
 
@@ -108,7 +103,7 @@ const CustomLegend = (props: LegendProps) => {
             className="flex items-center gap-1 text-sm text-gray-600"
           >
             <span
-              className="h-4 w-4 rounded-sm"
+              className="w-4 h-4 rounded-sm"
               style={{ backgroundColor: item.color }}
             />
 

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Job } from "@prisma/client"
 
+import { cn } from "@/lib/utils"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,6 +25,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+
+import { buttonVariants } from "./ui/button"
 
 async function deletePost(postId: string) {
   const response = await fetch(`/api/posts/${postId}`, {
@@ -54,8 +57,8 @@ export function PostOperations({ job, published }: PostOperationsProps) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
-          <Icons.ellipsis className="h-4 w-4" />
+        <DropdownMenuTrigger className="flex items-center justify-center w-8 h-8 transition-colors border rounded-md hover:bg-muted">
+          <Icons.ellipsis className="w-4 h-4" />
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -74,7 +77,7 @@ export function PostOperations({ job, published }: PostOperationsProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            className="flex cursor-pointer items-center text-destructive focus:text-destructive"
+            className="flex items-center cursor-pointer text-destructive focus:text-destructive"
             onSelect={() => setShowDeleteAlert(true)}
           >
             Delete
@@ -106,12 +109,12 @@ export function PostOperations({ job, published }: PostOperationsProps) {
                   router.refresh()
                 }
               }}
-              className="bg-red-600 focus:ring-red-600"
+              className={cn(buttonVariants({ variant: "destructive" }))}
             >
               {isDeleteLoading ? (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
               ) : (
-                <Icons.trash className="mr-2 h-4 w-4" />
+                <Icons.trash className="w-4 h-4 mr-2" />
               )}
               <span>Delete</span>
             </AlertDialogAction>

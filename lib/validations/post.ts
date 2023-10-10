@@ -69,7 +69,5 @@ export const postQuestionnairePatchSchema = z.object({
 })
 
 export const postConfigPatchSchema = z.object({
-  featured: z.boolean(),
-  highlighted: z.boolean(),
   step: z.number().optional(),
 })

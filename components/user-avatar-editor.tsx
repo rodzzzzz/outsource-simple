@@ -138,6 +138,8 @@ export function UserAvatarEditor({
         variant: "destructive",
       })
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [croppedAreaPixels, avatar])
 
   function reset(croppedImage: string) {

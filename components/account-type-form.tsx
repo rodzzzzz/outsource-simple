@@ -51,7 +51,7 @@ export function AccountTypeForm({
   className,
   ...props
 }: AccountTypeFormProps) {
-  const { update } = useSession()
+  const { update, data: session } = useSession()
   const router = useRouter()
   const form = useForm<FormData>({
     resolver: zodResolver(userTypeSchema),
@@ -83,7 +83,13 @@ export function AccountTypeForm({
       })
     }
 
-    await update({ userType: data.userType })
+    await update({
+      ...session,
+      user: {
+        ...session?.user,
+        userType: data.userType,
+      },
+    })
 
     router.refresh()
     router.push("/dashboard")

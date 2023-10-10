@@ -36,7 +36,7 @@ export function AccountNameForm({
   className,
   ...props
 }: AccountNameFormProps) {
-  const { update } = useSession()
+  const { update, data: session } = useSession()
   const router = useRouter()
   const form = useForm<FormData>({
     resolver: zodResolver(userNameSchema),
@@ -71,7 +71,14 @@ export function AccountNameForm({
         })
       }
 
-      await update({ firstName: data.firstName, lastName: data.firstName })
+      await update({
+        ...session,
+        user: {
+          ...session?.user,
+          firstName: data.firstName,
+          lastName: data.firstName,
+        },
+      })
 
       router.refresh()
     }
@@ -99,7 +106,7 @@ export function AccountNameForm({
       >
         <div className="space-y-1.5">
           <motion.h1
-            className="font-heading text-4xl leading-none tracking-tight md:text-5xl lg:text-6xl"
+            className="text-4xl leading-none tracking-tight font-heading md:text-5xl lg:text-6xl"
             variants={STAGGER_CHILD_VARIANTS}
           >
             Let&apos;s get you started.
@@ -155,7 +162,7 @@ export function AccountNameForm({
                 disabled={isSaving}
               >
                 {isSaving && (
-                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
                 )}
                 <span>Next</span>
               </button>

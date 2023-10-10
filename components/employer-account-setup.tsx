@@ -16,7 +16,7 @@ import { EmployerSetupNameForm } from "./employer-setup-name-form"
 
 interface EmployerAccountSetupProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, "id" | "firstName" | "lastName">
+  user: Pick<User, "id" | "firstName" | "lastName" | "image">
   company: Pick<
     Company,
     | "id"
@@ -76,6 +76,7 @@ export function EmployerAccountSetup({
                 id: user.id,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                image: user.image,
               }}
             />
           </div>

@@ -7,16 +7,19 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
+import { Button } from "./ui/button"
+import { Separator } from "./ui/separator"
+import { UserAvatarEditor } from "./user-avatar-editor"
+
 interface EmployerAccountDetailsFormProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, "email" | "firstName" | "lastName">
+  user: Pick<User, "email" | "firstName" | "lastName" | "image">
 }
 
 export function EmployerAccountDetailsForm({
@@ -32,11 +35,21 @@ export function EmployerAccountDetailsForm({
       </CardHeader>
       <CardContent>
         <div className="space-y-8">
+          <div className="w-full max-w-[400px] flex flex-col gap-y-2">
+            <Label>Profile Picture</Label>
+            <UserAvatarEditor
+              image={user.image}
+              firstName={user.firstName}
+              lastName={user.lastName}
+            />
+          </div>
+
+          <Separator />
+
           <div className="flex flex-wrap gap-8">
             <div className="w-full max-w-[400px] space-y-2">
               <Label>First Name</Label>
               <Input
-                disabled
                 defaultValue={user.firstName}
                 className="w-full"
                 size={32}
@@ -46,7 +59,6 @@ export function EmployerAccountDetailsForm({
             <div className="w-full max-w-[400px] space-y-2">
               <Label>Last Name</Label>
               <Input
-                disabled
                 defaultValue={user.lastName}
                 className="w-full"
                 size={32}
@@ -62,14 +74,14 @@ export function EmployerAccountDetailsForm({
               className="w-full"
               size={32}
             />
+            <p className="text-xs text-muted-foreground">
+              Email address cannot be changed.
+            </p>
           </div>
+
+          <Button>Update account</Button>
         </div>
       </CardContent>
-      <CardFooter className="pt-6 border-t">
-        <p className="text-xs text-muted-foreground">
-          Account details cannot be changed.
-        </p>
-      </CardFooter>
     </Card>
   )
 }

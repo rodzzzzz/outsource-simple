@@ -25,9 +25,11 @@ import {
   FormMessage,
 } from "@/components/react-hook-form/form"
 
+import { UserAvatarEditor } from "./user-avatar-editor"
+
 interface EmployerSetupNameFormProps
   extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, "id" | "firstName" | "lastName">
+  user: Pick<User, "id" | "firstName" | "lastName" | "image">
 }
 
 type FormData = z.infer<typeof userNameSchema>
@@ -37,7 +39,7 @@ export function EmployerSetupNameForm({
   className,
   ...props
 }: EmployerSetupNameFormProps) {
-  const { update } = useSession()
+  const { update, data: session } = useSession()
   const router = useRouter()
   const pathName = usePathname()
   const form = useForm<FormData>({
@@ -72,7 +74,14 @@ export function EmployerSetupNameForm({
         })
       }
 
-      await update({ firstName: data.firstName, lastName: data.firstName })
+      await update({
+        ...session,
+        user: {
+          ...session?.user,
+          firstName: data.firstName,
+          lastName: data.lastName,
+        },
+      })
 
       router.refresh()
     }
@@ -112,7 +121,13 @@ export function EmployerSetupNameForm({
             Please tell us your real name and add your photo.
           </motion.p>
         </div>
-
+        <div className="mx-auto">
+          <UserAvatarEditor
+            image={user.image}
+            firstName={user.firstName}
+            lastName={user.lastName}
+          />
+        </div>
         <motion.div variants={STAGGER_CHILD_VARIANTS}>
           <Form {...form}>
             <form

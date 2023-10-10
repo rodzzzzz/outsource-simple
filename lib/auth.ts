@@ -80,7 +80,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ token, session, trigger }) {
+    async session({ token, session }) {
       if (token) {
         session.user.id = token.id
         session.user.firstName = token.firstName
@@ -91,8 +91,37 @@ export const authOptions: NextAuthOptions = {
         session.user.userType = token.userType
         session.user.emailVerified = token.emailVerified
       }
+      return session
+    },
+    async jwt({ token, user, session, trigger }) {
+      if (trigger === "signIn" || trigger === "signUp") {
+        const dbUser = await db.user.findFirst({
+          where: {
+            email: token.email,
+          },
+        })
+
+        if (!dbUser) {
+          if (user) {
+            token.id = user?.id
+          }
+          return token
+        }
+
+        return {
+          id: dbUser.id,
+          firstName: dbUser.firstName,
+          lastName: dbUser.lastName,
+          email: dbUser.email,
+          picture: dbUser.image,
+          emailVerified: dbUser.emailVerified as Date | undefined,
+          setup: dbUser.setup,
+          userType: dbUser.userType as UserType,
+        }
+      }
 
       if (trigger === "update" && session) {
+        token.picture = session.user.image
         if (typeof session.user.firstName === "string") {
           token.firstName = session.user.firstName
         }
@@ -103,7 +132,7 @@ export const authOptions: NextAuthOptions = {
           token.email = session.user.email
         }
         if (typeof session.user.image === "string") {
-          token.image = session.user.image
+          token.picture = session.user.image
         }
         if (session.user.emailVerified instanceof Date) {
           token.emailVerified = session.user.emailVerified
@@ -115,33 +144,31 @@ export const authOptions: NextAuthOptions = {
           token.userType = session.user.userType
         }
       }
+      return token
 
-      return session
-    },
-    async jwt({ token, user }) {
-      const dbUser = await db.user.findFirst({
-        where: {
-          email: token.email,
-        },
-      })
+      // const dbUser = await db.user.findFirst({
+      //   where: {
+      //     email: token.email,
+      //   },
+      // })
 
-      if (!dbUser) {
-        if (user) {
-          token.id = user?.id
-        }
-        return token
-      }
+      //   if (!dbUser) {
+      //     if (user) {
+      //       token.id = user?.id
+      //     }
+      //     return token
+      //   }
 
-      return {
-        id: dbUser.id,
-        firstName: dbUser.firstName,
-        lastName: dbUser.lastName,
-        email: dbUser.email,
-        picture: dbUser.image,
-        emailVerified: dbUser.emailVerified as Date | undefined,
-        setup: dbUser.setup,
-        userType: dbUser.userType as UserType,
-      }
+      //   return {
+      //     id: dbUser.id,
+      //     firstName: dbUser.firstName,
+      //     lastName: dbUser.lastName,
+      //     email: dbUser.email,
+      //     picture: dbUser.image,
+      //     emailVerified: dbUser.emailVerified as Date | undefined,
+      //     setup: dbUser.setup,
+      //     userType: dbUser.userType as UserType,
+      //   }
     },
   },
 }

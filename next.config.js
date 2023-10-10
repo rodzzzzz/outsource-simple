@@ -8,7 +8,20 @@ import("./env.mjs")
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["avatars.githubusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.googleusercontent.com",
+        port: "",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "uploadthing-prod.s3.us-west-2.amazonaws.com",
+        port: "",
+        pathname: "**",
+      },
+    ],
   },
   experimental: {
     appDir: true,

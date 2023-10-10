@@ -3,20 +3,59 @@ import { DashboardConfig } from "types"
 export const dashboardConfig: DashboardConfig = {
   applicantNav: [
     {
-      title: "Job Applications",
-      href: "/dashboard",
+      category: "",
+      items: [
+        {
+          title: "Job Applications",
+          href: "/dashboard",
+          icon: "send",
+        },
+        {
+          title: "Discover",
+          href: "#",
+          icon: "discover",
+        },
+        {
+          title: "Messages",
+          href: "#",
+          icon: "message",
+        },
+      ],
     },
     {
-      title: "Saved Jobs",
-      href: "/dashboard/saved",
+      category: "",
+      items: [
+        {
+          title: "Works",
+          href: "#",
+          icon: "briefcase",
+        },
+        {
+          title: "Wallet",
+          href: "#",
+          icon: "wallet",
+        },
+      ],
     },
     {
-      title: "Resume",
-      href: "/dashboard/resume",
-    },
-    {
-      title: "Settings",
-      href: "/dashboard/settings",
+      category: "",
+      items: [
+        {
+          title: "Saved Jobs",
+          href: "/dashboard/saved",
+          icon: "save",
+        },
+        {
+          title: "Resume",
+          href: "/dashboard/resume",
+          icon: "post",
+        },
+        {
+          title: "Settings",
+          href: "/dashboard/settings",
+          icon: "settings",
+        },
+      ],
     },
   ],
   employerNav: [

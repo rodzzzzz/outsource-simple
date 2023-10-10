@@ -12,7 +12,6 @@ import { DashboardNav } from "@/components/dashboard-nav"
 import { EmployerAccountNav } from "@/components/employer-account-nav"
 import { Icons } from "@/components/icons"
 import { ModeToggle } from "@/components/mode-toggle"
-import { UserAvatar } from "@/components/user-avatar"
 
 interface DashboardLayoutProps {
   children?: React.ReactNode
@@ -44,21 +43,6 @@ export default async function DashboardLayout({
         </div>
       </aside>
       <div className="relative flex flex-col flex-1 gap-12 pb-12">
-        {/* <header className="sticky top-0 z-40 border-b bg-background">
-          <div className="container flex items-center justify-end h-20 py-4">
-            <div className="flex items-center gap-6">
-              <ModeToggle />
-              <EmployerAccountNav
-                user={{
-                  firstName: user.firstName,
-                  lastName: user.lastName,
-                  image: user.image,
-                  email: user.email,
-                }}
-              />
-            </div>
-          </div>
-        </header> */}
         <header className="sticky top-0 z-40 border-b bg-background">
           <div className="container flex items-center justify-between h-20 py-4 lg:justify-end">
             <DashboardMainNav items={dashboardConfig.employerNav}>
@@ -86,7 +70,6 @@ export default async function DashboardLayout({
         <main className="container relative grid flex-1 gap-12 pb-12">
           <div className="flex flex-col flex-1 overflow-hidden">{children}</div>
         </main>
-        {/* <div className="flex flex-col flex-1 overflow-hidden">{children}</div> */}
       </div>
     </div>
   )

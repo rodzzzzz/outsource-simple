@@ -79,6 +79,7 @@ model User {
   jobVisits     JobVisit[]
   savedJobs     SavedJob[]
   transactions  Transaction[]
+  files         File[]
 
   emialConfig EmailConfig?
 
@@ -411,4 +412,30 @@ model Transaction {
 enum TransactionStatus {
   SUCCESS
   FAILED
+}
+
+enum UploadStatus {
+  PENDING
+  PROCESSING
+  FAILED
+  SUCCESS
+}
+
+model File {
+  id   String @id @default(cuid())
+  name String
+
+  uploadStatus UploadStatus @default(PENDING)
+
+  url String
+  key String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@index([userId])
+  @@map(name: "files")
 }

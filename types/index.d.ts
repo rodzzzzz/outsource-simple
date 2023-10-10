@@ -69,7 +69,7 @@ export type MarketingConfig = {
 }
 
 export type DashboardConfig = {
-  applicantNav: MainNavItem[]
+  applicantNav: SidebarNavItem[]
   employerNav: SidebarNavItem[]
 }
 

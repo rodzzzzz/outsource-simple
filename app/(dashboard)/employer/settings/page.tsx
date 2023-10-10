@@ -50,6 +50,7 @@ export default async function SettingsPage() {
             firstName: user.firstName!,
             lastName: user.lastName!,
             email: user.email!,
+            image: user.image!,
           }}
         />
         <EmployerAcceptedEmailForm

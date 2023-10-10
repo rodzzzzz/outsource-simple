@@ -61,6 +61,7 @@ export default async function EmployerSetupPage() {
           id: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
+          image: user.image!,
         }}
         company={{
           id: company?.id || "",
